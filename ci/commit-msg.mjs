@@ -1,5 +1,4 @@
 // Invoked on the commit-msg git hook by simple-git-hooks.
-
 import { readFileSync } from 'fs';
 import colors from 'picocolors';
 
@@ -18,7 +17,7 @@ if (!commitRE.test(commitTitle)) {
       `Invalid commit title, format, or length.`
     )}\n\n` +
       colors.white(
-        `  Commit messages must under 100 characters and have the following format:\n\n`
+        `  Commit messages must be under 100 characters and have the following format:\n\n`
       ) +
       `    ${colors.green(
         `- Starts with feat, fix, refactor, test, perf, style, asset, doc, ci, chore or wip`
@@ -27,7 +26,9 @@ if (!commitRE.test(commitTitle)) {
         `- Followed by a semi-colon and a space, then a capitalized title.`
       )}\n\n` +
       `    ${colors.white(
-        `Example => ${colors.green(`feat: Add new cool feature`)}`
+        `Example => ${colors.green(
+          `feat: Implement signup page and add it to the router`
+        )}`
       )}\n\n`
   );
   process.exit(1);
