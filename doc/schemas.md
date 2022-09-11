@@ -3,11 +3,9 @@
 User Schema:
 
 ```js
-  _id: ObjectId,
-  avatar: String,
+  image: String,
   name: String,
   email: String,
-  password: String,
   Workspaces: Workspace[]
   // Future Fields V2.0
   requestedWorkspaces: Workspace[];
