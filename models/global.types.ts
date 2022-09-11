@@ -1,4 +1,5 @@
 export interface IUser {
+  _id: string;
   image: string;
   name: string;
   email: string;
@@ -7,6 +8,7 @@ export interface IUser {
 }
 
 export interface IWorkspace {
+  _id: string;
   name: string;
   description: string;
   users: IUser[];
@@ -14,12 +16,14 @@ export interface IWorkspace {
 }
 
 export interface IBoard {
+  _id: string;
   title: string;
   description: string;
   cards: ICard[];
 }
 
 export interface ICard {
+  _id: string;
   title: string;
   description: string;
   comments: IComment[];
@@ -27,6 +31,7 @@ export interface ICard {
 }
 
 export interface IComment {
+  _id: string;
   user: IUser;
   text: string;
 }
