@@ -1,4 +1,4 @@
-import { model, Schema } from 'mongoose';
+import { model, models, Schema } from 'mongoose';
 
 const User = new Schema({
   avatar: { type: String, required: true },
@@ -14,4 +14,6 @@ const User = new Schema({
   workspaces: [{ type: Schema.Types.ObjectId, ref: 'Workspace' }],
 });
 
-export default model('User', User);
+const UserModel = models.User || model('User', User);
+
+export default UserModel;

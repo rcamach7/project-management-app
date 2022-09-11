@@ -1,4 +1,4 @@
-import { model, Schema } from 'mongoose';
+import { model, models, Schema } from 'mongoose';
 
 const Workspace = new Schema({
   name: { type: String, required: true, minLength: 3, maxLength: 50 },
@@ -7,4 +7,6 @@ const Workspace = new Schema({
   users: [{ type: Schema.Types.ObjectId, ref: 'User' }],
 });
 
-export default model('Workspace', Workspace);
+const WorkspaceModel = models.Workspace || model('Workspace', Workspace);
+
+export default WorkspaceModel;

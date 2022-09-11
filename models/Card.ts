@@ -1,4 +1,4 @@
-import { Schema, model } from 'mongoose';
+import { Schema, model, models } from 'mongoose';
 
 const Card = new Schema({
   title: { type: String, required: true, minLength: 3, maxLength: 50 },
@@ -7,4 +7,6 @@ const Card = new Schema({
   labels: [{ type: Schema.Types.ObjectId, ref: 'Label' }],
 });
 
-export default model('Card', Card);
+const CardModel = models.Card || model('Card', Card);
+
+export default CardModel;
