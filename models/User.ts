@@ -1,6 +1,7 @@
-import { model, models, Schema } from 'mongoose';
+import { model, Schema } from 'mongoose';
+import { IUser } from './global.types';
 
-const User = new Schema({
+const User = new Schema<IUser>({
   avatar: { type: String, required: true },
   name: { type: String, required: true, minLength: 3, maxLength: 50 },
   email: {
@@ -14,6 +15,6 @@ const User = new Schema({
   workspaces: [{ type: Schema.Types.ObjectId, ref: 'Workspace' }],
 });
 
-const UserModel = models.User || model('User', User);
+const UserModel = model<IUser>('User', User);
 
 export default UserModel;
