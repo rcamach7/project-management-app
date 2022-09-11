@@ -8,6 +8,7 @@ const Comment = {
 const Card = {
   title: { type: String, required: true, minLength: 3, maxLength: 50 },
   description: { type: String, required: true, minLength: 3, maxLength: 255 },
+  comments: [Comment],
   labels: [
     {
       type: String,
@@ -27,7 +28,6 @@ const Card = {
       ],
     },
   ],
-  comments: [Comment],
 };
 
 const Board = {
