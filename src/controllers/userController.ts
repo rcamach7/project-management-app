@@ -2,6 +2,14 @@ import { IUser } from '../../models/global.types';
 import connectMongo from '../lib/connectToMongo';
 import User from '../../models/User';
 
+/**
+ * Create Resources (POST)
+ */
+
+/**
+ * Read Resources (GET)
+ */
+
 export const getAllUsers = async () => {
   try {
     await connectMongo();
@@ -22,37 +30,26 @@ export const getUserByEmail = async (email: string) => {
   }
 };
 
-export const getUserById = async (id: string) => {
-  try {
-    await connectMongo();
-    const user: IUser = await User.findById(id);
-    return user;
-  } catch (error) {
-    return Promise.reject(error);
-  }
-};
+/**
+ * Update Resources (PUT)
+ */
 
-export const createUser = async (user: IUser) => {
-  try {
-    await connectMongo();
-    const newUser: IUser = await User.create(user);
-    return newUser;
-  } catch (error) {
-    return Promise.reject(error);
-  }
-};
-
-export const updateUser = async (
-  id: string,
-  fields: { avatar?: string; name?: string }
+export const addWorkspaceToUser = async (
+  email: string,
+  workspaceId: string
 ) => {
-  if (!Object.keys(fields).length) return Promise.reject('No fields to update');
-
   try {
     await connectMongo();
-    const user: IUser = await User.findByIdAndUpdate(id, fields, { new: true });
+    const user: IUser = await User.findOneAndUpdate(
+      { email },
+      { $push: { workspaces: workspaceId } }
+    );
     return user;
   } catch (error) {
     return Promise.reject(error);
   }
 };
+
+/**
+ * Delete Resources (DELETE)
+ */
