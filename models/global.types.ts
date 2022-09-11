@@ -1,34 +1,34 @@
-export interface User {
+export interface IUser {
   _id: string;
   avatar: string;
   name: string;
   email: string;
   password: string;
-  workspaces: Workspaces[];
+  workspaces: IWorkspace[];
 }
 
-export interface Workspaces {
+export interface IWorkspace {
   name: string;
   description: string;
-  users: User[];
-  boards: Board[];
+  users: IUser[];
+  boards: IBoard[];
 }
 
-export interface Board {
+export interface IBoard {
   title: string;
   description: string;
-  cards: Card[];
+  cards: ICard[];
 }
 
-export interface Card {
+export interface ICard {
   title: string;
   description: string;
-  comments: Comment[];
+  comments: IComment[];
   labels: LabelsEnum[];
 }
 
-export interface Comment {
-  user: User;
+export interface IComment {
+  user: IUser;
   text: string;
 }
 
