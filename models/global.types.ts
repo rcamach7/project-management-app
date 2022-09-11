@@ -1,10 +1,9 @@
 export interface IUser {
-  _id: string;
-  avatar: string;
+  image: string;
   name: string;
   email: string;
-  password: string;
-  workspaces: IWorkspace[];
+  emailVerified: boolean;
+  workspaces?: IWorkspace[];
 }
 
 export interface IWorkspace {

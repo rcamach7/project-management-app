@@ -2,7 +2,7 @@ import { model, Schema } from 'mongoose';
 import { IUser } from './global.types';
 
 const User = new Schema<IUser>({
-  avatar: { type: String, required: true },
+  image: { type: String, required: true },
   name: { type: String, required: true, minLength: 3, maxLength: 50 },
   email: {
     type: String,
@@ -11,7 +11,7 @@ const User = new Schema<IUser>({
     maxLength: 255,
     unique: true,
   },
-  password: { type: String, required: true, minLength: 5, maxLength: 1024 },
+  emailVerified: { type: Boolean, required: true },
   workspaces: [{ type: Schema.Types.ObjectId, ref: 'Workspace' }],
 });
 
