@@ -1,4 +1,9 @@
-import { IBoard, IUser, IWorkspace } from '../../models/global.types';
+import {
+  IBoard,
+  IUser,
+  SWorkspace,
+  IWorkspace,
+} from '../../models/global.types';
 import connectMongo from '../lib/connectToMongo';
 import Workspace from '../../models/Workspace';
 import User from '../../models/User';
@@ -7,10 +12,17 @@ import User from '../../models/User';
  * Create Resources (POST)
  */
 
-export const createWorkspace = async (workspace: IWorkspace) => {
+export const createNewWorkspace = async (workspace: SWorkspace) => {
   try {
     await connectMongo();
-    const newWorkspace: IWorkspace = await Workspace.create(workspace);
+
+    const newWorkspace: IWorkspace = await (
+      await Workspace.create(workspace)
+    ).populate({
+      path: 'users',
+      model: 'User',
+    });
+
     return newWorkspace;
   } catch (error) {
     return Promise.reject(error);
@@ -25,6 +37,7 @@ export const getAllWorkspaces = async () => {
   try {
     await connectMongo();
     const workspaces: IWorkspace[] = await Workspace.find();
+
     return workspaces;
   } catch (error) {
     return Promise.reject(error);
@@ -63,6 +76,7 @@ export const addUserToWorkspace = async (_id: string, email: string) => {
       { _id },
       { $push: { users: user._id } }
     );
+
     return workspace;
   } catch (error) {
     return Promise.reject(error);
@@ -75,6 +89,7 @@ export const addBoardToWorkspace = async (_id: string, board: IBoard) => {
     const workspace: IWorkspace = await Workspace.findByIdAndUpdate(_id, {
       $push: { boards: board },
     });
+
     return workspace;
   } catch (error) {
     return Promise.reject(error);
@@ -103,6 +118,7 @@ export const deleteWorkspace = async (_id: string) => {
   try {
     await connectMongo();
     const workspace: IWorkspace = await Workspace.findByIdAndDelete(_id);
+
     return workspace;
   } catch (error) {
     return Promise.reject(error);

@@ -33,10 +33,10 @@ const getAllUsers = async () => {
   }
 };
 
-export const getUserByEmail = async (email: string) => {
+export const getUserById = async (_id: string) => {
   try {
     await connectMongo();
-    const user: IUser = await User.findOne({ email });
+    const user: IUser = await User.findById(_id);
     return user;
   } catch (error) {
     return Promise.reject(error);
@@ -47,14 +47,11 @@ export const getUserByEmail = async (email: string) => {
  * Update Resources (PUT)
  */
 
-export const addWorkspaceToUser = async (
-  email: string,
-  workspaceId: string
-) => {
+export const addWorkspaceToUser = async (_id: string, workspaceId: string) => {
   try {
     await connectMongo();
     const user: IUser = await User.findOneAndUpdate(
-      { email },
+      { _id },
       { $push: { workspaces: workspaceId } }
     );
     return user;
