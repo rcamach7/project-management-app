@@ -1,3 +1,5 @@
+import { Session } from 'next-auth';
+
 export interface IUser {
   _id: string;
   image: string;
@@ -12,6 +14,14 @@ export interface IWorkspace {
   name: string;
   description: string;
   users: IUser[];
+  boards: IBoard[];
+}
+
+export interface SWorkspace {
+  _id: string;
+  name: string;
+  description: string;
+  users: string[];
   boards: IBoard[];
 }
 
@@ -49,4 +59,14 @@ export enum LabelsEnum {
   CI = 'CI',
   CHORE = 'CHORE',
   WIP = 'WIP',
+}
+
+export interface AppSession extends Session {
+  user?: {
+    name?: string;
+    email?: string;
+    image?: string;
+    _id?: string;
+    workspaces?: IWorkspace[];
+  };
 }
