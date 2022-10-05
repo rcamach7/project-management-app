@@ -1,12 +1,6 @@
-import {
-  IBoard,
-  IUser,
-  SWorkspace,
-  IWorkspace,
-} from '../../models/global.types';
 import connectMongo from '../lib/connectToMongo';
-import Workspace from '../../models/Workspace';
-import User from '../../models/User';
+import Workspace from '../../schemas/Workspace';
+import User from '../../schemas/User';
 
 /**
  * Create Resources (POST)
@@ -40,7 +34,7 @@ export const createNewWorkspace = async (workspace: any) => {
 export const getAllWorkspaces = async () => {
   try {
     await connectMongo();
-    const workspaces: IWorkspace[] = await Workspace.find({}).populate('users');
+    const workspaces = await Workspace.find({}).populate('users');
 
     return workspaces;
   } catch (error) {
@@ -63,7 +57,7 @@ export const updateWorkspaceDetails = async (
 
   try {
     await connectMongo();
-    const workspace: IWorkspace = await Workspace.findByIdAndUpdate(_id, {
+    const workspace = await Workspace.findByIdAndUpdate(_id, {
       $set: fields,
     });
 
@@ -77,8 +71,8 @@ export const updateWorkspaceDetails = async (
 export const addUserToWorkspace = async (_id: string, email: string) => {
   try {
     await connectMongo();
-    const user: IUser = await User.findOne({ email });
-    const workspace: IWorkspace = await Workspace.findOneAndUpdate(
+    const user = await User.findOne({ email });
+    const workspace = await Workspace.findOneAndUpdate(
       { _id },
       { $push: { users: user._id } }
     );
@@ -90,10 +84,10 @@ export const addUserToWorkspace = async (_id: string, email: string) => {
   }
 };
 
-export const addBoardToWorkspace = async (_id: string, board: IBoard) => {
+export const addBoardToWorkspace = async (_id: string, board: any) => {
   try {
     await connectMongo();
-    const workspace: IWorkspace = await Workspace.findByIdAndUpdate(_id, {
+    const workspace = await Workspace.findByIdAndUpdate(_id, {
       $push: { boards: board },
     });
 
@@ -105,7 +99,7 @@ export const addBoardToWorkspace = async (_id: string, board: IBoard) => {
 };
 
 // Update the board in the workspace, without updating the entire workspace
-const updateWorkspaceBoard = async (_id: string, board: IBoard) => {
+const updateWorkspaceBoard = async (_id: string, board: any) => {
   try {
     await connectMongo();
     // const workspace: IWorkspace = await Workspace.findOneAndUpdate(
@@ -126,7 +120,7 @@ const updateWorkspaceBoard = async (_id: string, board: IBoard) => {
 export const deleteWorkspace = async (_id: string) => {
   try {
     await connectMongo();
-    const workspace: IWorkspace = await Workspace.findByIdAndDelete(_id);
+    const workspace = await Workspace.findByIdAndDelete(_id);
 
     return workspace;
   } catch (error) {
