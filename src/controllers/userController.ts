@@ -16,6 +16,7 @@ export const createEmptyWorkspaces = async (_id: string) => {
     );
     return user;
   } catch (error) {
+    console.error('Error creating empty workspaces: ', error);
     return Promise.reject(error);
   }
 };
@@ -23,23 +24,13 @@ export const createEmptyWorkspaces = async (_id: string) => {
  * Read Resources (GET)
  */
 
-const getAllUsers = async () => {
-  try {
-    await connectMongo();
-    const users: IUser[] = await User.find();
-    return users;
-  } catch (error) {
-    return Promise.reject(error);
-  }
-};
-
 export const getUserById = async (_id: string) => {
   try {
     await connectMongo();
-    const user: IUser = await User.findById(_id).populate('workspaces');
+    const user = await User.findById(_id);
     return user;
   } catch (error) {
-    console.log('Error retrieving user: ', error);
+    console.error('Error retrieving user: ', error);
     return Promise.reject(error);
   }
 };
@@ -57,6 +48,7 @@ export const addWorkspaceToUser = async (_id: string, workspaceId: string) => {
     );
     return user;
   } catch (error) {
+    console.error('Error adding workspace to user: ', error);
     return Promise.reject(error);
   }
 };
