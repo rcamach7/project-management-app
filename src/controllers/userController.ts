@@ -1,6 +1,5 @@
-import { IUser } from '../../models/global.types';
 import connectMongo from '../lib/connectToMongo';
-import User from '../../models/User';
+import User from '../../schemas/User';
 
 /**
  * Create Resources (POST)
@@ -42,7 +41,7 @@ export const getUserById = async (_id: string) => {
 export const addWorkspaceToUser = async (_id: string, workspaceId: string) => {
   try {
     await connectMongo();
-    const user: IUser = await User.findOneAndUpdate(
+    const user = await User.findOneAndUpdate(
       { _id },
       { $push: { workspaces: workspaceId } }
     );

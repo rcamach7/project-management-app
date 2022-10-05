@@ -18,7 +18,7 @@ export default async (req, res) => {
         const user = await getUserById(session.user._id);
         res.json({ user });
       } catch (error) {
-        res.status(500).json({ message: 'Error retrieving user' });
+        res.status(500).json({ message: 'Error retrieving user', error });
       }
       break;
     default:
