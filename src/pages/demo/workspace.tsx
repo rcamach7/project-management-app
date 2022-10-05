@@ -21,12 +21,17 @@ export default function Workspace() {
   };
 
   return (
-    <div className="container flex flex-col h-screen justify-center items-center">
-      <h1 className="text-4xl font-bold">Workspace</h1>
+    <div className="container flex flex-col h-screen justify-center items-center gap-3">
+      <h1 className="text-4xl font-bold">Workspace Demo</h1>
+
       <button
-        className="bg-slate-50 p-2 border-2 "
-        onClick={() => addNewWorkspace()}
+        className="bg-slate-500 p-1"
+        onClick={() => console.log(session.user.workspaces)}
       >
+        Print My Workspaces
+      </button>
+
+      <button className="bg-slate-500 p-1" onClick={() => addNewWorkspace()}>
         Add New Empty Workspace to my profile
       </button>
     </div>

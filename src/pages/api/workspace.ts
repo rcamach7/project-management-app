@@ -1,5 +1,4 @@
 import { unstable_getServerSession } from 'next-auth/next';
-import mongoose from 'mongoose';
 import { authOptions } from './auth/[...nextauth]';
 import { createNewWorkspace } from '../../controllers/workspaceController';
 import { AppSession } from '../../../models/global.types';
