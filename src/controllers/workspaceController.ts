@@ -1,4 +1,5 @@
 import connectMongo from '../lib/connectToMongo';
+import { Types } from 'mongoose';
 import Workspace from '../../schemas/Workspace';
 import User from '../../schemas/User';
 
@@ -6,21 +7,22 @@ import User from '../../schemas/User';
  * Create Resources (POST)
  */
 
-export const createNewWorkspace = async (workspace: any) => {
+export const createNewWorkspace = async (
+  workspaceFields: Object,
+  userId: string
+) => {
   try {
     await connectMongo();
-    /** workspace coming in causing error below:
-      {
-        _id: new ObjectId("631fd720b666337cc4fb9af0"),
-        name: 'New Workspace',
-        description: 'New Workspace Description',
-        users: [ '631e6203d20ad22ef48d8a6a' ],
-        boards: []
-      }
-    */
-    const newWorkspace = await Workspace.create(workspace);
+    const newWorkspace = new Workspace({
+      ...workspaceFields,
+      users: [{ _id: new Types.ObjectId(userId) }],
+      boards: [],
+    });
 
-    return newWorkspace;
+    await newWorkspace.save();
+    const workspace = await Workspace.findOne({ _id: newWorkspace._id });
+
+    return workspace;
   } catch (error) {
     console.error('Error creating workspace: ', error);
     return Promise.reject(error);

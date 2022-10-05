@@ -39,10 +39,67 @@ const Board = {
 const Workspace = new Schema({
   name: { type: String, required: true, minLength: 3, maxLength: 50 },
   description: { type: String, required: true, minLength: 3, maxLength: 255 },
-  users: [{ type: Schema.Types.ObjectId, ref: 'User' }],
-  boards: [Board],
+  users: [
+    { _id: { type: Schema.Types.ObjectId, ref: 'User', required: true } },
+  ],
+  boards: [
+    {
+      title: { type: String, required: true, minLength: 3, maxLength: 50 },
+      description: {
+        type: String,
+        required: true,
+        minLength: 3,
+        maxLength: 255,
+      },
+      cards: [
+        {
+          title: { type: String, required: true, minLength: 3, maxLength: 50 },
+          description: {
+            type: String,
+            required: true,
+            minLength: 3,
+            maxLength: 255,
+          },
+          comments: [
+            {
+              user: {
+                type: Schema.Types.ObjectId,
+                ref: 'User',
+                required: true,
+              },
+              text: {
+                type: String,
+                required: true,
+                minLength: 3,
+                maxLength: 255,
+              },
+            },
+          ],
+          labels: [
+            {
+              type: String,
+              enum: [
+                'BACKEND',
+                'FRONTEND',
+                'FEAT',
+                'REFACTOR',
+                'TEST',
+                'PERF',
+                'STYLE',
+                'ASSET',
+                'DOC',
+                'CI',
+                'CHORE',
+                'WIP',
+              ],
+            },
+          ],
+        },
+      ],
+    },
+  ],
 });
 
-const WorkspaceModel: any = models.User || model('Workspace', Workspace);
+const WorkspaceSchema: any = models.Workspace || model('Workspace', Workspace);
 
-export default WorkspaceModel;
+export default WorkspaceSchema;
