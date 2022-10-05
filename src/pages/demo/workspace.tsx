@@ -8,13 +8,16 @@ export default function Workspace() {
   const addNewWorkspace = async () => {
     if (!session) return;
 
-    const bodyFields = {
-      name: 'New Workspace',
-      description: 'New Workspace Description',
-    };
+    try {
+      const newWorkspace = await axios.post('/api/workspace', {
+        name: 'Cool Workspace Project',
+        description: 'This is a cool workspace project description',
+      });
 
-    const newWorkspace = await axios.post('/api/workspace', bodyFields);
-    console.log(newWorkspace);
+      console.log(newWorkspace);
+    } catch (error) {
+      console.error("Couldn't create workspace", error);
+    }
   };
 
   return (
