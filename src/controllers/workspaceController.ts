@@ -28,7 +28,7 @@ export const createNewWorkspace = async (workspace: any) => {
 
     return newWorkspace;
   } catch (error) {
-    console.log('Error creating workspace: ', error);
+    console.error('Error creating workspace: ', error);
     return Promise.reject(error);
   }
 };
@@ -44,6 +44,7 @@ export const getAllWorkspaces = async () => {
 
     return workspaces;
   } catch (error) {
+    console.error('Error retrieving all workspaces: ', error);
     return Promise.reject(error);
   }
 };
@@ -68,6 +69,7 @@ export const updateWorkspaceDetails = async (
 
     return workspace;
   } catch (error) {
+    console.error('Error updating workspace details: ', error);
     return Promise.reject(error);
   }
 };
@@ -83,6 +85,7 @@ export const addUserToWorkspace = async (_id: string, email: string) => {
 
     return workspace;
   } catch (error) {
+    console.error('Error adding user to workspace: ', error);
     return Promise.reject(error);
   }
 };
@@ -96,6 +99,7 @@ export const addBoardToWorkspace = async (_id: string, board: IBoard) => {
 
     return workspace;
   } catch (error) {
+    console.error('Error adding board to workspace: ', error);
     return Promise.reject(error);
   }
 };
@@ -110,6 +114,7 @@ const updateWorkspaceBoard = async (_id: string, board: IBoard) => {
     // );
     // return workspace;
   } catch (error) {
+    console.error('Error updating workspace board: ', error);
     return Promise.reject(error);
   }
 };
@@ -125,6 +130,7 @@ export const deleteWorkspace = async (_id: string) => {
 
     return workspace;
   } catch (error) {
+    console.error('Error deleting workspace: ', error);
     return Promise.reject(error);
   }
 };
