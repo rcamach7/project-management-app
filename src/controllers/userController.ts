@@ -8,12 +8,8 @@ import User from '../../schemas/User';
 export const createEmptyWorkspaces = async (_id: string) => {
   try {
     await connectMongo();
-    const user = await User.findByIdAndUpdate(
-      _id,
-      { workspaces: [] },
-      { new: true }
-    );
-    return user;
+    await User.findByIdAndUpdate(_id, { workspaces: [] });
+    return [];
   } catch (error) {
     console.error('Error creating empty workspaces: ', error);
     return Promise.reject(error);
@@ -30,6 +26,19 @@ export const getUserById = async (_id: string) => {
     return user;
   } catch (error) {
     console.error('Error retrieving user: ', error);
+    return Promise.reject(error);
+  }
+};
+
+// Used by the session callback to populate the user's workspaces.
+export const getPopulatedUserWorkspaces = async (_id: string) => {
+  try {
+    await connectMongo();
+    const user = await User.findById(_id).populate('workspaces');
+
+    return user.workspaces;
+  } catch (error) {
+    console.error('Error retrieving user workspaces: ', error);
     return Promise.reject(error);
   }
 };

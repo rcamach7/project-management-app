@@ -18,9 +18,16 @@ export const createNewWorkspace = async (
       users: [{ _id: new Types.ObjectId(userId) }],
       boards: [],
     });
+    const workspace = await newWorkspace.save();
 
-    await newWorkspace.save();
-    const workspace = await Workspace.findOne({ _id: newWorkspace._id });
+    try {
+      await User.findOneAndUpdate(
+        { _id: userId },
+        { $push: { workspaces: workspace._id } }
+      );
+    } catch (error) {
+      console.error('Error saving new workspace to user: ', error);
+    }
 
     return workspace;
   } catch (error) {
