@@ -1,4 +1,5 @@
 import { Session } from 'next-auth';
+import mongoose from 'mongoose';
 
 export interface IUser {
   _id: string;
@@ -18,10 +19,10 @@ export interface IWorkspace {
 }
 
 export interface SWorkspace {
-  _id: string;
+  _id: mongoose.Types.ObjectId;
   name: string;
   description: string;
-  users: string[];
+  users: mongoose.Types.ObjectId[];
   boards: IBoard[];
 }
 

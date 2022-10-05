@@ -36,9 +36,10 @@ const getAllUsers = async () => {
 export const getUserById = async (_id: string) => {
   try {
     await connectMongo();
-    const user: IUser = await User.findById(_id);
+    const user: IUser = await User.findById(_id).populate('workspaces');
     return user;
   } catch (error) {
+    console.log('Error retrieving user: ', error);
     return Promise.reject(error);
   }
 };

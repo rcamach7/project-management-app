@@ -1,5 +1,5 @@
-import { model, Schema } from 'mongoose';
-import { IWorkspace } from './global.types';
+import { model, Schema, models } from 'mongoose';
+import { SWorkspace } from './global.types';
 
 const Comment = {
   user: { type: Schema.Types.ObjectId, ref: 'User' },
@@ -37,13 +37,14 @@ const Board = {
   cards: [Card],
 };
 
-const Workspace = new Schema<IWorkspace>({
+const Workspace = new Schema<SWorkspace>({
   name: { type: String, required: true, minLength: 3, maxLength: 50 },
   description: { type: String, required: true, minLength: 3, maxLength: 255 },
   users: [{ type: Schema.Types.ObjectId, ref: 'User' }],
   boards: [Board],
 });
 
-const WorkspaceModel = model<IWorkspace>('Workspace', Workspace);
+const WorkspaceModel: any =
+  models.User || model<SWorkspace>('Workspace', Workspace);
 
 export default WorkspaceModel;

@@ -12,19 +12,23 @@ import User from '../../models/User';
  * Create Resources (POST)
  */
 
-export const createNewWorkspace = async (workspace: SWorkspace) => {
+export const createNewWorkspace = async (workspace: any) => {
   try {
     await connectMongo();
-
-    const newWorkspace: IWorkspace = await (
-      await Workspace.create(workspace)
-    ).populate({
-      path: 'users',
-      model: 'User',
-    });
+    /** workspace coming in causing error below:
+      {
+        _id: new ObjectId("631fd720b666337cc4fb9af0"),
+        name: 'New Workspace',
+        description: 'New Workspace Description',
+        users: [ '631e6203d20ad22ef48d8a6a' ],
+        boards: []
+      }
+    */
+    const newWorkspace = await Workspace.create(workspace);
 
     return newWorkspace;
   } catch (error) {
+    console.log('Error creating workspace: ', error);
     return Promise.reject(error);
   }
 };
@@ -36,7 +40,7 @@ export const createNewWorkspace = async (workspace: SWorkspace) => {
 export const getAllWorkspaces = async () => {
   try {
     await connectMongo();
-    const workspaces: IWorkspace[] = await Workspace.find();
+    const workspaces: IWorkspace[] = await Workspace.find({}).populate('users');
 
     return workspaces;
   } catch (error) {

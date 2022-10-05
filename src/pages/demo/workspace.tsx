@@ -1,7 +1,5 @@
-import { IWorkspace } from '../../../models/global.types';
 import { useSession } from 'next-auth/react';
 import { AppSession } from '../../../models/global.types';
-import { v4 } from 'uuid';
 import axios from 'axios';
 
 export default function Workspace() {
@@ -15,11 +13,7 @@ export default function Workspace() {
       description: 'New Workspace Description',
     };
 
-    const newWorkspace: IWorkspace = await axios.post(
-      '/api/workspace',
-      bodyFields
-    );
-
+    const newWorkspace = await axios.post('/api/workspace', bodyFields);
     console.log(newWorkspace);
   };
 
