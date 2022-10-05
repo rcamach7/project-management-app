@@ -1,4 +1,6 @@
 import connectMongo from '../lib/connectToMongo';
+import mongoose from 'mongoose';
+import { initializeWorkspaceSchema } from '../../schemas/Workspace';
 import User from '../../schemas/User';
 
 /**
@@ -32,13 +34,21 @@ export const getUserById = async (_id: string) => {
 
 // Used by the session callback to populate the user's workspaces.
 export const getPopulatedUserWorkspaces = async (_id: string) => {
+  initializeWorkspaceSchema();
+  console.log(mongoose.models);
   try {
     await connectMongo();
-    const user = await User.findById(_id).populate('workspaces');
+    const user = await User.findById(_id).populate({
+      path: 'workspaces',
+      populate: {
+        path: '_id',
+        model: 'Workspace',
+      },
+    });
 
     return user.workspaces;
   } catch (error) {
-    console.error('Error retrieving user workspaces: ', error);
+    console.error('Error pre populating user workspaces: ', error);
     return Promise.reject(error);
   }
 };

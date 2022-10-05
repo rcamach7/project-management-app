@@ -11,9 +11,15 @@ const User = new Schema({
     unique: true,
   },
   emailVerified: { type: Boolean, required: true },
-  workspaces: [{ type: Schema.Types.ObjectId, ref: 'Workspace' }],
+  workspaces: [
+    { _id: { type: Schema.Types.ObjectId, ref: 'Workspace', required: true } },
+  ],
 });
 
 const UserModel: any = models.User || model('User', User);
+
+export const initializeUserSchema = () => {
+  UserModel;
+};
 
 export default UserModel;

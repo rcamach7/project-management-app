@@ -102,4 +102,8 @@ const Workspace = new Schema({
 
 const WorkspaceSchema: any = models.Workspace || model('Workspace', Workspace);
 
+export const initializeWorkspaceSchema = () => {
+  WorkspaceSchema;
+};
+
 export default WorkspaceSchema;
