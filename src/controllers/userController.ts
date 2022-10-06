@@ -35,7 +35,6 @@ export const getUserById = async (_id: string) => {
 // Used by the session callback to populate the user's workspaces.
 export const getPopulatedUserWorkspaces = async (_id: string) => {
   initializeWorkspaceSchema();
-  console.log(mongoose.models);
   try {
     await connectMongo();
     const user = await User.findById(_id).populate({

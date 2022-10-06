@@ -9,12 +9,11 @@ export default function Workspace() {
     if (!session) return;
 
     try {
-      const newWorkspace = await axios.post('/api/workspace', {
+      const { data: workspace } = await axios.post('/api/workspace', {
         name: 'Cool Workspace Project',
         description: 'This is a cool workspace project description',
       });
-
-      console.log(newWorkspace);
+      console.log(workspace);
     } catch (error) {
       console.error("Couldn't create workspace", error);
     }
