@@ -23,7 +23,7 @@ export const createNewWorkspace = async (
     try {
       await User.findOneAndUpdate(
         { _id: userId },
-        { $push: { workspaces: workspace._id } }
+        { $push: { workspaces: { _id: workspace._id } } }
       );
     } catch (error) {
       console.error('Error saving new workspace to user: ', error);
