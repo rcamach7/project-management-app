@@ -74,3 +74,21 @@ export const addWorkspaceToUser = async (_id: string, workspaceId: string) => {
 /**
  * Delete Resources (DELETE)
  */
+
+export const deleteWorkspaceFromUser = async (
+  _id: string,
+  workspaceId: string
+) => {
+  try {
+    await connectMongo();
+    const user = await User.findOneAndUpdate(
+      { _id },
+      { $pull: { workspaces: workspaceId } },
+      { new: true }
+    );
+    return user;
+  } catch (error) {
+    console.error('Error deleting workspace from user: ', error);
+    return Promise.reject(error);
+  }
+};
