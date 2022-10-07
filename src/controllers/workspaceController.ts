@@ -15,6 +15,7 @@ export const createNewWorkspace = async (
     await connectMongo();
     const newWorkspace = new Workspace({
       ...workspaceFields,
+      owner: new Types.ObjectId(userId),
       users: [{ _id: new Types.ObjectId(userId) }],
       boards: [],
     });
