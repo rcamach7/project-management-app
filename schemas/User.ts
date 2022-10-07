@@ -12,7 +12,7 @@ const User = new Schema({
   },
   emailVerified: { type: Boolean, required: true },
   workspaces: [
-    { _id: { type: Schema.Types.ObjectId, ref: 'Workspace', required: true } },
+    { type: Schema.Types.ObjectId, ref: 'Workspace', required: true },
   ],
 });
 

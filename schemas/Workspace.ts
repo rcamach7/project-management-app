@@ -40,9 +40,7 @@ const Workspace = new Schema({
   name: { type: String, required: true, minLength: 3, maxLength: 50 },
   description: { type: String, required: true, minLength: 3, maxLength: 255 },
   owner: { type: Schema.Types.ObjectId, ref: 'User', required: true },
-  users: [
-    { _id: { type: Schema.Types.ObjectId, ref: 'User', required: true } },
-  ],
+  users: [{ type: Schema.Types.ObjectId, ref: 'User', required: true }],
   boards: [
     {
       title: { type: String, required: true, minLength: 3, maxLength: 50 },

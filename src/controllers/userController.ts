@@ -39,17 +39,10 @@ export const getPopulatedUserWorkspaces = async (_id: string) => {
     await connectMongo();
     const user = await User.findById(_id).populate({
       path: 'workspaces',
+      select: ['name', 'description', 'users'],
       populate: {
-        path: '_id',
-        select: ['name', 'description', 'users'],
-        populate: {
-          path: 'owner users',
-          select: ['name', 'image'],
-          populate: {
-            path: '_id',
-            select: ['name', 'image'],
-          },
-        },
+        path: 'owner users',
+        select: ['name', 'image'],
       },
     });
 
