@@ -41,7 +41,15 @@ export const getPopulatedUserWorkspaces = async (_id: string) => {
       path: 'workspaces',
       populate: {
         path: '_id',
-        model: 'Workspace',
+        select: ['name', 'description', 'users'],
+        populate: {
+          path: 'owner users',
+          select: ['name', 'image'],
+          populate: {
+            path: '_id',
+            select: ['name', 'image'],
+          },
+        },
       },
     });
 
