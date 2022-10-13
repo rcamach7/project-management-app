@@ -1,7 +1,7 @@
 import connectMongo from '../lib/connectToMongo';
 import { Types } from 'mongoose';
-import Workspace from '../../schemas/Workspace';
-import User from '../../schemas/User';
+import Workspace from 'schemas/Workspace';
+import User from 'schemas/User';
 
 /**
  * Create Resources (POST)

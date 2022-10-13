@@ -1,11 +1,11 @@
 import { MongoDBAdapter } from '@next-auth/mongodb-adapter';
 import GoogleProvider from 'next-auth/providers/google';
-import clientPromise from '../../../lib/mongodb';
+import clientPromise from '@/lib/mongodb';
 import NextAuth from 'next-auth';
 import {
   createEmptyWorkspaces,
   getPopulatedUserWorkspaces,
-} from '../../../controllers/userController';
+} from '@/controllers/userController';
 
 export const authOptions = {
   providers: [

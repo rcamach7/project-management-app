@@ -1,6 +1,6 @@
 import { useSession } from 'next-auth/react';
-import { AppSession } from '../../../models/global.types';
-import { reloadSession } from '../../lib/clientSesstion';
+import { AppSession } from 'models/global.types';
+import { reloadSession } from '@/lib/clientSesstion';
 import axios from 'axios';
 
 export default function Workspace() {
