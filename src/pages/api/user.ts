@@ -3,8 +3,8 @@ import { authOptions } from './auth/[...nextauth]';
 import {
   getUserById,
   deleteWorkspaceFromUser,
-} from '../../controllers/userController';
-import { AppSession } from '../../../models/global.types';
+} from '@/controllers/userController';
+import { AppSession } from 'models/global.types';
 
 export default async (req, res) => {
   const session: AppSession = await unstable_getServerSession(

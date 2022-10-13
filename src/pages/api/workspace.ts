@@ -1,7 +1,7 @@
 import { unstable_getServerSession } from 'next-auth/next';
 import { authOptions } from './auth/[...nextauth]';
-import { createNewWorkspace } from '../../controllers/workspaceController';
-import { AppSession } from '../../../models/global.types';
+import { createNewWorkspace } from '@/controllers/workspaceController';
+import { AppSession } from 'models/global.types';
 
 export default async (req, res) => {
   const session: AppSession = await unstable_getServerSession(
