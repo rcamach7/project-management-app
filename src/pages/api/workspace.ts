@@ -1,6 +1,9 @@
 import { unstable_getServerSession } from 'next-auth/next';
 import { authOptions } from './auth/[...nextauth]';
-import { createNewWorkspace } from '@/controllers/workspaceController';
+import {
+  createNewWorkspace,
+  updateGeneralWorkspaceDetails,
+} from '@/controllers/workspaceController';
 import { AppSession } from 'models/global.types';
 
 export default async (req, res) => {
@@ -28,8 +31,23 @@ export default async (req, res) => {
         res.status(500).json({ message: 'Error creating workspace', error });
       }
       break;
+    case 'PUT':
+      try {
+        const workspace = await updateGeneralWorkspaceDetails(req.body._id, {
+          name: req.body.name ? req.body.name : '',
+          description: req.body.description ? req.body.description : '',
+        });
+
+        res.json({ workspace });
+      } catch (error) {
+        res.status(500).json({
+          message: 'Error updating general information for workspace',
+          error,
+        });
+      }
+      break;
     default:
-      res.setHeader('Allow', ['POST']);
+      res.setHeader('Allow', ['POST', 'PUT']);
       res.status(405).end(`Method ${method} Not Allowed`);
   }
 };
