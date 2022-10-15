@@ -57,7 +57,7 @@ export const getAllWorkspaces = async () => {
  * Update Resources (PUT)
  */
 
-export const updateWorkspaceDetails = async (
+export const updateGeneralWorkspaceDetails = async (
   _id: string,
   fields: { name?: string; description?: string }
 ) => {
@@ -67,9 +67,13 @@ export const updateWorkspaceDetails = async (
 
   try {
     await connectMongo();
-    const workspace = await Workspace.findByIdAndUpdate(_id, {
-      $set: fields,
-    });
+    const workspace = await Workspace.findByIdAndUpdate(
+      _id,
+      {
+        $set: fields,
+      },
+      { new: true }
+    );
 
     return workspace;
   } catch (error) {
@@ -112,11 +116,6 @@ export const addBoardToWorkspace = async (_id: string, board: any) => {
 const updateWorkspaceBoard = async (_id: string, board: any) => {
   try {
     await connectMongo();
-    // const workspace: IWorkspace = await Workspace.findOneAndUpdate(
-    //   { _id },
-    //   { $set: { 'boards.$': board } }
-    // );
-    // return workspace;
   } catch (error) {
     console.error('Error updating workspace board: ', error);
     return Promise.reject(error);
