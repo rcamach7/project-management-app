@@ -41,14 +41,13 @@ export const createNewWorkspace = async (
  * Read Resources (GET)
  */
 
-export const getAllWorkspaces = async () => {
+export const getWorkspaceById = async (_id: string) => {
   try {
     await connectMongo();
-    const workspaces = await Workspace.find({}).populate('users');
-
-    return workspaces;
+    const workspace = await Workspace.findOne({ _id });
+    return workspace;
   } catch (error) {
-    console.error('Error retrieving all workspaces: ', error);
+    console.error('Error getting workspace by id: ', error);
     return Promise.reject(error);
   }
 };
@@ -137,3 +136,5 @@ export const deleteWorkspace = async (_id: string) => {
     return Promise.reject(error);
   }
 };
+
+export const deleteWorkspaceFromUsers = async (users: string[]) => {};
