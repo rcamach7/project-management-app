@@ -35,6 +35,38 @@ export default function Workspace() {
     }
   };
 
+  const updateWorkspaceDetails = async (
+    workspaceId: string,
+    fields: { name: string; description: string }
+  ) => {
+    if (!session) return;
+
+    try {
+      const res = await axios.put('/api/workspace/', {
+        _id: workspaceId,
+        ...fields,
+      });
+      reloadSession();
+      console.log(res);
+    } catch (error) {
+      console.error("Couldn't delete workspace", error);
+    }
+  };
+
+  const deleteEntireWorkspace = async (workspaceId: string) => {
+    if (!session) return;
+
+    try {
+      const res = await axios.delete('/api/workspace/', {
+        data: { _id: workspaceId },
+      });
+      reloadSession();
+      console.log(res);
+    } catch (error) {
+      console.error("Couldn't delete workspace", error);
+    }
+  };
+
   return (
     <div className="container flex flex-col h-screen justify-center items-center gap-3">
       <h1 className="text-4xl font-bold">Log Info</h1>
@@ -60,6 +92,24 @@ export default function Workspace() {
         onClick={() => deleteWorkspace('634091a4e199a84ab6a06b59')}
       >
         Delete specific workspace
+      </button>
+
+      <button
+        className="bg-slate-500 p-1"
+        onClick={() =>
+          updateWorkspaceDetails('6340959ae199a84ab6a06b6d', {
+            name: 'New name',
+            description: 'New Description',
+          })
+        }
+      >
+        Update Workspace General Info (title and description)
+      </button>
+      <button
+        className="bg-slate-500 p-1"
+        onClick={() => deleteEntireWorkspace('6340959ae199a84ab6a06b6d')}
+      >
+        Delete Entire Workspace
       </button>
     </div>
   );
