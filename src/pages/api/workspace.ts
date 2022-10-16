@@ -3,6 +3,8 @@ import { authOptions } from './auth/[...nextauth]';
 import {
   createNewWorkspace,
   updateGeneralWorkspaceDetails,
+  getWorkspaceById,
+  deleteWorkspace,
 } from '@/controllers/workspaceController';
 import { AppSession } from 'models/global.types';
 
@@ -46,8 +48,26 @@ export default async (req, res) => {
         });
       }
       break;
+    case 'DELETE':
+      try {
+        const workspaceToDelete = await getWorkspaceById(req.body._id);
+        if (workspaceToDelete.owner.toString() !== session.user._id) {
+          res.status(401).json({
+            message: 'You are not authorized to delete this workspace',
+          });
+        }
+
+        const workspace = await deleteWorkspace(req.body._id);
+        res.json({ workspace });
+      } catch (error) {
+        res.status(500).json({
+          message: 'Error ocurred deleting workspace',
+          error,
+        });
+      }
+      break;
     default:
-      res.setHeader('Allow', ['POST', 'PUT']);
+      res.setHeader('Allow', ['POST', 'PUT', 'DELETE']);
       res.status(405).end(`Method ${method} Not Allowed`);
   }
 };
