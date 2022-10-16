@@ -1,6 +1,7 @@
 import { useSession } from 'next-auth/react';
 import { AppSession } from 'models/global.types';
 import { reloadSession } from '@/lib/clientSesstion';
+import Link from 'next/link';
 import axios from 'axios';
 
 export default function Workspace() {
@@ -111,6 +112,13 @@ export default function Workspace() {
       >
         Delete Entire Workspace
       </button>
+
+      <h1 className="text-4xl font-bold">Visit Workspaces</h1>
+      {session?.user.workspaces.map((workspace) => (
+        <Link key={workspace._id} href={`workspace/${workspace._id}`}>
+          <span className="bg-slate-500 p-1">{workspace.name}</span>
+        </Link>
+      ))}
     </div>
   );
 }

@@ -44,7 +44,10 @@ export const createNewWorkspace = async (
 export const getWorkspaceById = async (_id: string) => {
   try {
     await connectMongo();
-    const workspace = await Workspace.findOne({ _id });
+    const workspace = await Workspace.findOne({ _id }).populate({
+      path: 'owner users',
+      select: ['name', 'email', 'image', '_id'],
+    });
     return workspace;
   } catch (error) {
     console.error('Error getting workspace by id: ', error);
@@ -112,7 +115,7 @@ export const addBoardToWorkspace = async (_id: string, board: any) => {
 };
 
 // Update the board in the workspace, without updating the entire workspace
-const updateWorkspaceBoard = async (_id: string, board: any) => {
+export const updateWorkspaceBoard = async (_id: string, board: any) => {
   try {
     await connectMongo();
   } catch (error) {
