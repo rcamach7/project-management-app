@@ -100,30 +100,6 @@ export const addUserToWorkspace = async (_id: string, email: string) => {
   }
 };
 
-export const addBoardToWorkspace = async (_id: string, board: any) => {
-  try {
-    await connectMongo();
-    const workspace = await Workspace.findByIdAndUpdate(_id, {
-      $push: { boards: board },
-    });
-
-    return workspace;
-  } catch (error) {
-    console.error('Error adding board to workspace: ', error);
-    return Promise.reject(error);
-  }
-};
-
-// Update the board in the workspace, without updating the entire workspace
-export const updateWorkspaceBoard = async (_id: string, board: any) => {
-  try {
-    await connectMongo();
-  } catch (error) {
-    console.error('Error updating workspace board: ', error);
-    return Promise.reject(error);
-  }
-};
-
 /**
  * Delete Resources (DELETE)
  */
