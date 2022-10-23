@@ -1,4 +1,4 @@
-import connectMongo from '../src/lib/connectToMongo';
+import connectMongo from '@/lib/connectToMongo';
 import { initializeWorkspaceSchema } from 'schemas/Workspace';
 import User from 'schemas/User';
 
