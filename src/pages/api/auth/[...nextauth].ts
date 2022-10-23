@@ -5,7 +5,7 @@ import NextAuth from 'next-auth';
 import {
   createEmptyWorkspaces,
   getPopulatedUserWorkspaces,
-} from '@/controllers/userController';
+} from 'controllers/userController';
 
 export const authOptions = {
   providers: [

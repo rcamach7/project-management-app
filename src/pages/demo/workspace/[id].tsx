@@ -1,6 +1,6 @@
 import { useSession } from 'next-auth/react';
 import { AppSession } from 'models/global.types';
-import { getWorkspaceById } from '@/controllers/workspaceController';
+import { getWorkspaceById } from 'controllers/workspaceController';
 import { useEffect, useState } from 'react';
 
 export async function getServerSideProps(context) {
