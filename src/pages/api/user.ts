@@ -3,7 +3,7 @@ import { authOptions } from './auth/[...nextauth]';
 import {
   getUserById,
   deleteWorkspaceFromUser,
-} from '@/controllers/userController';
+} from 'controllers/userController';
 import { AppSession } from 'models/global.types';
 
 export default async (req, res) => {

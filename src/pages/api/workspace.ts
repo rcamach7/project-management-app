@@ -5,7 +5,7 @@ import {
   updateGeneralWorkspaceDetails,
   getWorkspaceById,
   deleteWorkspace,
-} from '@/controllers/workspaceController';
+} from 'controllers/workspaceController';
 import { AppSession } from 'models/global.types';
 
 export default async (req, res) => {

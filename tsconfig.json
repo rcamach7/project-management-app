@@ -3,7 +3,6 @@
     "baseUrl": ".",
     "paths": {
       "@/components/*": ["src/components/*"],
-      "@/controllers/*": ["src/controllers/*"],
       "@/lib/*": ["src/lib/*"]
     },
     "target": "es5",
