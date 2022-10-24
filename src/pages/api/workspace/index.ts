@@ -7,6 +7,7 @@ import {
   deleteWorkspace,
 } from 'controllers/workspaceController';
 import { AppSession } from 'models/global.types';
+import { Workspace } from 'schemas';
 
 export default async (req, res) => {
   const session: AppSession = await unstable_getServerSession(
@@ -18,6 +19,17 @@ export default async (req, res) => {
 
   const { method } = req;
   switch (method) {
+    // TODO: Delete this endpoint before production - only for testing
+    case 'GET':
+      try {
+        const workspaces = await Workspace.find();
+
+        res.json(workspaces);
+      } catch (error) {
+        res.status(500).json({ message: 'Error getting workspaces', error });
+      }
+      break;
+
     case 'POST':
       try {
         const workspace = await createNewWorkspace(
