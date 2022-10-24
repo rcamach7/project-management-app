@@ -50,7 +50,7 @@ Only populates what is needed for the user page. **Additional fields exist for w
 
 /api/workspace/board/
 
-- Allows POST in order to create a new board
+- Allows POST in order to create a new board (will need [wid] on req body)
 
 /api/workspace/board/:id
 
