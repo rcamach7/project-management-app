@@ -8,21 +8,6 @@ const Ticket = new Schema({
     minLength: 3,
     maxLength: 255,
   },
-  comments: [
-    {
-      user: {
-        type: Schema.Types.ObjectId,
-        ref: 'User',
-        required: true,
-      },
-      text: {
-        type: String,
-        required: true,
-        minLength: 3,
-        maxLength: 255,
-      },
-    },
-  ],
   labels: [
     {
       type: String,
@@ -40,13 +25,14 @@ const Ticket = new Schema({
         'CHORE',
         'WIP',
       ],
+      required: true,
     },
   ],
 });
 
-const TicketSchema = models.Ticket || model('Ticket', Ticket);
+const TicketSchema: any = models.Ticket || model('Ticket', Ticket);
 
-export const initializeCardSchema = () => {
+export const initializeTicketSchema = () => {
   return TicketSchema;
 };
 
