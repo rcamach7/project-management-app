@@ -27,14 +27,14 @@ export default async (req, res) => {
 
     case 'POST':
       try {
-        const { title, description, workspaceId } = req.body;
-        if (!title || !description || !workspaceId) {
+        const { title, description, workspace_id } = req.body;
+        if (!title || !description || !workspace_id) {
           return res.status(400).json({ message: 'Missing required fields' });
         }
 
         // Create new board, then add board to the workspace.
-        const newBoard = await createNewBoard(title, description);
-        await Workspace.findByIdAndUpdate(workspaceId, {
+        const newBoard = await createNewBoard(title, description, workspace_id);
+        await Workspace.findByIdAndUpdate(workspace_id, {
           $push: { boards: new Types.ObjectId(newBoard._id) },
         });
 
