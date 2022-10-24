@@ -1,17 +1,19 @@
 import UserSchema, { initializeUserSchema } from './User';
 import WorkspaceSchema, { initializeWorkspaceSchema } from './Workspace';
 import BoardSchema, { initializeBoardSchema } from './Board';
-import TicketSchema, { initializeCardSchema } from './Ticket';
+import TicketSchema, { initializeTicketSchema } from './Ticket';
 import connectToMongo from '@/lib/connectToMongo';
 
 // Initialize all schemas so references work when populating _id's.
 initializeUserSchema();
 initializeWorkspaceSchema();
 initializeBoardSchema();
-initializeCardSchema();
+initializeTicketSchema();
 
 // Connect to MongoDB.
-connectToMongo();
+(async () => {
+  await connectToMongo();
+})();
 
 export {
   UserSchema as User,
