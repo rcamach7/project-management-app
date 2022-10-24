@@ -32,4 +32,30 @@ Only populates what is needed for the user page. **Additional fields exist for w
 
 ---
 
-## Workspace Page
+## API Architecture
+
+**Workspace**
+
+/api/workspace/
+
+- Allows POST in order to create a new workspace
+
+/api/workspace/:id
+
+- Allows GET in order to get a workspace
+- Allows PUT in order to update a workspace
+- Allows DELETE in order to delete a workspace
+
+**Board**
+
+/api/workspace/board/
+
+- Allows POST in order to create a new board
+
+/api/workspace/board/:id
+
+- Allows GET in order to get the board details
+- Allows PUT in order to update a board
+- Allows DELETE in order to delete the board
+
+/workspace/[wid]/board/[bid]/ticket/[tid]
