@@ -1,4 +1,5 @@
 import { Board } from 'schemas';
+import { Types } from 'mongoose';
 
 /**
  * GET Controllers
@@ -39,11 +40,16 @@ export const updateBoardDescriptionById = async (
  * POST Controllers
  */
 
-export const createNewBoard = async (title: string, description: string) => {
+export const createNewBoard = async (
+  title: string,
+  description: string,
+  workspace_id: string
+) => {
   try {
     const newBoard = new Board({
-      title: title,
-      description: description,
+      workspace_id: new Types.ObjectId(workspace_id),
+      title,
+      description,
       tickets: [],
     });
     await newBoard.save();
@@ -58,3 +64,13 @@ export const createNewBoard = async (title: string, description: string) => {
 /**
  * DELETE Controllers
  */
+
+export const deleteBoardById = async (_id: string) => {
+  try {
+    const board = await Board.findOneAndDelete({ _id });
+    return board;
+  } catch (error) {
+    console.error('Error deleting board: ', error);
+    return Promise.reject(error);
+  }
+};

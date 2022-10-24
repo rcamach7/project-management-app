@@ -4,6 +4,7 @@ import { AppSession } from 'models/global.types';
 import {
   updateBoardDescriptionById,
   getBoardById,
+  deleteBoardById,
 } from 'controllers/boardController';
 
 export default async (req, res) => {
@@ -14,11 +15,13 @@ export default async (req, res) => {
   );
   if (!session) res.status(401).json({ message: 'Unauthorized' });
 
+  const { bid } = req.query;
+  if (!bid) return res.status(400).json({ message: 'Missing board id' });
+
   const { method } = req;
   switch (method) {
     case 'GET':
       try {
-        const { bid } = req.query;
         const board = await getBoardById(bid);
         res.json(board);
       } catch (error) {
@@ -33,17 +36,25 @@ export default async (req, res) => {
         });
       }
       try {
-        const updatedBoard = await updateBoardDescriptionById(req.query.bid, {
+        const board = await updateBoardDescriptionById(req.query.bid, {
           title,
           description,
         });
-        res.json({ board: updatedBoard });
+        res.json(board);
+      } catch (error) {
+        res.status(500).json({ msg: 'Error updating board', error });
+      }
+      break;
+    case 'DELETE':
+      try {
+        const board = await deleteBoardById(bid);
+        res.json(board);
       } catch (error) {
         res.status(500).json({ msg: 'Error updating board', error });
       }
       break;
     default:
-      res.setHeader('Allow', ['GET']);
+      res.setHeader('Allow', ['GET', 'PUT', 'DELETE']);
       res.status(405).end(`Method ${method} Not Allowed`);
   }
 };
