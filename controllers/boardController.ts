@@ -6,10 +6,31 @@ import { Board } from 'schemas';
 
 export const getBoardById = async (_id: string) => {
   try {
-    const board = await Board.findById(_id);
+    const board = await Board.findOne({ _id });
     return board;
   } catch (error) {
     console.error('Error retrieving board: ', error);
+    return Promise.reject(error);
+  }
+};
+
+/**
+ * PUT Controllers
+ */
+
+export const updateBoardDescriptionById = async (
+  _id: string,
+  fields: { title?: string; description?: string }
+) => {
+  try {
+    const board = await Board.findByIdAndUpdate(
+      _id,
+      { $set: fields },
+      { new: true }
+    );
+    return board;
+  } catch (error) {
+    console.error('Error updating board: ', error);
     return Promise.reject(error);
   }
 };
