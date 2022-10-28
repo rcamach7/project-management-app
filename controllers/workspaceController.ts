@@ -1,7 +1,5 @@
-import connectMongo from '@/lib/connectToMongo';
 import { Types } from 'mongoose';
-import Workspace from 'schemas/Workspace';
-import User from 'schemas/User';
+import { Workspace, User } from 'schemas';
 
 /**
  * Create Resources (POST)
@@ -12,7 +10,6 @@ export const createNewWorkspace = async (
   userId: string
 ) => {
   try {
-    await connectMongo();
     const newWorkspace = new Workspace({
       ...workspaceFields,
       owner: new Types.ObjectId(userId),
@@ -43,7 +40,6 @@ export const createNewWorkspace = async (
 
 export const getWorkspaceById = async (_id: string) => {
   try {
-    await connectMongo();
     const workspace = await Workspace.findOne({ _id }).populate({
       path: 'owner users',
       select: ['name', 'email', 'image', '_id'],
@@ -68,7 +64,6 @@ export const updateGeneralWorkspaceDetails = async (
   }
 
   try {
-    await connectMongo();
     const workspace = await Workspace.findByIdAndUpdate(
       _id,
       {
@@ -86,7 +81,6 @@ export const updateGeneralWorkspaceDetails = async (
 
 export const addUserToWorkspace = async (_id: string, email: string) => {
   try {
-    await connectMongo();
     const user = await User.findOne({ email });
     const workspace = await Workspace.findOneAndUpdate(
       { _id },
@@ -106,7 +100,6 @@ export const addUserToWorkspace = async (_id: string, email: string) => {
 
 export const deleteWorkspace = async (_id: string) => {
   try {
-    await connectMongo();
     const workspace = await Workspace.findByIdAndDelete(_id);
 
     return workspace;
