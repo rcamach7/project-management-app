@@ -1,7 +1,7 @@
 import { unstable_getServerSession } from 'next-auth/next';
 import { NextApiRequest, NextApiResponse } from 'next';
 import {
-  createNewWorkspace,
+  updateGeneralWorkspaceDetails,
   getWorkspaceById,
   deleteWorkspace,
 } from 'controllers/workspaceController';
@@ -31,20 +31,22 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       }
       break;
 
-    case 'POST':
+    case 'PUT':
       try {
-        // const { name, description } = req.body;
-        const workspace = await createNewWorkspace(
-          {
-            name: name ? name : 'Untitled Workspace',
-            description: description ? description : '',
-          },
-          session.user._id
-        );
+        if (!name && !description)
+          return res.status(400).json({ message: 'No fields to update' });
+
+        const workspace = await updateGeneralWorkspaceDetails(wid, {
+          name: name ? name : '',
+          description: description ? description : '',
+        });
 
         res.json(workspace);
       } catch (error) {
-        res.status(500).json({ message: 'Error updating workspace', error });
+        res.status(500).json({
+          message: 'Error updating general information for workspace',
+          error,
+        });
       }
       break;
 
