@@ -1,6 +1,5 @@
-import connectMongo from '@/lib/connectToMongo';
 import { initializeWorkspaceSchema } from 'schemas/Workspace';
-import User from 'schemas/User';
+import { User } from 'schemas';
 
 /**
  * Create Resources (POST)
@@ -8,7 +7,6 @@ import User from 'schemas/User';
 
 export const createEmptyWorkspaces = async (_id: string) => {
   try {
-    await connectMongo();
     await User.findByIdAndUpdate(_id, { workspaces: [] });
     return [];
   } catch (error) {
@@ -22,7 +20,6 @@ export const createEmptyWorkspaces = async (_id: string) => {
 
 export const getUserById = async (_id: string) => {
   try {
-    await connectMongo();
     const user = await User.findById(_id);
     return user;
   } catch (error) {
@@ -35,7 +32,6 @@ export const getUserById = async (_id: string) => {
 export const getPopulatedUserWorkspaces = async (_id: string) => {
   initializeWorkspaceSchema();
   try {
-    await connectMongo();
     const user = await User.findById(_id).populate({
       path: 'workspaces',
       select: ['name', 'description', 'users'],
@@ -58,7 +54,6 @@ export const getPopulatedUserWorkspaces = async (_id: string) => {
 
 export const addWorkspaceToUser = async (_id: string, workspaceId: string) => {
   try {
-    await connectMongo();
     const user = await User.findOneAndUpdate(
       { _id },
       { $push: { workspaces: workspaceId } }
@@ -79,7 +74,6 @@ export const deleteWorkspaceFromUser = async (
   workspaceId: string
 ) => {
   try {
-    await connectMongo();
     const user = await User.findOneAndUpdate(
       { _id },
       { $pull: { workspaces: workspaceId } },
