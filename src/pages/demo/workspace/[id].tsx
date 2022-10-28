@@ -25,10 +25,6 @@ export default function Workspace_Continued({ workspace }) {
   const { data: session }: { data: AppSession } = useSession();
   const [workspaceState, setWorkspaceState] = useState(JSON.parse(workspace));
 
-  useEffect(() => {
-    console.log(workspaceState);
-  }, [workspaceState]);
-
   if (!workspaceState) {
     return (
       <div className="container flex flex-col h-screen justify-center items-center gap-3">
@@ -43,13 +39,13 @@ export default function Workspace_Continued({ workspace }) {
           className="bg-slate-500 p-1"
           onClick={() => console.log(session?.user)}
         >
-          Print My Session
+          Print My User Session
         </button>
         <button
           className="bg-slate-500 p-1"
-          onClick={() => console.log(session.user.workspaces)}
+          onClick={() => console.log(workspaceState)}
         >
-          Print My Workspaces
+          Print This Workspace
         </button>
       </div>
     );
