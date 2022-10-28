@@ -25,7 +25,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   switch (method) {
     case 'GET':
       try {
-        res.json({ msg: 'GET request on api/workspace/[wid]/' });
+        const workspace = await getWorkspaceById(wid);
+        res.json(workspace);
       } catch (error) {
         res.status(500).json({ message: 'Error retrieving workspace', error });
       }

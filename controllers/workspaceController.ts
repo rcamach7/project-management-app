@@ -41,7 +41,7 @@ export const createNewWorkspace = async (
 export const getWorkspaceById = async (_id: string) => {
   try {
     const workspace = await Workspace.findOne({ _id }).populate({
-      path: 'owner users',
+      path: 'owner users boards',
       select: ['name', 'email', 'image', '_id'],
     });
     return workspace;
