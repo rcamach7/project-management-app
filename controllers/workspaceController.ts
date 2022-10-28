@@ -40,10 +40,21 @@ export const createNewWorkspace = async (
 
 export const getWorkspaceById = async (_id: string) => {
   try {
-    const workspace = await Workspace.findOne({ _id }).populate({
-      path: 'owner users boards',
-      select: ['name', 'email', 'image', '_id'],
-    });
+    const workspace = await Workspace.findOne({ _id })
+      .populate({
+        path: 'owner users',
+        select: ['name', 'email', 'image', '_id'],
+      })
+      .populate({
+        path: 'boards',
+        model: 'Board',
+        select: ['title', 'description', 'workspace_id', 'tickets', '_id'],
+        populate: {
+          path: 'tickets',
+          model: 'Ticket',
+          select: ['title', 'description', 'labels', 'board_id', '_id'],
+        },
+      });
     return workspace;
   } catch (error) {
     console.error('Error getting workspace by id: ', error);
