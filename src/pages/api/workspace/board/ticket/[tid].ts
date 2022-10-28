@@ -1,4 +1,5 @@
 import { unstable_getServerSession } from 'next-auth/next';
+import { NextApiRequest, NextApiResponse } from 'next';
 import { authOptions } from '@/auth/[...nextauth]';
 import { AppSession } from 'models/global.types';
 import {
@@ -7,7 +8,7 @@ import {
   updateTicketFieldsById,
 } from 'controllers/ticketController';
 
-export default async (req, res) => {
+export default async (req: NextApiRequest, res: NextApiResponse) => {
   const session: AppSession = await unstable_getServerSession(
     req,
     res,
@@ -16,6 +17,11 @@ export default async (req, res) => {
   if (!session) res.status(401).json({ message: 'Unauthorized' });
 
   const { tid } = req.query;
+  if (!tid || Array.isArray(tid))
+    return res
+      .status(400)
+      .json({ message: 'Ticket id is not provided, or valid' });
+
   if (!tid)
     return res
       .status(400)

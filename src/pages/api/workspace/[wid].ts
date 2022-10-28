@@ -1,8 +1,9 @@
 import { unstable_getServerSession } from 'next-auth/next';
+import { NextApiRequest, NextApiResponse } from 'next';
 import { authOptions } from '@/auth/[...nextauth]';
 import { AppSession } from 'models/global.types';
 
-export default async (req, res) => {
+export default async (req: NextApiRequest, res: NextApiResponse) => {
   const session: AppSession = await unstable_getServerSession(
     req,
     res,

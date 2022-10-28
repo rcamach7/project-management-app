@@ -1,4 +1,5 @@
 import { unstable_getServerSession } from 'next-auth/next';
+import { NextApiRequest, NextApiResponse } from 'next';
 import { authOptions } from '@/auth/[...nextauth]';
 import { AppSession } from 'models/global.types';
 import {
@@ -7,7 +8,7 @@ import {
   deleteBoardById,
 } from 'controllers/boardController';
 
-export default async (req, res) => {
+export default async (req: NextApiRequest, res: NextApiResponse) => {
   const session: AppSession = await unstable_getServerSession(
     req,
     res,
@@ -16,7 +17,8 @@ export default async (req, res) => {
   if (!session) res.status(401).json({ message: 'Unauthorized' });
 
   const { bid } = req.query;
-  if (!bid) return res.status(400).json({ message: 'Missing board id' });
+  if (!bid || Array.isArray(bid))
+    return res.status(400).json({ message: 'Missing board id' });
 
   const { method } = req;
   switch (method) {
@@ -36,7 +38,7 @@ export default async (req, res) => {
         });
       }
       try {
-        const board = await updateBoardDescriptionById(req.query.bid, {
+        const board = await updateBoardDescriptionById(bid, {
           title,
           description,
         });
