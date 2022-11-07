@@ -69,34 +69,22 @@ export default function Workspace() {
   };
 
   return (
-    <div className="container flex flex-col h-screen justify-center items-center gap-3">
-      <h1 className="text-4xl font-bold">Log Info</h1>
-      <button
-        className="bg-slate-500 p-1"
-        onClick={() => console.log(session?.user)}
-      >
+    <div>
+      <h1>Log Info</h1>
+      <button onClick={() => console.log(session?.user)}>
         Print My Session
       </button>
-      <button
-        className="bg-slate-500 p-1"
-        onClick={() => console.log(session.user.workspaces)}
-      >
+      <button onClick={() => console.log(session.user.workspaces)}>
         Print My Workspaces
       </button>
 
-      <h1 className="text-4xl font-bold">Workspace CRUD</h1>
-      <button className="bg-slate-500 p-1" onClick={() => addNewWorkspace()}>
-        Add New Empty Workspace
-      </button>
-      <button
-        className="bg-slate-500 p-1"
-        onClick={() => deleteWorkspace('634091a4e199a84ab6a06b59')}
-      >
+      <h1>Workspace CRUD</h1>
+      <button onClick={() => addNewWorkspace()}>Add New Empty Workspace</button>
+      <button onClick={() => deleteWorkspace('634091a4e199a84ab6a06b59')}>
         Delete specific workspace
       </button>
 
       <button
-        className="bg-slate-500 p-1"
         onClick={() =>
           updateWorkspaceDetails('6340959ae199a84ab6a06b6d', {
             name: 'New name',
@@ -106,17 +94,14 @@ export default function Workspace() {
       >
         Update Workspace General Info (title and description)
       </button>
-      <button
-        className="bg-slate-500 p-1"
-        onClick={() => deleteEntireWorkspace('6340959ae199a84ab6a06b6d')}
-      >
+      <button onClick={() => deleteEntireWorkspace('6340959ae199a84ab6a06b6d')}>
         Delete Entire Workspace
       </button>
 
-      <h1 className="text-4xl font-bold">Visit Workspaces</h1>
+      <h1>Visit Workspaces</h1>
       {session?.user.workspaces.map((workspace) => (
         <Link key={workspace._id} href={`workspace/${workspace._id}`}>
-          <span className="bg-slate-500 p-1">{workspace.name}</span>
+          <span>{workspace.name}</span>
         </Link>
       ))}
     </div>
