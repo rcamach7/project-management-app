@@ -1,7 +1,7 @@
 import { useSession } from 'next-auth/react';
 import { AppSession } from 'models/global.types';
 import { getWorkspaceById } from 'controllers/workspaceController';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 export async function getServerSideProps(context) {
   const { id } = context.query;
@@ -27,24 +27,18 @@ export default function Workspace_Continued({ workspace }) {
 
   if (!workspaceState) {
     return (
-      <div className="container flex flex-col h-screen justify-center items-center gap-3">
-        <h1 className="text-4xl font-bold">Workspace not found</h1>
+      <div>
+        <h1>Workspace not found</h1>
       </div>
     );
   } else {
     return (
-      <div className="container flex flex-col h-screen justify-center items-center gap-3">
-        <h1 className="text-4xl font-bold">User Info</h1>
-        <button
-          className="bg-slate-500 p-1"
-          onClick={() => console.log(session?.user)}
-        >
+      <div>
+        <h1>User Info</h1>
+        <button onClick={() => console.log(session?.user)}>
           Print My User Session
         </button>
-        <button
-          className="bg-slate-500 p-1"
-          onClick={() => console.log(workspaceState)}
-        >
+        <button onClick={() => console.log(workspaceState)}>
           Print This Workspace
         </button>
       </div>

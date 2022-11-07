@@ -7,7 +7,7 @@ export default function FetchUser() {
   };
 
   return (
-    <div className="container flex flex-col justify-center items-center w-screen h-screen">
+    <div>
       <button onClick={fetchUser}>Print User Data By Fetching Endpoint</button>
     </div>
   );
