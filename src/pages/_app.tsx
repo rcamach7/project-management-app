@@ -1,5 +1,6 @@
-import '../theme/globals.css';
 import { SessionProvider } from 'next-auth/react';
+import { ThemeProvider, CssBaseline } from '@mui/material/';
+import theme from '../theme';
 
 export default function App({
   Component,
@@ -7,7 +8,10 @@ export default function App({
 }) {
   return (
     <SessionProvider session={session}>
-      <Component {...pageProps} />
+      <ThemeProvider theme={theme}>
+        <Component {...pageProps} />
+        <CssBaseline />
+      </ThemeProvider>
     </SessionProvider>
   );
 }
