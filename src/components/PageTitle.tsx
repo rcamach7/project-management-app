@@ -11,7 +11,11 @@ export default function PageTitle({ title, subheading }: Props) {
       <Typography variant="h1" sx={{ fontSize: '3rem' }}>
         {title}
       </Typography>
-      <Typography variant="h2" sx={{ fontSize: '1.5rem' }}>
+      <Typography
+        variant="h2"
+        sx={{ fontSize: '1.5rem' }}
+        color="text.secondary"
+      >
         {subheading}
       </Typography>
     </Box>
