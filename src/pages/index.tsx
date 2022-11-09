@@ -60,7 +60,7 @@ export default function Home({ featuresList }: Props) {
           flexDirection: 'column',
           alignItems: 'center',
           justifyContent: 'center',
-          p: 2,
+          p: 1.5,
           minHeight: '100vh',
         }}
       >
@@ -72,7 +72,7 @@ export default function Home({ featuresList }: Props) {
         </CenteredBox>
 
         <CenteredBox flex={1}>
-          <ActionButton text="Sign In / Get Started" />
+          <ActionButton text="Sign In / Get Started" variant="outlined" />
         </CenteredBox>
 
         <Grid
