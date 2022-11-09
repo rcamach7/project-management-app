@@ -1,17 +1,28 @@
-import { Box, Typography } from '@mui/material';
+import Head from 'next/head';
+import { Box } from '@mui/material';
+import { PageTitle } from '@/components/index';
 
-export default function Home() {
+export async function getStaticProps() {
+  return {
+    props: {
+      featuresList: [],
+    },
+  };
+}
+
+export default function Home({ featuresList }) {
   return (
-    <Box
-      sx={{
-        width: '100vw',
-        minHeight: '100vh',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-      }}
-    >
-      <Typography>Welcome to my Flow Project!</Typography>
-    </Box>
+    <>
+      <Head>
+        <title>Flow: Sign In</title>
+      </Head>
+
+      <Box>
+        <PageTitle
+          title="Flow"
+          subheading="Collaborative Project Management Tool"
+        />
+      </Box>
+    </>
   );
 }
