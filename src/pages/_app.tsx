@@ -1,6 +1,8 @@
 import { SessionProvider } from 'next-auth/react';
-import { ThemeProvider, CssBaseline } from '@mui/material/';
 import theme from '../theme';
+import { ThemeProvider, CssBaseline } from '@mui/material/';
+import { Provider } from 'react-redux';
+import { store } from '@/features/index';
 
 export default function App({
   Component,
@@ -8,10 +10,12 @@ export default function App({
 }) {
   return (
     <SessionProvider session={session}>
-      <ThemeProvider theme={theme}>
-        <Component {...pageProps} />
-        <CssBaseline />
-      </ThemeProvider>
+      <Provider store={store}>
+        <ThemeProvider theme={theme}>
+          <Component {...pageProps} />
+          <CssBaseline />
+        </ThemeProvider>
+      </Provider>
     </SessionProvider>
   );
 }
