@@ -1,13 +1,8 @@
-import { Card, CardContent, CardMedia, Box, Typography } from '@mui/material';
+import { Card, CardContent, Box, Typography } from '@mui/material';
+import { Feature } from 'models/client.models';
 import Image from 'next/image';
 
-interface Props {
-  image: string;
-  title: string;
-  description: string;
-}
-
-export default function FeatureCard({ image, title, description }: Props) {
+export default function FeatureCard({ image, title, description }: Feature) {
   return (
     <Card
       sx={{
