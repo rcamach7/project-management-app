@@ -13,8 +13,6 @@ export default function ActionButton({ text, variant, onClick }: Props) {
       size="large"
       sx={{
         color: 'text.primary',
-        border: 'solid 1px',
-        borderColor: 'secondary.main',
       }}
       onClick={onClick}
     >

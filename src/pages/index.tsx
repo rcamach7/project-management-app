@@ -66,12 +66,12 @@ export default function Home({ featuresList }: Props) {
       >
         <CenteredBox flex={1}>
           <PageTitle
-            title="Flow"
             subheading="Collaborative Project Management Tool"
+            image="/flow.svg"
           />
         </CenteredBox>
 
-        <CenteredBox flex={1}>
+        <CenteredBox flex={1} padding="1em 0 0 0">
           <ActionButton text="Sign In / Get Started" variant="outlined" />
         </CenteredBox>
 

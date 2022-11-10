@@ -3,9 +3,17 @@ import { Box as MuiBox, BoxProps } from '@mui/material';
 
 interface Props extends BoxProps {
   flex?: number;
+  p?: number;
+  padding?: string;
 }
 
-const CenteredBox: FC<Props> = ({ children, flex }) => {
+const CenteredBox: FC<Props> = ({ children, flex, p, padding }) => {
+  const styles = {
+    ...(flex && { flex }),
+    ...(p && { p }),
+    ...(padding && { padding }),
+  };
+
   return (
     <MuiBox
       sx={{
@@ -13,7 +21,7 @@ const CenteredBox: FC<Props> = ({ children, flex }) => {
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
-        flex,
+        ...styles,
       }}
     >
       {children}
