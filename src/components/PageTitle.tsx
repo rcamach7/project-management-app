@@ -1,23 +1,30 @@
 import { Box, Typography } from '@mui/material';
+import Image from 'next/image';
 
 interface Props {
-  title: string;
+  title?: string;
   subheading?: string;
+  image?: string;
 }
 
-export default function PageTitle({ title, subheading }: Props) {
+export default function PageTitle({ title, subheading, image }: Props) {
   return (
     <Box textAlign="center">
-      <Typography variant="h1" sx={{ fontSize: '3rem' }}>
-        {title}
-      </Typography>
-      <Typography
-        variant="h2"
-        sx={{ fontSize: '1.5rem' }}
-        color="text.secondary"
-      >
-        {subheading}
-      </Typography>
+      {image && <Image src={image} alt={title} width={500} height={125} />}
+      {title && (
+        <Typography variant="h1" sx={{ fontSize: '3rem' }}>
+          {title}
+        </Typography>
+      )}
+      {subheading && (
+        <Typography
+          variant="h2"
+          sx={{ fontSize: '1.25rem' }}
+          color="text.secondary"
+        >
+          {subheading}
+        </Typography>
+      )}
     </Box>
   );
 }
