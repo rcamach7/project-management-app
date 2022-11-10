@@ -1,11 +1,11 @@
 import Head from 'next/head';
+import { Feature } from 'models/client.models';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { signIn } from 'next-auth/react';
 import { AppSession } from 'models/global.types';
 import { useSession } from 'next-auth/react';
-import { Box } from '@mui/material';
-import Grid from '@mui/material/Unstable_Grid2'; // Grid version 2
+import { Box, Unstable_Grid2 as Grid } from '@mui/material';
 import {
   PageTitle,
   FeatureCard,
@@ -43,13 +43,7 @@ export async function getStaticProps() {
 }
 
 interface Props {
-  featuresList: [
-    {
-      image: string;
-      title: string;
-      description: string;
-    }
-  ];
+  featuresList: Feature[];
 }
 
 export default function Home({ featuresList }: Props) {
