@@ -1,46 +1,32 @@
-import Head from 'next/head';
-import { useRouter } from 'next/router';
-import { useEffect } from 'react';
-import { signOut } from 'next-auth/react';
-import { AppSession } from 'models/global.types';
-import { useSession } from 'next-auth/react';
-import { Box, Typography } from '@mui/material';
-import { ActionButton } from '@/components/index';
+import { authOptions } from '@/auth/[...nextauth]';
+import { unstable_getServerSession } from 'next-auth/next';
 
-export function getServerSideProps() {
-  return {
-    props: {},
-  };
+export default function Me({ mySession }) {
+  const { user } = JSON.parse(mySession);
+
+  return 'User is logged in';
 }
 
-export default function Me({}) {
-  const { data: session }: { data: AppSession } = useSession();
-  const router = useRouter();
-
-  useEffect(() => {
-    if (!session) {
-      router.push('/');
-    }
-  }, [session]);
-
-  return (
-    <>
-      <Head>
-        <title>Flow: Me</title>
-      </Head>
-
-      <Box
-        sx={{
-          minHeight: '100vh',
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}
-      >
-        <Typography>User Page</Typography>
-        <ActionButton text="Sign Out" variant="outlined" onClick={signOut} />
-      </Box>
-    </>
+export async function getServerSideProps(context) {
+  const session = await unstable_getServerSession(
+    context.req,
+    context.res,
+    authOptions
   );
+
+  if (!session) {
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false,
+      },
+    };
+  }
+
+  const mySession = JSON.stringify(session);
+  return {
+    props: {
+      mySession,
+    },
+  };
 }
