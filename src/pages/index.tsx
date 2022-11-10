@@ -77,7 +77,7 @@ export default function Home({ featuresList }: Props) {
 
         <Grid
           container
-          spacing={1}
+          spacing={{ sm: 1, md: 3, lg: 6 }}
           justifyContent="space-evenly"
           sx={{ flex: 2, p: 1 }}
         >

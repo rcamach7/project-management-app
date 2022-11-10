@@ -1,4 +1,5 @@
-import { Card, CardContent, CardMedia, Typography } from '@mui/material';
+import { Card, CardContent, CardMedia, Box, Typography } from '@mui/material';
+import Image from 'next/image';
 
 interface Props {
   image: string;
@@ -18,7 +19,16 @@ export default function FeatureCard({ image, title, description }: Props) {
         background: 'background.paper',
       }}
     >
-      <CardMedia component="img" height="75" image={image} alt={title} />
+      <Box sx={{ height: 'clamp(100px, 25vw, 150px)', overflow: 'hidden' }}>
+        <Image
+          src={image}
+          alt={title}
+          width={200}
+          height={200}
+          layout="responsive"
+          objectFit="cover"
+        />
+      </Box>
       <CardContent sx={{ padding: '.50em !important', textAlign: 'center' }}>
         <Typography gutterBottom variant="h6" component="div">
           {title}
