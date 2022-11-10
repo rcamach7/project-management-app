@@ -1,4 +1,9 @@
 import Head from 'next/head';
+import { useRouter } from 'next/router';
+import { useEffect } from 'react';
+import { signIn } from 'next-auth/react';
+import { AppSession } from 'models/global.types';
+import { useSession } from 'next-auth/react';
 import { Box } from '@mui/material';
 import Grid from '@mui/material/Unstable_Grid2'; // Grid version 2
 import {
@@ -48,6 +53,15 @@ interface Props {
 }
 
 export default function Home({ featuresList }: Props) {
+  const { data: session }: { data: AppSession } = useSession();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (session) {
+      router.push('/me');
+    }
+  }, [session]);
+
   return (
     <>
       <Head>
@@ -72,7 +86,11 @@ export default function Home({ featuresList }: Props) {
         </CenteredBox>
 
         <CenteredBox flex={1} padding="1em 0 0 0">
-          <ActionButton text="Sign In / Get Started" variant="outlined" />
+          <ActionButton
+            text="Get Started"
+            variant="outlined"
+            onClick={signIn}
+          />
         </CenteredBox>
 
         <Grid
@@ -81,8 +99,8 @@ export default function Home({ featuresList }: Props) {
           justifyContent="space-evenly"
           sx={{ flex: 2, p: 1 }}
         >
-          {featuresList.map((feature) => (
-            <Grid xs={5} md={4} lg={3}>
+          {featuresList.map((feature, i) => (
+            <Grid key={i} xs={5} md={4} lg={3}>
               <FeatureCard key={feature.title} {...feature} />
             </Grid>
           ))}
