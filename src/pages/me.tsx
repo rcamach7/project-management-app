@@ -1,25 +1,19 @@
 import { authOptions } from '@/auth/[...nextauth]';
 import { unstable_getServerSession } from 'next-auth/next';
-import { useEffect } from 'react';
-import { useAppSelector } from '@/features/index';
+import { getUserWorkspaces } from 'controllers/workspaceController';
+import { AppSession } from 'models/global';
 
-export default function Me({ mySession }) {
+export default function Me({ mySession, workspaces }) {
   const { user } = JSON.parse(mySession);
-  const { value, loading } = useAppSelector((state) => state.workspaces);
-
-  useEffect(() => {
-    console.log(loading);
-    console.log(value);
-    console.log(user);
-  }, [loading, value, user]);
+  workspaces = JSON.parse(workspaces);
 
   return 'User is logged in';
 }
 
-export async function getServerSideProps(context) {
-  const session = await unstable_getServerSession(
-    context.req,
-    context.res,
+export async function getServerSideProps({ req, res }) {
+  const session: AppSession = await unstable_getServerSession(
+    req,
+    res,
     authOptions
   );
 
@@ -30,12 +24,16 @@ export async function getServerSideProps(context) {
         permanent: false,
       },
     };
+  } else {
+    const mySession = JSON.stringify(session);
+    const myWorkspaces = JSON.stringify(
+      await getUserWorkspaces(session.user._id)
+    );
+    return {
+      props: {
+        mySession,
+        workspaces: myWorkspaces,
+      },
+    };
   }
-
-  const mySession = JSON.stringify(session);
-  return {
-    props: {
-      mySession,
-    },
-  };
 }
