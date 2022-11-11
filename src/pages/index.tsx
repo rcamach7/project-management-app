@@ -1,10 +1,8 @@
 import Head from 'next/head';
 import { Feature } from 'models/client';
-import { useRouter } from 'next/router';
-import { useEffect } from 'react';
 import { signIn } from 'next-auth/react';
-import { AppSession } from 'models/global';
-import { useSession } from 'next-auth/react';
+import { unstable_getServerSession } from 'next-auth/next';
+import { authOptions } from '@/auth/[...nextauth]';
 import { Box, Unstable_Grid2 as Grid } from '@mui/material';
 import {
   PageTitle,
@@ -13,49 +11,11 @@ import {
   CenteredBox,
 } from '@/components/index';
 
-export async function getStaticProps() {
-  return {
-    props: {
-      featuresList: [
-        {
-          image: 'https://placekitten.com/300/300',
-          title: 'Feature 1',
-          description: 'This is a description of feature 1',
-        },
-        {
-          image: 'https://placekitten.com/300/300',
-          title: 'Feature 2',
-          description: 'This is a description of feature 2',
-        },
-        {
-          image: 'https://placekitten.com/300/300',
-          title: 'Feature 3',
-          description: 'This is a description of feature 3',
-        },
-        {
-          image: 'https://placekitten.com/300/300',
-          title: 'Feature 4',
-          description: 'This is a description of feature 4',
-        },
-      ],
-    },
-  };
-}
-
 interface Props {
   featuresList: Feature[];
 }
 
 export default function Home({ featuresList }: Props) {
-  const { data: session }: { data: AppSession } = useSession();
-  const router = useRouter();
-
-  useEffect(() => {
-    if (session) {
-      router.push('/me');
-    }
-  }, [session]);
-
   return (
     <>
       <Head>
@@ -102,4 +62,44 @@ export default function Home({ featuresList }: Props) {
       </Box>
     </>
   );
+}
+
+export async function getServerSideProps({ req, res }) {
+  const session = await unstable_getServerSession(req, res, authOptions);
+
+  if (session) {
+    return {
+      redirect: {
+        destination: '/me',
+        permanent: false,
+      },
+    };
+  } else {
+    return {
+      props: {
+        featuresList: [
+          {
+            image: 'https://placekitten.com/300/300',
+            title: 'Feature 1',
+            description: 'This is a description of feature 1',
+          },
+          {
+            image: 'https://placekitten.com/300/300',
+            title: 'Feature 2',
+            description: 'This is a description of feature 2',
+          },
+          {
+            image: 'https://placekitten.com/300/300',
+            title: 'Feature 3',
+            description: 'This is a description of feature 3',
+          },
+          {
+            image: 'https://placekitten.com/300/300',
+            title: 'Feature 4',
+            description: 'This is a description of feature 4',
+          },
+        ],
+      },
+    };
+  }
 }
