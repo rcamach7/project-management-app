@@ -4,18 +4,24 @@ import { RootState } from '@/features/store';
 
 interface WorkspaceState {
   value: Workspace[];
+  loading: boolean;
 }
 
 const initialState: WorkspaceState = {
   value: [],
+  loading: true,
 };
 
 const workspaceSlice = createSlice({
   name: 'workspaces',
   initialState,
   reducers: {
-    setWorkspaces: (state, action: PayloadAction<Workspace[]>) => {
-      state.value = action.payload;
+    setWorkspaces: (
+      state,
+      action: PayloadAction<{ workspaces: Workspace[]; loading: boolean }>
+    ) => {
+      state.value = action.payload.workspaces;
+      state.loading = action.payload.loading;
     },
   },
 });
