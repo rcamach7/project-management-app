@@ -2,7 +2,7 @@ import Head from 'next/head';
 import { authOptions } from '@/auth/[...nextauth]';
 import { unstable_getServerSession } from 'next-auth/next';
 import { AppSession } from 'models/global';
-import { ProfileBar } from '@/components/index';
+import { CenteredBox, ProfileBar, ImageButton } from '@/components/index';
 import { Box } from '@mui/material';
 
 export default function Me({ mySession }) {
@@ -20,6 +20,9 @@ export default function Me({ mySession }) {
         }}
       >
         <ProfileBar user={user} />
+        <CenteredBox sx={{ p: 1 }}>
+          <ImageButton text="New Project" />
+        </CenteredBox>
       </Box>
     </>
   );
