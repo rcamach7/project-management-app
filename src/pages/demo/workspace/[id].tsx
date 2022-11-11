@@ -1,5 +1,5 @@
 import { useSession } from 'next-auth/react';
-import { AppSession } from 'models/global.types';
+import { AppSession } from 'models/global';
 import { getWorkspaceById } from 'controllers/workspaceController';
 import { useState } from 'react';
 

@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { Workspace } from 'models/client.models';
+import { Workspace } from 'models/client';
 import { RootState } from '@/features/store';
 
 interface WorkspaceState {

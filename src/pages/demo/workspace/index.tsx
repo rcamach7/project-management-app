@@ -1,5 +1,5 @@
 import { useSession } from 'next-auth/react';
-import { AppSession } from 'models/global.types';
+import { AppSession } from 'models/global';
 import { reloadSession } from '@/lib/clientSesstion';
 import Link from 'next/link';
 import axios from 'axios';

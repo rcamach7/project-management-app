@@ -1,9 +1,9 @@
 import Head from 'next/head';
-import { Feature } from 'models/client.models';
+import { Feature } from 'models/client';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { signIn } from 'next-auth/react';
-import { AppSession } from 'models/global.types';
+import { AppSession } from 'models/global';
 import { useSession } from 'next-auth/react';
 import { Box, Unstable_Grid2 as Grid } from '@mui/material';
 import {
