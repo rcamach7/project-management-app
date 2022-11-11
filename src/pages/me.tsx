@@ -2,7 +2,8 @@ import Head from 'next/head';
 import { authOptions } from '@/auth/[...nextauth]';
 import { unstable_getServerSession } from 'next-auth/next';
 import { AppSession } from 'models/global';
-import { CenteredBox, ProfileBar } from '@/components/index';
+import { ProfileBar } from '@/components/index';
+import { Box } from '@mui/material';
 
 export default function Me({ mySession }) {
   const { user }: AppSession = JSON.parse(mySession);
@@ -13,13 +14,13 @@ export default function Me({ mySession }) {
         <title>Flow: User Page</title>
       </Head>
 
-      <CenteredBox
+      <Box
         sx={{
           minHeight: '100vh',
         }}
       >
         <ProfileBar user={user} />
-      </CenteredBox>
+      </Box>
     </>
   );
 }
