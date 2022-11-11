@@ -38,6 +38,30 @@ export const createNewWorkspace = async (
  * Read Resources (GET)
  */
 
+export const getUserWorkspaces = async (_id: string) => {
+  try {
+    const workspaces = await Workspace.find({ users: _id })
+      .populate({
+        path: 'owner users',
+        select: ['name', 'email', 'image', '_id'],
+      })
+      .populate({
+        path: 'boards',
+        model: 'Board',
+        select: ['title', 'description', 'workspace_id', 'tickets', '_id'],
+        populate: {
+          path: 'tickets',
+          model: 'Ticket',
+          select: ['title', 'description', 'labels', 'board_id', '_id'],
+        },
+      });
+    return workspaces;
+  } catch (error) {
+    console.error('Error getting user workspaces: ', error);
+    return Promise.reject(error);
+  }
+};
+
 export const getWorkspaceById = async (_id: string) => {
   try {
     const workspace = await Workspace.findOne({ _id })
