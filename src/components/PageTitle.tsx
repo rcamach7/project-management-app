@@ -17,11 +17,7 @@ export default function PageTitle({ title, subheading, image }: Props) {
         </Typography>
       )}
       {subheading && (
-        <Typography
-          variant="h2"
-          sx={{ fontSize: '1.25rem' }}
-          color="text.secondary"
-        >
+        <Typography variant="h2" sx={{ fontSize: '1.25rem' }}>
           {subheading}
         </Typography>
       )}
