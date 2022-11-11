@@ -1,9 +1,25 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { workspacesReducer } from '@/features/workspaces/workspaceSlice';
+import {
+  workspacesReducer,
+  setWorkspaces,
+} from '@/features/workspaces/workspaceSlice';
+import { Workspace } from 'models/client.models';
+import axios from 'axios';
 
 const store = configureStore({
   reducer: { workspaces: workspacesReducer },
 });
+
+const initialUserWorkspacesFetch = async (dispatch) => {
+  try {
+    const workspaces = await axios.get('/api/workspace');
+    const { data }: { data: Workspace[] } = workspaces;
+    dispatch(setWorkspaces(data));
+  } catch {
+    console.error("Error fetching user's workspaces");
+  }
+};
+store.dispatch(initialUserWorkspacesFetch);
 
 export default store;
 
