@@ -4,8 +4,7 @@
     "paths": {
       "@/components/*": ["src/components/*"],
       "@/auth/*": ["src/pages/api/auth/*"],
-      "@/lib/*": ["src/lib/*"],
-      "@/features/*": ["src/features/*"]
+      "@/lib/*": ["src/lib/*"]
     },
     "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],
