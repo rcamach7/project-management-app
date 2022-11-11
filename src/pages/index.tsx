@@ -79,7 +79,7 @@ export default function Home({ featuresList }: Props) {
           />
         </CenteredBox>
 
-        <CenteredBox flex={1} padding="1em 0 0 0">
+        <CenteredBox flex={1} sx={{ padding: '1em 0 0 0' }}>
           <ActionButton
             text="Get Started"
             variant="outlined"
