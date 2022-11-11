@@ -14,7 +14,7 @@ const initialUserWorkspacesFetch = async (dispatch) => {
   try {
     const workspaces = await axios.get('/api/workspace');
     const { data }: { data: Workspace[] } = workspaces;
-    dispatch(setWorkspaces(data));
+    dispatch(setWorkspaces({ workspaces: data, loading: false }));
   } catch {
     console.error("Error fetching user's workspaces");
   }
