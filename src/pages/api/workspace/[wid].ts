@@ -6,7 +6,7 @@ import {
   deleteWorkspace,
 } from 'controllers/workspaceController';
 import { authOptions } from '@/auth/[...nextauth]';
-import { AppSession } from 'models/global.types';
+import { AppSession } from 'models/global';
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   const session: AppSession = await unstable_getServerSession(

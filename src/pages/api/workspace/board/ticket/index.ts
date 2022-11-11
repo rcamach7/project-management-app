@@ -2,7 +2,7 @@ import { unstable_getServerSession } from 'next-auth/next';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { authOptions } from '@/auth/[...nextauth]';
 import { Types } from 'mongoose';
-import { AppSession } from 'models/global.types';
+import { AppSession } from 'models/global';
 import { Board } from 'schemas';
 import { createNewTicket, getAllTickets } from 'controllers/ticketController';
 

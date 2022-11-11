@@ -1,5 +1,5 @@
 import { Card, CardContent, Box, Typography } from '@mui/material';
-import { Feature } from 'models/client.models';
+import { Feature } from 'models/client';
 import Image from 'next/image';
 
 export default function FeatureCard({ image, title, description }: Feature) {

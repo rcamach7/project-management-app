@@ -3,7 +3,7 @@ import {
   workspacesReducer,
   setWorkspaces,
 } from '@/features/workspaces/workspaceSlice';
-import { Workspace } from 'models/client.models';
+import { Workspace } from 'models/client';
 import axios from 'axios';
 
 const store = configureStore({
