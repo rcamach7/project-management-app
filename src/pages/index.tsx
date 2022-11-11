@@ -44,6 +44,13 @@ export default function Home({ featuresList }: Props) {
             text="Get Started"
             variant="outlined"
             onClick={signIn}
+            sx={{
+              fontSize: { xs: '1em', sm: '1.2em', md: '1.4em' },
+              color: 'secondary.main',
+              border: 1,
+              borderColor: 'secondary.main',
+              p: '2px 4px',
+            }}
           />
         </CenteredBox>
 

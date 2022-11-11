@@ -1,18 +1,27 @@
-import { Button } from '@mui/material';
+import { Button, ButtonProps } from '@mui/material';
 
-interface Props {
+interface Props extends ButtonProps {
   text: string;
+  size?: 'small' | 'medium' | 'large';
   variant: 'contained' | 'outlined';
   onClick?: () => void;
+  sx?: {};
 }
 
-export default function ActionButton({ text, variant, onClick }: Props) {
+export default function ActionButton({
+  text,
+  variant,
+  size,
+  sx,
+  onClick,
+}: Props) {
   return (
     <Button
       variant={variant}
-      size="large"
+      size={size ? size : 'large'}
       sx={{
         color: 'text.primary',
+        ...sx,
       }}
       onClick={onClick}
     >
