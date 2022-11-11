@@ -1,7 +1,8 @@
 import { AppSession } from 'models/global';
-import { Box, Typography } from '@mui/material';
-import { CenteredBox } from '@/components/index';
 import Image from 'next/image';
+import { signOut } from 'next-auth/react';
+import { Box, Typography } from '@mui/material';
+import { ActionButton } from '@/components/index';
 
 interface Props {
   user: AppSession['user'];
@@ -16,8 +17,9 @@ export default function ProfileBar({ user }: Props) {
         width: '100%',
         display: 'flex',
         justifyContent: 'center',
-        gap: 1,
-        border: 1,
+        alignItems: 'center',
+        gap: { xs: 1, sm: 2, md: 3 },
+        borderBottom: 1,
         p: 1,
       }}
     >
@@ -27,6 +29,8 @@ export default function ProfileBar({ user }: Props) {
           height: { xs: '5.5em', sm: '6em', md: '6.5em' },
           overflow: 'hidden',
           borderRadius: '50%',
+          border: 2,
+          borderColor: 'secondary.main',
         }}
       >
         <Image src={user.image} width="50" height="50" layout="responsive" />
@@ -40,10 +44,37 @@ export default function ProfileBar({ user }: Props) {
             fontWeight: 'bold',
             fontSize: { xs: '1.2em', sm: '1.4em', md: '1.6em' },
           }}
+          gutterBottom
         >
           {user.name}
         </Typography>
-        <Typography>Sign Out</Typography>
+        <Box sx={{ display: 'flex', gap: 1 }}>
+          <ActionButton
+            text="Sign Out"
+            variant="outlined"
+            size="small"
+            onClick={signOut}
+            sx={{
+              fontSize: { xs: '.5em', sm: '.7em', md: '.9em' },
+              color: 'secondary.main',
+              border: 1,
+              borderColor: 'secondary.main',
+              p: '2px 4px',
+            }}
+          />
+          <ActionButton
+            text="Settings"
+            variant="outlined"
+            size="small"
+            sx={{
+              fontSize: { xs: '.5em', sm: '.7em', md: '.9em' },
+              color: 'secondary.main',
+              border: 1,
+              borderColor: 'secondary.main',
+              p: '2px 4px',
+            }}
+          />
+        </Box>
       </Box>
     </Box>
   );
