@@ -20,8 +20,12 @@ export default function Me({ mySession }) {
         }}
       >
         <ProfileBar user={user} />
-        <CenteredBox sx={{ p: 1 }}>
-          <ImageButton text="New Project" />
+        <CenteredBox
+          sx={{ p: 3, flexDirection: 'row', justifyContent: 'space-evenly' }}
+        >
+          <ImageButton text="New Project" image="/plus.svg" />
+          <ImageButton text="Invitations" image="/invite.svg" />
+          <ImageButton text="Templates" image="/template.svg" />
         </CenteredBox>
       </Box>
     </>
