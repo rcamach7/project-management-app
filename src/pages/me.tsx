@@ -23,9 +23,21 @@ export default function Me({ mySession }) {
         <CenteredBox
           sx={{ p: 3, flexDirection: 'row', justifyContent: 'space-evenly' }}
         >
-          <ImageButton text="New Project" image="/plus.svg" />
-          <ImageButton text="Invitations" image="/invite.svg" />
-          <ImageButton text="Templates" image="/template.svg" />
+          <ImageButton
+            text="New Project"
+            image="/plus.svg"
+            onClick={() => alert('clicked on new project')}
+          />
+          <ImageButton
+            text="Invitations"
+            image="/invite.svg"
+            onClick={() => alert('clicked on invitations')}
+          />
+          <ImageButton
+            text="Templates"
+            image="/template.svg"
+            onClick={() => alert('clicked on templates')}
+          />
         </CenteredBox>
       </Box>
     </>

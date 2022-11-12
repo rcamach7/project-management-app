@@ -5,10 +5,10 @@ import { CenteredBox } from '@/components/index';
 interface Props {
   text: string;
   image: string;
-  onClick?: () => void;
+  onClick: () => void;
 }
 
-export default function ImageButton({ text, image }: Props) {
+export default function ImageButton({ text, image, onClick }: Props) {
   return (
     <CenteredBox sx={{ height: '100px', gap: 0.5 }}>
       <Box
@@ -27,6 +27,7 @@ export default function ImageButton({ text, image }: Props) {
           border: 1,
           padding: 2,
         }}
+        onClick={onClick}
       >
         <Image src={image} width="20" height="20" layout="responsive" />
       </Box>
