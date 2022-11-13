@@ -10,9 +10,11 @@ export default function WorkspaceSummary({ workspace }: Props) {
   const { _id, description, name, owner, users } = workspace;
 
   return (
-    <Card sx={{ maxWidth: 345 }}>
-      <CardActionArea>
-        <CardContent>
+    <Card sx={{ width: 325, height: 175 }}>
+      <CardActionArea sx={{ height: '100%' }}>
+        <CardContent
+          sx={{ display: 'flex', flexDirection: 'column', height: '100%' }}
+        >
           <Typography variant="caption" component="p" sx={{ fontSize: 10 }}>
             {_id}
           </Typography>

@@ -9,7 +9,9 @@ interface Props {
 
 export default function UsersSummary({ users, owner }: Props) {
   return (
-    <Box sx={{ display: 'flex', p: 0.5, gap: 1, alignItems: 'center' }}>
+    <Box
+      sx={{ display: 'flex', p: 0.5, gap: 1, alignItems: 'center', mt: 'auto' }}
+    >
       <Typography variant="caption">Users:</Typography>
       {users.map((currentUser) => (
         <UserPopper

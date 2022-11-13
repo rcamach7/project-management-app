@@ -19,7 +19,7 @@ export default function ProfileBar({ user }: Props) {
         justifyContent: 'center',
         alignItems: 'center',
         gap: { xs: 1, sm: 2, md: 3 },
-        borderBottom: 1,
+        borderBottom: { xs: 1, lg: 0 },
         p: 1,
       }}
     >
