@@ -14,8 +14,8 @@ export default function ImageButton({ text, image, onClick }: Props) {
       <Box
         sx={{
           cursor: 'pointer',
-          width: { xs: '4em', sm: '4.5em', md: '5em' },
-          height: { xs: '4em', sm: '4.5em', md: '5em' },
+          width: { xs: '4em', sm: '4.5em' },
+          height: { xs: '4em', sm: '4.5em' },
           // TODO: Pull from theme
           background: '#112240',
           borderRadius: '50%',

@@ -8,7 +8,7 @@ import {
   ImageButton,
   WorkspaceSummary,
 } from '@/components/index';
-import { Box, Typography } from '@mui/material';
+import { Box, Typography, Unstable_Grid2 as Grid } from '@mui/material';
 
 export default function Me({ mySession }) {
   const { user }: AppSession = JSON.parse(mySession);
@@ -22,6 +22,8 @@ export default function Me({ mySession }) {
       <Box
         sx={{
           minHeight: '100vh',
+          display: 'flex',
+          flexDirection: 'column',
         }}
       >
         <ProfileBar user={user} />
@@ -45,9 +47,23 @@ export default function Me({ mySession }) {
           />
         </CenteredBox>
 
-        <CenteredBox>
-          <WorkspaceSummary workspace={user.workspaces[0]} />
-        </CenteredBox>
+        <Typography textAlign="center" pb={1} sx={{ fontWeight: 'bold' }}>
+          My Workspaces
+        </Typography>
+        <Box
+          sx={{
+            flex: 1,
+            display: 'flex',
+            flexWrap: 'wrap',
+            gap: { xs: 1, sm: 2, md: 5, lg: 7 },
+            justifyContent: 'center',
+            overflow: 'scroll',
+          }}
+        >
+          {user.workspaces.map((workspace) => (
+            <WorkspaceSummary key={workspace._id} workspace={workspace} />
+          ))}
+        </Box>
       </Box>
     </>
   );
