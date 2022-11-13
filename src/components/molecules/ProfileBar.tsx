@@ -19,8 +19,9 @@ export default function ProfileBar({ user }: Props) {
         justifyContent: { xs: 'center', sm: 'flex-start' },
         alignItems: 'center',
         gap: { xs: 1, sm: 2, md: 3 },
-        borderBottom: { xs: 1, lg: 0 },
+        borderBottom: 1,
         p: 1,
+        pt: { xs: 1, sm: 3, md: 5 },
       }}
     >
       <Box

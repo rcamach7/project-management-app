@@ -13,7 +13,7 @@ export default function Me({ mySession }) {
   return (
     <>
       <Head>
-        <title>Flow: User Page</title>
+        <title>Flow: {user.name}</title>
       </Head>
 
       <Box
