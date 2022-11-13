@@ -1,6 +1,7 @@
 import { WorkspaceSummary as WorkspaceSummaryType } from 'models/global';
 import { Card, CardContent, Typography, CardActionArea } from '@mui/material';
 import UsersSummary from './UsersSummary';
+import { NextLinkAnchor } from '@/components/atoms/index';
 
 interface Props {
   workspace: WorkspaceSummaryType;
@@ -10,7 +11,11 @@ export default function WorkspaceSummary({ workspace }: Props) {
   const { _id, description, name, owner, users } = workspace;
 
   return (
-    <Card sx={{ width: 325, height: 175 }}>
+    <Card
+      component={NextLinkAnchor}
+      to={`workspace/${workspace._id}`}
+      sx={{ width: 325, height: 175 }}
+    >
       <CardActionArea sx={{ height: '100%' }}>
         <CardContent
           sx={{ display: 'flex', flexDirection: 'column', height: '100%' }}
