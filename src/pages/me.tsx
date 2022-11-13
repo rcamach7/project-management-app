@@ -2,8 +2,13 @@ import Head from 'next/head';
 import { authOptions } from '@/auth/[...nextauth]';
 import { unstable_getServerSession } from 'next-auth/next';
 import { AppSession } from 'models/global';
-import { CenteredBox, ProfileBar, ImageButton } from '@/components/index';
-import { Box } from '@mui/material';
+import {
+  CenteredBox,
+  ProfileBar,
+  ImageButton,
+  WorkspaceSummary,
+} from '@/components/index';
+import { Box, Typography } from '@mui/material';
 
 export default function Me({ mySession }) {
   const { user }: AppSession = JSON.parse(mySession);
@@ -38,6 +43,10 @@ export default function Me({ mySession }) {
             image="/template.svg"
             onClick={() => alert('clicked on templates')}
           />
+        </CenteredBox>
+
+        <CenteredBox>
+          <WorkspaceSummary workspace={user.workspaces[0]} />
         </CenteredBox>
       </Box>
     </>
