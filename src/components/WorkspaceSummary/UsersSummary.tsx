@@ -1,5 +1,5 @@
 import { WorkspaceSummary as WorkspaceSummaryType } from 'models/global';
-import { Box, Typography, Popover } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import UserPopper from './UserPopper';
 
 interface Props {
@@ -7,11 +7,16 @@ interface Props {
   owner: WorkspaceSummaryType['owner'];
 }
 
-export default function UsersSummary({ users }: Props) {
+export default function UsersSummary({ users, owner }: Props) {
   return (
-    <Box sx={{ display: 'flex', gap: 1 }}>
-      {users.map((user) => (
-        <UserPopper key={user._id} user={user} />
+    <Box sx={{ display: 'flex', p: 0.5, gap: 1, alignItems: 'center' }}>
+      <Typography variant="caption">Users:</Typography>
+      {users.map((currentUser) => (
+        <UserPopper
+          key={currentUser._id}
+          user={currentUser}
+          owner={currentUser._id === owner._id}
+        />
       ))}
     </Box>
   );
