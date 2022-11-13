@@ -1,14 +1,15 @@
 import { WorkspaceSummary as WorkspaceSummaryType } from 'models/global';
-import * as React from 'react';
+import { useState } from 'react';
 import { Box, Typography, Popover } from '@mui/material';
 import Image from 'next/image';
 
 interface Props {
   user: WorkspaceSummaryType['owner'];
+  owner: boolean;
 }
 
-export default function UserPopover({ user }: Props) {
-  const [anchorEl, setAnchorEl] = React.useState<HTMLElement | null>(null);
+export default function UserPopover({ user, owner }: Props) {
+  const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
 
   const handlePopoverOpen = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -27,7 +28,14 @@ export default function UserPopover({ user }: Props) {
         aria-haspopup="true"
         onMouseEnter={handlePopoverOpen}
         onMouseLeave={handlePopoverClose}
-        sx={{ width: 30, height: 30, borderRadius: '50%', overflow: 'hidden' }}
+        sx={{
+          width: 30,
+          height: 30,
+          borderRadius: '50%',
+          overflow: 'hidden',
+          border: 1,
+          borderColor: `${owner ? 'secondary.main' : 'primary.main'}`,
+        }}
       >
         <Image
           src={user.image}
@@ -55,7 +63,10 @@ export default function UserPopover({ user }: Props) {
         onClose={handlePopoverClose}
         disableRestoreFocus
       >
-        <Typography sx={{ p: 1 }}>{user.name}</Typography>
+        <Typography sx={{ p: 1 }}>
+          {user.name}
+          {owner ? ' (owner)' : ''}
+        </Typography>
       </Popover>
     </div>
   );
