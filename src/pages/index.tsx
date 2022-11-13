@@ -32,7 +32,7 @@ export default function Home({ featuresList }: Props) {
         <CenteredBox flex={1}>
           <PageTitle
             subheading="Collaborative Project Management Tool"
-            image="/flow.svg"
+            image="/hero/flow.svg"
           />
         </CenteredBox>
 

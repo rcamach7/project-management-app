@@ -30,17 +30,17 @@ export default function Me({ mySession }) {
         >
           <ImageButton
             text="New Project"
-            image="/plus.svg"
+            image="/buttons/plus.svg"
             onClick={() => alert('clicked on new project')}
           />
           <ImageButton
             text="Invitations"
-            image="/invite.svg"
+            image="/buttons/invite.svg"
             onClick={() => alert('clicked on invitations')}
           />
           <ImageButton
             text="Templates"
-            image="/template.svg"
+            image="/buttons/template.svg"
             onClick={() => alert('clicked on templates')}
           />
         </CenteredBox>
