@@ -30,6 +30,7 @@ export default function Home({ featuresList }: Props) {
           justifyContent: 'center',
           p: 1.5,
           minHeight: '100vh',
+          maxWidth: '1000px',
         }}
       >
         <CenteredBox flex={1}>

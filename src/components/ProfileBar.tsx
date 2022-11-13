@@ -16,7 +16,7 @@ export default function ProfileBar({ user }: Props) {
         height: '100%',
         width: '100%',
         display: 'flex',
-        justifyContent: 'center',
+        justifyContent: { xs: 'center', sm: 'flex-start' },
         alignItems: 'center',
         gap: { xs: 1, sm: 2, md: 3 },
         borderBottom: { xs: 1, lg: 0 },
