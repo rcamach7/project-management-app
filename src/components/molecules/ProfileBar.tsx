@@ -2,7 +2,7 @@ import { AppSession } from 'models/global';
 import Image from 'next/image';
 import { signOut } from 'next-auth/react';
 import { Box, Typography } from '@mui/material';
-import { ActionButton } from '@/components/index';
+import { ActionButton } from '@/components/atoms/index';
 
 interface Props {
   user: AppSession['user'];
