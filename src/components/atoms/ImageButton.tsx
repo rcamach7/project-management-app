@@ -1,6 +1,6 @@
 import { Box, Typography } from '@mui/material';
 import Image from 'next/image';
-import { CenteredBox } from '@/components/index';
+import { CenteredBox } from '@/components/layout/index';
 
 interface Props {
   text: string;

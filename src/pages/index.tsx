@@ -4,12 +4,8 @@ import { signIn } from 'next-auth/react';
 import { unstable_getServerSession } from 'next-auth/next';
 import { authOptions } from '@/auth/[...nextauth]';
 import { Box, Unstable_Grid2 as Grid } from '@mui/material';
-import {
-  PageTitle,
-  FeatureCard,
-  ActionButton,
-  CenteredBox,
-} from '@/components/index';
+import { PageTitle, FeatureCard, ActionButton } from '@/components/atoms/index';
+import { CenteredBox } from '@/components/layout/index';
 
 interface Props {
   featuresList: Feature[];

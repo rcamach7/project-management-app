@@ -2,13 +2,10 @@ import Head from 'next/head';
 import { authOptions } from '@/auth/[...nextauth]';
 import { unstable_getServerSession } from 'next-auth/next';
 import { AppSession } from 'models/global';
-import {
-  CenteredBox,
-  ProfileBar,
-  ImageButton,
-  WorkspaceSummary,
-} from '@/components/index';
-import { Box, Typography, Unstable_Grid2 as Grid } from '@mui/material';
+import { ImageButton } from '@/components/atoms/index';
+import { ProfileBar, WorkspaceSummary } from '@/components/molecules/index';
+import { CenteredBox } from '@/components/layout/index';
+import { Box, Typography } from '@mui/material';
 
 export default function Me({ mySession }) {
   const { user }: AppSession = JSON.parse(mySession);
