@@ -1,5 +1,6 @@
 import { useState, MouseEvent } from 'react';
 import { signOut } from 'next-auth/react';
+import { NextLinkAnchor } from '@/components/atoms/index';
 import {
   AppBar,
   Box,
@@ -14,8 +15,6 @@ import {
   Tooltip,
 } from '@mui/material';
 import { Menu as MenuIcon } from '@mui/icons-material/';
-
-const pages = ['Account', 'Contact'];
 
 interface Props {
   image: string;
@@ -42,7 +41,7 @@ export default function ResponsiveAppBar({ image, name }: Props) {
   };
 
   return (
-    <AppBar position="static">
+    <AppBar position="static" sx={{ backgroundColor: 'background.paper' }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           {/* Desktop */}
@@ -93,11 +92,12 @@ export default function ResponsiveAppBar({ image, name }: Props) {
                 display: { xs: 'block', md: 'none' },
               }}
             >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
-                </MenuItem>
-              ))}
+              <MenuItem component={NextLinkAnchor} to="/me">
+                <Typography textAlign="center">Account</Typography>
+              </MenuItem>
+              <MenuItem component={NextLinkAnchor} to="/me">
+                <Typography textAlign="center">Contact</Typography>
+              </MenuItem>
             </Menu>
           </Box>
 
@@ -121,15 +121,20 @@ export default function ResponsiveAppBar({ image, name }: Props) {
             FLOW
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {pages.map((page) => (
-              <Button
-                key={page}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block' }}
-              >
-                {page}
-              </Button>
-            ))}
+            <Button
+              component={NextLinkAnchor}
+              sx={{ my: 2, color: 'white', display: 'block' }}
+              to="/me"
+            >
+              Account
+            </Button>
+            <Button
+              component={NextLinkAnchor}
+              sx={{ my: 2, color: 'white', display: 'block' }}
+              to="/me"
+            >
+              Contact
+            </Button>
           </Box>
 
           {/* Persistent User Icon */}
