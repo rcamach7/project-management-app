@@ -24,7 +24,7 @@ export default function Workspace_Continued({ mySession, workspace }) {
           flexDirection: 'column',
         }}
       >
-        <ResponsiveAppBar />
+        <ResponsiveAppBar name={user.name} image={user.image} />
       </Box>
     </>
   );
