@@ -46,7 +46,6 @@ export enum LabelsEnum {
   WIP = 'WIP',
 }
 
-// User Page
 export interface Feature {
   image: string;
   title: string;
