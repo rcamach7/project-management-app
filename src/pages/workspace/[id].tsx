@@ -4,17 +4,13 @@ import { AppSession } from 'models/global';
 import { authOptions } from '@/auth/[...nextauth]';
 import { getWorkspaceById } from 'controllers/workspaceController';
 import { ResponsiveAppBar } from '@/components/organisms/index';
+import { Workspace } from 'models/client';
 import { Box } from '@mui/material';
-import { useEffect } from 'react';
 
 export default function Workspace_Continued({ mySession, workspace }) {
   const { user }: AppSession = JSON.parse(mySession);
-  const workspaceData = JSON.parse(workspace);
-
-  useEffect(() => {
-    console.log(user);
-    console.log(workspaceData);
-  }, []);
+  const { _id, boards, description, owner, users }: Workspace =
+    JSON.parse(workspace);
 
   return (
     <>
