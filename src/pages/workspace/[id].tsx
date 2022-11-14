@@ -3,6 +3,8 @@ import { unstable_getServerSession } from 'next-auth/next';
 import { AppSession } from 'models/global';
 import { authOptions } from '@/auth/[...nextauth]';
 import { getWorkspaceById } from 'controllers/workspaceController';
+import { ResponsiveAppBar } from '@/components/organisms/index';
+import { Box } from '@mui/material';
 import { useEffect } from 'react';
 
 export default function Workspace_Continued({ mySession, workspace }) {
@@ -17,7 +19,17 @@ export default function Workspace_Continued({ mySession, workspace }) {
   return (
     <>
       <Head>Flow: Workspace Page</Head>
-      <p>Workspace Page</p>
+      <Box
+        sx={{
+          minWidth: '100vw',
+          minHeight: '100vh',
+          maxWidth: '900px',
+          display: 'flex',
+          flexDirection: 'column',
+        }}
+      >
+        <ResponsiveAppBar />
+      </Box>
     </>
   );
 }
