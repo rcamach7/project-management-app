@@ -1,4 +1,5 @@
 import { useState, MouseEvent } from 'react';
+import { signOut } from 'next-auth/react';
 import {
   AppBar,
   Box,
@@ -15,9 +16,13 @@ import {
 import { Menu as MenuIcon } from '@mui/icons-material/';
 
 const pages = ['Account', 'Contact'];
-const settings = ['Logout'];
 
-export default function ResponsiveAppBar() {
+interface Props {
+  image: string;
+  name: string;
+}
+
+export default function ResponsiveAppBar({ image, name }: Props) {
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
 
@@ -127,10 +132,11 @@ export default function ResponsiveAppBar() {
             ))}
           </Box>
 
+          {/* Persistent User Icon */}
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                <Avatar alt={name} src={image} />
               </IconButton>
             </Tooltip>
             <Menu
@@ -149,11 +155,9 @@ export default function ResponsiveAppBar() {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
-                </MenuItem>
-              ))}
+              <MenuItem onClick={() => signOut()}>
+                <Typography textAlign="center">Sign Out</Typography>
+              </MenuItem>
             </Menu>
           </Box>
         </Toolbar>
