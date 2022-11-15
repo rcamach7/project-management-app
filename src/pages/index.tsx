@@ -15,7 +15,7 @@ export default function Home({ featuresList }: Props) {
   return (
     <>
       <Head>
-        <title>Flow: Sign In</title>
+        <title>Flow: Home</title>
       </Head>
 
       <Box
