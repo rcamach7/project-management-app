@@ -3,7 +3,7 @@ import { unstable_getServerSession } from 'next-auth/next';
 import { AppSession } from 'models/global';
 import { authOptions } from '@/auth/[...nextauth]';
 import { getWorkspaceById } from 'controllers/workspaceController';
-import { ResponsiveAppBar } from '@/components/organisms/index';
+import { ResponsiveAppBar, BoardTabBar } from '@/components/organisms/index';
 import { Workspace } from 'models/client';
 import { Box } from '@mui/material';
 
@@ -25,6 +25,7 @@ export default function Workspace_Continued({ mySession, workspace }) {
         }}
       >
         <ResponsiveAppBar name={user.name} image={user.image} />
+        <BoardTabBar />
       </Box>
     </>
   );
