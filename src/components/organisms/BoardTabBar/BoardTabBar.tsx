@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { Board } from 'models/client';
 import { Box, Tabs, Typography } from '@mui/material';
 import StyledTab from './StyledTab';
@@ -6,13 +5,17 @@ import TabButtons from './TabButtons';
 
 interface Props {
   boards: Board[];
+  handleBoardChange: (boardId: string) => void;
+  activeBoard: string;
 }
 
-export default function BoardTabBar({ boards }: Props) {
-  const [value, setValue] = useState(boards.length ? boards[0]._id : null);
-
+export default function BoardTabBar({
+  boards,
+  activeBoard,
+  handleBoardChange,
+}: Props) {
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {
-    setValue(newValue);
+    handleBoardChange(newValue);
   };
 
   return (
@@ -20,7 +23,7 @@ export default function BoardTabBar({ boards }: Props) {
       <TabButtons />
       {boards.length ? (
         <Tabs
-          value={value}
+          value={activeBoard}
           onChange={handleChange}
           variant="scrollable"
           aria-label="scrollable boards tabs"
