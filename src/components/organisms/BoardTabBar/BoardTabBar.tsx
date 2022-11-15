@@ -12,11 +12,13 @@ export default function BoardTabBar() {
   return (
     <Box
       sx={{
-        display: 'flex',
-        alignItems: 'center',
         bgcolor: '',
+        borderBottom: 'solid 1px `#F3C610`',
       }}
     >
+      <Typography sx={{ fontWeight: 'bold', textAlign: 'center', pt: 1 }}>
+        Boards
+      </Typography>
       <Tabs
         value={value}
         onChange={handleChange}
