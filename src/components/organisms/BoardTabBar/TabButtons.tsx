@@ -6,8 +6,8 @@ export default function TabButtons() {
     <CenteredBox
       sx={{
         flexDirection: 'row',
+        justifyContent: 'space-evenly',
         pt: 2,
-        gap: { xs: '1.2em', sm: '2em', md: '3em' },
       }}
     >
       <ActionButton
@@ -15,7 +15,7 @@ export default function TabButtons() {
         variant="outlined"
         size="small"
         sx={{
-          fontSize: { xs: '.7em', sm: '.7em', md: '.8em' },
+          fontSize: { xs: '.7em', sm: '.9em', md: '1em' },
           color: 'secondary.main',
           border: 1,
           borderColor: 'secondary.main',
@@ -27,7 +27,7 @@ export default function TabButtons() {
         variant="outlined"
         size="small"
         sx={{
-          fontSize: { xs: '.7em', sm: '.7em', md: '.8em' },
+          fontSize: { xs: '.7em', sm: '.9em', md: '1em' },
           color: 'secondary.main',
           border: 1,
           borderColor: 'secondary.main',

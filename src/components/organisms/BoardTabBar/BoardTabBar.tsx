@@ -1,5 +1,6 @@
 import { useState, SyntheticEvent } from 'react';
 import { Box, Tabs } from '@mui/material';
+import { CenteredBox } from '@/components/layout/index';
 import StyledTab from './StyledTab';
 import TabButtons from './TabButtons';
 
@@ -11,20 +12,16 @@ export default function BoardTabBar() {
   };
 
   return (
-    <Box
-      sx={{
-        bgcolor: '',
-        borderBottom: 'solid 1px `#F3C610`',
-      }}
-    >
+    <Box>
       <TabButtons />
       <Tabs
         value={value}
         onChange={handleChange}
         variant="scrollable"
-        aria-label="scrollable auto tabs example"
-        scrollButtons="auto"
+        aria-label="scrollable boards tabs"
+        scrollButtons={true}
         allowScrollButtonsMobile
+        sx={{ width: '100%' }}
       >
         <StyledTab label="Item One" />
         <StyledTab label="Item Two" />

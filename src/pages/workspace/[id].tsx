@@ -17,15 +17,25 @@ export default function Workspace_Continued({ mySession, workspace }) {
       <Head>Flow: Workspace Page</Head>
       <Box
         sx={{
-          minWidth: '100vw',
+          minWidth: '100%',
           minHeight: '100vh',
-          maxWidth: '900px',
           display: 'flex',
           flexDirection: 'column',
         }}
       >
         <ResponsiveAppBar name={user.name} image={user.image} />
-        <BoardTabBar />
+        <Box
+          sx={{
+            width: '100%',
+            maxWidth: '1000px',
+            overflow: 'scroll',
+            display: 'flex',
+            flexDirection: 'column',
+            mx: 'auto',
+          }}
+        >
+          <BoardTabBar />
+        </Box>
       </Box>
     </>
   );
