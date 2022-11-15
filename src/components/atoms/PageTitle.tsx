@@ -5,19 +5,33 @@ interface Props {
   title?: string;
   subheading?: string;
   image?: string;
+  bold?: boolean;
+  sx?: {};
 }
 
-export default function PageTitle({ title, subheading, image }: Props) {
+export default function PageTitle({
+  title,
+  subheading,
+  image,
+  bold,
+  sx,
+}: Props) {
   return (
-    <Box textAlign="center">
+    <Box textAlign="center" sx={{ ...sx }}>
       {image && <Image src={image} alt={title} width={500} height={125} />}
       {title && (
-        <Typography variant="h1" sx={{ fontSize: '3rem' }}>
+        <Typography
+          variant="h1"
+          sx={{ fontSize: '3rem', fontWeight: bold ? 'bold' : '' }}
+        >
           {title}
         </Typography>
       )}
       {subheading && (
-        <Typography variant="h2" sx={{ fontSize: '1.25rem' }}>
+        <Typography
+          variant="h2"
+          sx={{ fontSize: '1.25rem', fontWeight: bold ? 'bold' : '' }}
+        >
           {subheading}
         </Typography>
       )}
