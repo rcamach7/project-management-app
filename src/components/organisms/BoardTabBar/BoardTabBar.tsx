@@ -1,36 +1,41 @@
-import { useState, SyntheticEvent } from 'react';
-import { Box, Tabs } from '@mui/material';
-import { CenteredBox } from '@/components/layout/index';
+import { useState } from 'react';
+import { Board } from 'models/client';
+import { Box, Tabs, Typography } from '@mui/material';
 import StyledTab from './StyledTab';
 import TabButtons from './TabButtons';
+import TabPanel from './TabPanel';
 
-export default function BoardTabBar() {
-  const [value, setValue] = useState(0);
+interface Props {
+  boards: Board[];
+}
 
-  const handleChange = (event: SyntheticEvent, newValue: number) => {
+export default function BoardTabBar({ boards }: Props) {
+  const [value, setValue] = useState(boards.length ? boards[0]._id : null);
+
+  const handleChange = (event: React.SyntheticEvent, newValue: string) => {
     setValue(newValue);
   };
 
   return (
     <Box>
       <TabButtons />
-      <Tabs
-        value={value}
-        onChange={handleChange}
-        variant="scrollable"
-        aria-label="scrollable boards tabs"
-        scrollButtons={true}
-        allowScrollButtonsMobile
-        sx={{ width: '100%' }}
-      >
-        <StyledTab label="Item One" />
-        <StyledTab label="Item Two" />
-        <StyledTab label="Item Three" />
-        <StyledTab label="Item Four" />
-        <StyledTab label="Item Five" />
-        <StyledTab label="Item Six" />
-        <StyledTab label="Item Seven" />
-      </Tabs>
+      {boards.length ? (
+        <Tabs
+          value={value}
+          onChange={handleChange}
+          variant="scrollable"
+          aria-label="scrollable boards tabs"
+          scrollButtons={true}
+          allowScrollButtonsMobile
+          sx={{ width: '100%' }}
+        >
+          {boards.map((board) => (
+            <StyledTab key={board._id} label={board.title} value={board._id} />
+          ))}
+        </Tabs>
+      ) : (
+        <Typography>Workspace Has No Boards</Typography>
+      )}
     </Box>
   );
 }

@@ -34,7 +34,7 @@ export default function Workspace_Continued({ mySession, workspace }) {
             mx: 'auto',
           }}
         >
-          <BoardTabBar />
+          <BoardTabBar boards={boards} />
         </Box>
       </Box>
     </>
