@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import { useState, useEffect } from 'react';
 import { unstable_getServerSession } from 'next-auth/next';
 import { AppSession } from 'models/global';
 import { authOptions } from '@/auth/[...nextauth]';
@@ -11,6 +12,14 @@ export default function Workspace_Continued({ mySession, workspace }) {
   const { user }: AppSession = JSON.parse(mySession);
   const { _id, boards, description, owner, users }: Workspace =
     JSON.parse(workspace);
+
+  const [activeBoard, setActiveBoard] = useState(
+    boards.length ? boards[0]._id : ''
+  );
+
+  const handleBoardChange = (boardId: string) => {
+    setActiveBoard(boardId);
+  };
 
   return (
     <>
@@ -34,7 +43,11 @@ export default function Workspace_Continued({ mySession, workspace }) {
             mx: 'auto',
           }}
         >
-          <BoardTabBar boards={boards} />
+          <BoardTabBar
+            boards={boards}
+            activeBoard={activeBoard}
+            handleBoardChange={handleBoardChange}
+          />
         </Box>
       </Box>
     </>
