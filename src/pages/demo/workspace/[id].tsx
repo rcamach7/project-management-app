@@ -2,6 +2,7 @@ import { useSession } from 'next-auth/react';
 import { AppSession } from 'models/global';
 import { getWorkspaceById } from 'controllers/workspaceController';
 import { useState } from 'react';
+import axios from 'axios';
 
 export async function getServerSideProps(context) {
   const { id } = context.query;
@@ -25,6 +26,20 @@ export default function Workspace_Continued({ workspace }) {
   const { data: session }: { data: AppSession } = useSession();
   const [workspaceState, setWorkspaceState] = useState(JSON.parse(workspace));
 
+  const addBoardToWorkspace = async () => {
+    const newBoard = {
+      title: 'Cool Beans',
+      description: 'This is a new board',
+      workspace_id: workspaceState._id,
+    };
+    try {
+      const res = await axios.post('/api/workspace/board', newBoard);
+      console.log(res);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   if (!workspaceState) {
     return (
       <div>
@@ -41,6 +56,7 @@ export default function Workspace_Continued({ workspace }) {
         <button onClick={() => console.log(workspaceState)}>
           Print This Workspace
         </button>
+        <button onClick={addBoardToWorkspace}>Add Board To Workspace</button>
       </div>
     );
   }
