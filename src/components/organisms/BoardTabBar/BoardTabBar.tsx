@@ -1,6 +1,7 @@
 import { useState, SyntheticEvent } from 'react';
-import { Box, Tab, Tabs, Typography } from '@mui/material';
+import { Box, Tabs } from '@mui/material';
 import StyledTab from './StyledTab';
+import TabButtons from './TabButtons';
 
 export default function BoardTabBar() {
   const [value, setValue] = useState(0);
@@ -16,9 +17,7 @@ export default function BoardTabBar() {
         borderBottom: 'solid 1px `#F3C610`',
       }}
     >
-      <Typography sx={{ fontWeight: 'bold', textAlign: 'center', pt: 1 }}>
-        Boards
-      </Typography>
+      <TabButtons />
       <Tabs
         value={value}
         onChange={handleChange}
