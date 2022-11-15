@@ -9,6 +9,7 @@ export interface User {
 
 export interface Workspace {
   _id: string;
+  name: string;
   description: string;
   owner: User;
   users: User[];

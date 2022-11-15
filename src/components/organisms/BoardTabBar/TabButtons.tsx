@@ -7,7 +7,7 @@ export default function TabButtons() {
       sx={{
         flexDirection: 'row',
         justifyContent: 'space-evenly',
-        pt: 2,
+        pt: 1,
       }}
     >
       <ActionButton
