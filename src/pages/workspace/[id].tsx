@@ -6,7 +6,7 @@ import { authOptions } from '@/auth/[...nextauth]';
 import { getWorkspaceById } from 'controllers/workspaceController';
 import { ResponsiveAppBar, BoardTabBar } from '@/components/organisms/index';
 import { PageTitle } from '@/components/atoms/index';
-import { BoardDisplay } from '@/components/organisms/index';
+import { TicketsDisplay } from '@/components/organisms/index';
 import { Workspace } from 'models/client';
 import { Box } from '@mui/material';
 
@@ -53,7 +53,7 @@ export default function Workspace_Continued({ mySession, workspace }) {
             activeBoard={activeBoard}
             handleBoardChange={handleBoardChange}
           />
-          {board && <BoardDisplay tickets={board.tickets} />}
+          {board && <TicketsDisplay tickets={board.tickets} />}
         </Box>
       </Box>
     </>

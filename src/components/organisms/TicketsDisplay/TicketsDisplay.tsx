@@ -5,6 +5,6 @@ interface Props {
   tickets: Ticket[];
 }
 
-export default function BoardDisplay({ tickets }: Props) {
+export default function TicketsDisplay({ tickets }: Props) {
   return <Box sx={{ flex: 1 }}></Box>;
 }
