@@ -47,7 +47,7 @@ export default function Workspace_Continued({ mySession, workspace }) {
             mx: 'auto',
           }}
         >
-          <PageTitle subheading={name} sx={{ pt: 1 }} />
+          <PageTitle subheading={name} sx={{ pt: 2, pb: 1 }} />
           <BoardTabBar
             boards={boards}
             activeBoard={activeBoard}

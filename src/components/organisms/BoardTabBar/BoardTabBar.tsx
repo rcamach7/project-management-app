@@ -2,6 +2,7 @@ import { Board } from 'models/client';
 import { Box, Tabs, Typography } from '@mui/material';
 import StyledTab from './StyledTab';
 import TabButtons from './TabButtons';
+import { CenteredBox } from '../../layout';
 
 interface Props {
   boards: Board[];
@@ -19,22 +20,49 @@ export default function BoardTabBar({
   };
 
   return (
-    <Box sx={{ borderBottom: { xs: 1, m: 2 }, borderColor: 'text.secondary' }}>
+    <Box sx={{}}>
       <TabButtons />
       {boards.length ? (
-        <Tabs
-          value={activeBoard}
-          onChange={handleChange}
-          variant="scrollable"
-          aria-label="scrollable boards tabs"
-          scrollButtons={true}
-          allowScrollButtonsMobile
-          sx={{ width: '100%' }}
-        >
-          {boards.map((board) => (
-            <StyledTab key={board._id} label={board.title} value={board._id} />
-          ))}
-        </Tabs>
+        <CenteredBox sx={{ flexDirection: 'row', mt: { xs: 2, sm: 3 } }}>
+          <Typography
+            sx={{
+              display: { xs: 'none', sm: 'block' },
+              pl: 2,
+              fontWeight: 'bold',
+              fontSize: '1.2em',
+            }}
+          >
+            Board(s):
+          </Typography>
+          <Tabs
+            value={activeBoard}
+            onChange={handleChange}
+            variant="scrollable"
+            aria-label="scrollable boards tabs"
+            scrollButtons={true}
+            allowScrollButtonsMobile
+            sx={{ width: '100%' }}
+            TabScrollButtonProps={{
+              style: {
+                width: 30,
+                height: 48,
+              },
+            }}
+            TabIndicatorProps={{
+              style: {
+                height: 0,
+              },
+            }}
+          >
+            {boards.map((board) => (
+              <StyledTab
+                key={board._id}
+                label={board.title}
+                value={board._id}
+              />
+            ))}
+          </Tabs>
+        </CenteredBox>
       ) : (
         <Typography
           sx={{
