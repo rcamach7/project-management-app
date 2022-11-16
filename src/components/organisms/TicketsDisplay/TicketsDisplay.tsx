@@ -12,8 +12,9 @@ export default function TicketsDisplay({ tickets }: Props) {
       sx={{
         display: 'flex',
         flexDirection: 'column',
-        alignItems: 'center',
         flex: 1,
+        p: 2,
+        overflow: 'scroll',
       }}
     >
       {tickets.map((ticket) => (
