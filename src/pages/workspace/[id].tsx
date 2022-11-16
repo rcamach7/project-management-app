@@ -53,7 +53,7 @@ export default function Workspace_Continued({ mySession, workspace }) {
             activeBoard={activeBoard}
             handleBoardChange={handleBoardChange}
           />
-          {board && <BoardDisplay board={board} />}
+          {board && <BoardDisplay tickets={board.tickets} />}
         </Box>
       </Box>
     </>
