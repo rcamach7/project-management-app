@@ -1,4 +1,5 @@
 import { createTheme } from '@mui/material/styles';
+import { LabelsEnum } from 'models/client';
 
 const theme = createTheme({
   palette: {
@@ -33,5 +34,36 @@ const theme = createTheme({
     ].join(','),
   },
 });
+
+export const getLabelColor = (label: LabelsEnum) => {
+  switch (label) {
+    case LabelsEnum.BACKEND:
+      return '#EFA94A';
+    case LabelsEnum.FRONTEND:
+      return '#633A34';
+    case LabelsEnum.FEAT:
+      return '#7D8471';
+    case LabelsEnum.REFACTOR:
+      return '#3B83BD';
+    case LabelsEnum.TEST:
+      return '#3D642D';
+    case LabelsEnum.PERF:
+      return '#C35831';
+    case LabelsEnum.STYLE:
+      return '#4A192C';
+    case LabelsEnum.ASSET:
+      return '#6A5F31';
+    case LabelsEnum.DOC:
+      return '#3F888F';
+    case LabelsEnum.CI:
+      return '#B44C43';
+    case LabelsEnum.CHORE:
+      return '#316650';
+    case LabelsEnum.WIP:
+      return '#00BB2D';
+    default:
+      return '#F3C610';
+  }
+};
 
 export default theme;

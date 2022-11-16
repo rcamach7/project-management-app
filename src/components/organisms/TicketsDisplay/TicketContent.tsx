@@ -10,7 +10,7 @@ interface Props {
 
 export default function TicketContent({ labels, title, description }: Props) {
   return (
-    <CardContent>
+    <CardContent sx={{ py: 1 }}>
       <LabelsDisplay labels={labels} mobile={true} />
       <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
         <Typography gutterBottom variant="h5" component="div">

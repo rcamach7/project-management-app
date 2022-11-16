@@ -1,6 +1,7 @@
 import { LabelsEnum } from 'models/client';
 import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';
+import { getLabelColor } from '../../../theme/index';
 
 interface Props {
   labels: LabelsEnum[];
@@ -21,7 +22,11 @@ export default function LabelsDisplay({ labels, mobile }: Props) {
           variant="outlined"
           onDelete={() => {}}
           size="small"
-          sx={{ fontSize: '10px' }}
+          sx={{
+            fontSize: '10px',
+            borderColor: `${getLabelColor(label)}`,
+            color: `${getLabelColor(label)}`,
+          }}
         />
       ))}
     </Stack>
