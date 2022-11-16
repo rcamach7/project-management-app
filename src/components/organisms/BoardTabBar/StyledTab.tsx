@@ -17,6 +17,8 @@ const StyledTab = styled((props: StyledTabProps) => (
   color: 'rgba(255, 255, 255, 0.7)',
   '&.Mui-selected': {
     color: '#F3C610',
+    background: '#2e3a50',
+    borderRadius: '15px',
   },
   '&.Mui-focusVisible': {
     backgroundColor: 'rgba(100, 95, 228, 0.32)',
