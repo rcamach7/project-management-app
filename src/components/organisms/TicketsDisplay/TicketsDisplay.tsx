@@ -1,10 +1,24 @@
-import { Ticket } from 'models/client';
+import { Ticket as TicketType } from 'models/client';
 import { Box } from '@mui/material';
+import { default as TicketComponent } from './Ticket';
 
 interface Props {
-  tickets: Ticket[];
+  tickets: TicketType[];
 }
 
 export default function TicketsDisplay({ tickets }: Props) {
-  return <Box sx={{ flex: 1 }}></Box>;
+  return (
+    <Box
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        flex: 1,
+      }}
+    >
+      {tickets.map((ticket) => (
+        <TicketComponent key={ticket._id} ticket={ticket} />
+      ))}
+    </Box>
+  );
 }
