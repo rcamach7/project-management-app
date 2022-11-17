@@ -9,6 +9,8 @@ import { PageTitle } from '@/components/atoms/index';
 import { TicketsDisplay } from '@/components/organisms/index';
 import { Workspace } from 'models/client';
 import { Box } from '@mui/material';
+import { deleteTicketByID } from '@/lib/clientApi';
+import { deleteTicketFromWorkspace } from '@/lib/helpers';
 
 export default function Workspace_Continued({ mySession, workspace }) {
   const { user }: AppSession = JSON.parse(mySession);
@@ -25,6 +27,18 @@ export default function Workspace_Continued({ mySession, workspace }) {
 
   const handleBoardChange = (boardId: string) => {
     setActiveBoard(boardId);
+  };
+
+  const handleTicketDelete = async (ticketId: string) => {
+    try {
+      console.log('Processing ticket deletion...');
+      await deleteTicketByID(ticketId);
+      setWorkspaceState((prevState) => {
+        return deleteTicketFromWorkspace(prevState, ticketId);
+      });
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
@@ -56,7 +70,12 @@ export default function Workspace_Continued({ mySession, workspace }) {
             activeBoard={activeBoard}
             handleBoardChange={handleBoardChange}
           />
-          {board && <TicketsDisplay tickets={board.tickets} />}
+          {board && (
+            <TicketsDisplay
+              tickets={board.tickets}
+              handleTicketDelete={handleTicketDelete}
+            />
+          )}
         </Box>
       </Box>
     </>

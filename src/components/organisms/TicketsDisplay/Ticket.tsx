@@ -6,9 +6,10 @@ import TicketContent from './TicketContent';
 
 interface Props {
   ticket: TicketType;
+  handleTicketDelete: (ticketId: string) => void;
 }
 
-export default function Ticket({ ticket }: Props) {
+export default function Ticket({ ticket, handleTicketDelete }: Props) {
   const { _id, board_id, description, labels, title } = ticket;
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
 
@@ -41,11 +42,9 @@ export default function Ticket({ ticket }: Props) {
           title={`Are you sure you want to delete this ticket? (${title})`}
           content={`This will delete the ticket from the board and all of its data will be lost.`}
           open={showDeleteConfirmation}
+          asset_id={_id}
           handleClose={() => setShowDeleteConfirmation(false)}
-          handleConfirm={() => {
-            // delete ticket function here
-            setShowDeleteConfirmation(false);
-          }}
+          handleDelete={handleTicketDelete}
         />
       )}
     </>
