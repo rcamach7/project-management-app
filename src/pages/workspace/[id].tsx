@@ -12,13 +12,16 @@ import { Box } from '@mui/material';
 
 export default function Workspace_Continued({ mySession, workspace }) {
   const { user }: AppSession = JSON.parse(mySession);
-  const { _id, boards, description, owner, users, name }: Workspace =
-    JSON.parse(workspace);
+  const [workspaceState, setWorkspaceState] = useState<Workspace>(
+    JSON.parse(workspace)
+  );
 
   const [activeBoard, setActiveBoard] = useState(
-    boards.length ? boards[0]._id : ''
+    workspaceState.boards.length ? workspaceState.boards[0]._id : ''
   );
-  const board = boards.find((board) => board._id === activeBoard);
+  const board = workspaceState.boards.find(
+    (board) => board._id === activeBoard
+  );
 
   const handleBoardChange = (boardId: string) => {
     setActiveBoard(boardId);
@@ -47,9 +50,9 @@ export default function Workspace_Continued({ mySession, workspace }) {
             mx: 'auto',
           }}
         >
-          <PageTitle subheading={name} sx={{ pt: 2, pb: 1 }} />
+          <PageTitle subheading={workspaceState.name} sx={{ pt: 2, pb: 1 }} />
           <BoardTabBar
-            boards={boards}
+            boards={workspaceState.boards}
             activeBoard={activeBoard}
             handleBoardChange={handleBoardChange}
           />
