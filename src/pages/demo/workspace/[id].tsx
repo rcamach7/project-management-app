@@ -40,6 +40,26 @@ export default function Workspace_Continued({ workspace }) {
     }
   };
 
+  const getRandomIndex = (arr) => {
+    return Math.floor(Math.random() * arr.length);
+  };
+
+  const addTicketToRandomBoard = async () => {
+    const newTicket = {
+      title: 'Fix 404 Code',
+      description: 'Cool new ticket',
+      board_id:
+        workspaceState.boards[getRandomIndex(workspaceState.boards)]._id,
+      label: 'FRONTEND',
+    };
+    try {
+      const res = await axios.post('/api/workspace/board/ticket', newTicket);
+      console.log(res);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   if (!workspaceState) {
     return (
       <div>
@@ -57,6 +77,9 @@ export default function Workspace_Continued({ workspace }) {
           Print This Workspace
         </button>
         <button onClick={addBoardToWorkspace}>Add Board To Workspace</button>
+        <button onClick={addTicketToRandomBoard}>
+          Add ticket to random board
+        </button>
       </div>
     );
   }
