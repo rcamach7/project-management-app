@@ -52,3 +52,10 @@ export interface Feature {
   title: string;
   description: string;
 }
+
+export interface UxFeedbackState {
+  loading: boolean;
+  showBanner: boolean;
+  bannerMessage: string;
+  bannerType?: 'success' | 'error';
+}

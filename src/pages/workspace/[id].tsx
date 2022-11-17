@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { unstable_getServerSession } from 'next-auth/next';
 import { AppSession } from 'models/global';
 import { authOptions } from '@/auth/[...nextauth]';
@@ -7,16 +7,31 @@ import { getWorkspaceById } from 'controllers/workspaceController';
 import { ResponsiveAppBar, BoardTabBar } from '@/components/organisms/index';
 import { PageTitle } from '@/components/atoms/index';
 import { TicketsDisplay } from '@/components/organisms/index';
-import { Workspace } from 'models/client';
+import { Workspace, UxFeedbackState } from 'models/client';
 import { Box } from '@mui/material';
 import { deleteTicketByID } from '@/lib/clientApi';
 import { deleteTicketFromWorkspace } from '@/lib/helpers';
+import { UxFeedback } from '@/components/molecules/index';
 
 export default function Workspace_Continued({ mySession, workspace }) {
   const { user }: AppSession = JSON.parse(mySession);
   const [workspaceState, setWorkspaceState] = useState<Workspace>(
     JSON.parse(workspace)
   );
+  const [uxFeedback, setUxFeedback] = useState<UxFeedbackState>({
+    loading: false,
+    showBanner: false,
+    bannerMessage: '',
+  });
+
+  // Reset banner messages state after 3 seconds and remove from UI
+  useEffect(() => {
+    if (uxFeedback.showBanner) {
+      setTimeout(() => {
+        setUxFeedback({ ...uxFeedback, showBanner: false, bannerMessage: '' });
+      }, 3000);
+    }
+  }, [uxFeedback.showBanner]);
 
   const [activeBoard, setActiveBoard] = useState(
     workspaceState.boards.length ? workspaceState.boards[0]._id : ''
@@ -31,12 +46,24 @@ export default function Workspace_Continued({ mySession, workspace }) {
 
   const handleTicketDelete = async (ticketId: string) => {
     try {
-      console.log('Processing ticket deletion...');
+      setUxFeedback({ ...uxFeedback, loading: true });
       await deleteTicketByID(ticketId);
       setWorkspaceState((prevState) => {
         return deleteTicketFromWorkspace(prevState, ticketId);
       });
+      setUxFeedback({
+        loading: false,
+        showBanner: true,
+        bannerMessage: 'Successfully Deleted Ticket',
+        bannerType: 'success',
+      });
     } catch (error) {
+      setUxFeedback({
+        loading: false,
+        showBanner: true,
+        bannerType: 'error',
+        bannerMessage: 'Error occurred deleting ticket',
+      });
       console.error(error);
     }
   };
@@ -78,6 +105,12 @@ export default function Workspace_Continued({ mySession, workspace }) {
           )}
         </Box>
       </Box>
+      <UxFeedback
+        loading={uxFeedback.loading}
+        showBanner={uxFeedback.showBanner}
+        bannerMessage={uxFeedback.bannerMessage}
+        bannerType={uxFeedback.bannerType ? uxFeedback.bannerType : 'success'}
+      />
     </>
   );
 }
