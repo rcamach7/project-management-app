@@ -15,6 +15,7 @@ export default function TicketsDisplay({ tickets, handleTicketDelete }: Props) {
         flexDirection: 'column',
         flex: 1,
         p: 2,
+        gap: { xs: 1, sm: 2, md: 3 },
         overflow: 'scroll',
       }}
     >
