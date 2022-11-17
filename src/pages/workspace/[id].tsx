@@ -24,15 +24,6 @@ export default function Workspace_Continued({ mySession, workspace }) {
     bannerMessage: '',
   });
 
-  // Reset banner messages state after 3 seconds and remove from UI
-  useEffect(() => {
-    if (uxFeedback.showBanner) {
-      setTimeout(() => {
-        setUxFeedback({ ...uxFeedback, showBanner: false, bannerMessage: '' });
-      }, 3000);
-    }
-  }, [uxFeedback.showBanner]);
-
   const [activeBoard, setActiveBoard] = useState(
     workspaceState.boards.length ? workspaceState.boards[0]._id : ''
   );
@@ -44,29 +35,68 @@ export default function Workspace_Continued({ mySession, workspace }) {
     setActiveBoard(boardId);
   };
 
+  const displayErrorMessage = (message: string, error: any) => {
+    setUxFeedback({
+      loading: false,
+      showBanner: true,
+      bannerType: 'error',
+      bannerMessage: message,
+    });
+    console.error(error);
+  };
+
+  const displaySuccessMessage = (message: string) => {
+    setUxFeedback({
+      loading: false,
+      showBanner: true,
+      bannerType: 'success',
+      bannerMessage: message,
+    });
+  };
+
+  const displayLoading = () => setUxFeedback({ ...uxFeedback, loading: true });
+
   const handleTicketDelete = async (ticketId: string) => {
     try {
-      setUxFeedback({ ...uxFeedback, loading: true });
+      displayLoading();
       await deleteTicketByID(ticketId);
       setWorkspaceState((prevState) => {
         return deleteTicketFromWorkspace(prevState, ticketId);
       });
-      setUxFeedback({
-        loading: false,
-        showBanner: true,
-        bannerMessage: 'Successfully Deleted Ticket',
-        bannerType: 'success',
-      });
+      displaySuccessMessage('Ticket deleted successfully');
     } catch (error) {
-      setUxFeedback({
-        loading: false,
-        showBanner: true,
-        bannerType: 'error',
-        bannerMessage: 'Error occurred deleting ticket',
-      });
-      console.error(error);
+      displayErrorMessage(
+        'Error deleting Ticket. Please try again later.',
+        error
+      );
     }
   };
+
+  const handleDeleteBoard = (boardId: string) => {
+    try {
+      displayLoading();
+      setWorkspaceState((prevState) => {
+        return {
+          ...prevState,
+          boards: prevState.boards.filter((board) => board._id !== boardId),
+        };
+      });
+      displaySuccessMessage('Board deleted successfully');
+    } catch (error) {
+      displayErrorMessage(
+        'Error deleting board. Please try again later.',
+        error
+      );
+    }
+  };
+
+  useEffect(() => {
+    if (uxFeedback.showBanner) {
+      setTimeout(() => {
+        setUxFeedback({ ...uxFeedback, showBanner: false, bannerMessage: '' });
+      }, 3000);
+    }
+  }, [uxFeedback.showBanner]);
 
   return (
     <>
