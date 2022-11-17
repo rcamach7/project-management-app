@@ -4,9 +4,10 @@ import { default as TicketComponent } from './Ticket';
 
 interface Props {
   tickets: TicketType[];
+  handleTicketDelete: (ticketId: string) => void;
 }
 
-export default function TicketsDisplay({ tickets }: Props) {
+export default function TicketsDisplay({ tickets, handleTicketDelete }: Props) {
   return (
     <Box
       sx={{
@@ -18,7 +19,11 @@ export default function TicketsDisplay({ tickets }: Props) {
       }}
     >
       {tickets.map((ticket) => (
-        <TicketComponent key={ticket._id} ticket={ticket} />
+        <TicketComponent
+          key={ticket._id}
+          ticket={ticket}
+          handleTicketDelete={handleTicketDelete}
+        />
       ))}
     </Box>
   );
