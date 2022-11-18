@@ -6,7 +6,12 @@ import { unstable_getServerSession } from 'next-auth/next';
 import { authOptions } from '@/auth/[...nextauth]';
 import { getWorkspaceById } from 'controllers/workspaceController';
 import { AppSession } from 'models/global';
-import { Workspace, UxFeedbackState, BoardFormStatus } from 'models/client';
+import {
+  Workspace,
+  UxFeedbackState,
+  BoardFormStatus,
+  LabelsEnum,
+} from 'models/client';
 import {
   ResponsiveAppBar,
   BoardTabBar,
@@ -137,13 +142,24 @@ export default function Workspace_Continued({ mySession, workspace }) {
     action: BoardFormStatus['action'],
     title: string,
     description: string,
-    boardId?: string
+    labels?: LabelsEnum[],
+    boardId?: string,
+    ticketId?: string
   ) => {
     try {
       displayLoading();
       if (action === 'CREATE') {
       }
-      if (action === 'EDIT' && boardId) {
+      if (action === 'EDIT' && ticketId && labels) {
+        const updatedTicket = await clientApi.updateTicket(
+          title,
+          description,
+          labels,
+          ticketId
+        );
+        setWorkspaceState((prevState) => {
+          return helpers.updateTicketInWorkspace(prevState, updatedTicket);
+        });
       }
 
       displaySuccessMessage(`Ticket ${action.toLowerCase()}ed successfully`);
