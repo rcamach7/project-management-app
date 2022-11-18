@@ -6,6 +6,7 @@ interface Props {
   action: 'CREATE' | 'EDIT';
   title?: string;
   description?: string;
+  labels?: LabelsEnum[];
   boardId?: string;
   handleClose: () => void;
   handleTicketFormAction: (
@@ -22,6 +23,7 @@ export default function TicketForm({
   title,
   description,
   boardId,
+  labels,
   action,
   handleClose,
   handleTicketFormAction,
@@ -38,6 +40,7 @@ export default function TicketForm({
           handleClose={handleClose}
           title={action === 'EDIT' ? title : undefined}
           description={action === 'EDIT' ? description : undefined}
+          labels={action === 'EDIT' ? labels : undefined}
           boardId={action === 'EDIT' ? boardId : undefined}
           handleTicketFormAction={handleTicketFormAction}
         />
