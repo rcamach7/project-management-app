@@ -1,4 +1,8 @@
-import { Ticket as TicketType, BoardFormStatus } from 'models/client';
+import {
+  Ticket as TicketType,
+  BoardFormStatus,
+  LabelsEnum,
+} from 'models/client';
 import { Box } from '@mui/material';
 import { default as TicketComponent } from './Ticket';
 
@@ -9,7 +13,9 @@ interface Props {
     action: BoardFormStatus['action'],
     title: string,
     description: string,
-    boardId?: string
+    labels?: LabelsEnum[],
+    boardId?: string,
+    ticketId?: string
   ) => void;
 }
 

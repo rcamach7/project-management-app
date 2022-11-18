@@ -1,4 +1,4 @@
-import { Workspace, Board } from 'models/client';
+import { Workspace, Board, Ticket } from 'models/client';
 
 export const deleteTicketFromWorkspace = (
   workspace: Workspace,
@@ -37,9 +37,23 @@ export const deleteBoardFromWorkspace = (
   return newWorkspace;
 };
 
+export const updateTicketInWorkspace = (
+  workspace: Workspace,
+  ticket: Ticket
+) => {
+  const newWorkspace: Workspace = { ...workspace };
+  newWorkspace.boards.forEach((board) => {
+    board.tickets = board.tickets.map((t) =>
+      t._id === ticket._id ? ticket : t
+    );
+  });
+  return newWorkspace;
+};
+
 export default {
   deleteTicketFromWorkspace,
   addBoardToWorkspace,
   updateBoardInWorkspace,
   deleteBoardFromWorkspace,
+  updateTicketInWorkspace,
 };

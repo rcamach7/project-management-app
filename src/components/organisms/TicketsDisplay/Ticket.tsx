@@ -1,5 +1,9 @@
 import { useState } from 'react';
-import { Ticket as TicketType, BoardFormStatus } from 'models/client';
+import {
+  Ticket as TicketType,
+  BoardFormStatus,
+  LabelsEnum,
+} from 'models/client';
 import { Card, CardActions as TicketActions, Button } from '@mui/material';
 import { ConfirmDeleteDialog } from '@/components/atoms/index';
 import { TicketForm } from '@/components/molecules/index';
@@ -12,7 +16,9 @@ interface Props {
     action: BoardFormStatus['action'],
     title: string,
     description: string,
-    boardId?: string
+    labels?: LabelsEnum[],
+    boardId?: string,
+    ticketId?: string
   ) => void;
 }
 

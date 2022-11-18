@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { Board } from 'models/client';
+import { Board, LabelsEnum, Ticket } from 'models/client';
 
 export const deleteTicketByID = async (id: string) => {
   try {
@@ -54,4 +54,32 @@ export const updateBoard = async (
   }
 };
 
-export default { deleteBoardByID, deleteTicketByID, createBoard, updateBoard };
+export const updateTicket = async (
+  title: string,
+  description: string,
+  labels: LabelsEnum[],
+  ticket_id: string
+) => {
+  try {
+    const body = {
+      title,
+      description,
+      labels,
+    };
+    const res = await axios.put(
+      `/api/workspace/board/ticket/${ticket_id}`,
+      body
+    );
+    return res.data as Ticket;
+  } catch (error) {
+    return Promise.reject(error);
+  }
+};
+
+export default {
+  deleteBoardByID,
+  deleteTicketByID,
+  createBoard,
+  updateBoard,
+  updateTicket,
+};
