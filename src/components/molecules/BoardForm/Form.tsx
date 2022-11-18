@@ -6,11 +6,13 @@ interface Props {
   action: 'CREATE' | 'EDIT';
   title?: string;
   description?: string;
+  boardId?: string;
   handleClose: () => void;
   handleBoardFormAction: (
     action: BoardFormStatus['action'],
     title: string,
-    description: string
+    description: string,
+    boardId?: string
   ) => void;
 }
 
@@ -18,6 +20,7 @@ export default function Form({
   action,
   title,
   description,
+  boardId,
   handleClose,
   handleBoardFormAction,
 }: Props) {
@@ -34,7 +37,20 @@ export default function Form({
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     handleClose();
-    handleBoardFormAction(action, formDetails.title, formDetails.description);
+    if (action === 'CREATE') {
+      handleBoardFormAction(
+        'CREATE',
+        formDetails.title,
+        formDetails.description
+      );
+    } else {
+      handleBoardFormAction(
+        'EDIT',
+        formDetails.title,
+        formDetails.description,
+        boardId
+      );
+    }
   };
 
   return (

@@ -36,3 +36,20 @@ export const createBoard = async (
     return Promise.reject(error);
   }
 };
+
+export const updateBoard = async (
+  title: string,
+  description: string,
+  _id: string
+) => {
+  try {
+    const body = {
+      title,
+      description,
+    };
+    const res = await axios.put(`/api/workspace/board/${_id}`, body);
+    return res.data as Board;
+  } catch (error) {
+    return Promise.reject(error);
+  }
+};

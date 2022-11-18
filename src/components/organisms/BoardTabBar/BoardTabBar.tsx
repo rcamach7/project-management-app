@@ -12,7 +12,8 @@ interface Props {
   handleBoardFormAction: (
     action: BoardFormStatus['action'],
     title: string,
-    description: string
+    description: string,
+    boardId?: string
   ) => void;
 }
 

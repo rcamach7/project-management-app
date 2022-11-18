@@ -13,6 +13,7 @@ import {
   deleteTicketByID,
   deleteBoardByID,
   createBoard,
+  updateBoard,
 } from '@/lib/clientApi';
 import { deleteTicketFromWorkspace } from '@/lib/helpers';
 import { UxFeedback } from '@/components/molecules/index';
@@ -102,7 +103,8 @@ export default function Workspace_Continued({ mySession, workspace }) {
   const handleBoardFormAction = async (
     action: BoardFormStatus['action'],
     title: string,
-    description: string
+    description: string,
+    boardId?: string
   ) => {
     try {
       displayLoading();
@@ -115,7 +117,16 @@ export default function Workspace_Continued({ mySession, workspace }) {
           };
         });
       }
-      if (action === 'EDIT') {
+      if (action === 'EDIT' && boardId) {
+        const updatedBoard = await updateBoard(title, description, boardId);
+        setWorkspaceState((prevState) => {
+          return {
+            ...prevState,
+            boards: prevState.boards.map((board) =>
+              board._id === updatedBoard._id ? updatedBoard : board
+            ),
+          };
+        });
       }
 
       displaySuccessMessage(`Board ${action.toLowerCase()}ed successfully`);

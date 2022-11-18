@@ -11,7 +11,8 @@ interface Props {
   handleBoardFormAction: (
     action: BoardFormStatus['action'],
     title: string,
-    description: string
+    description: string,
+    boardId?: string
   ) => void;
 }
 
@@ -96,6 +97,7 @@ export default function TabButtons({
           handleClose={() => setFormStatus({ show: false, action: 'CREATE' })}
           title={activeBoardData?.title}
           description={activeBoardData?.description}
+          boardId={activeBoardData?._id}
           handleBoardFormAction={handleBoardFormAction}
         />
       )}
