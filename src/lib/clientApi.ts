@@ -53,3 +53,5 @@ export const updateBoard = async (
     return Promise.reject(error);
   }
 };
+
+export default { deleteBoardByID, deleteTicketByID, createBoard, updateBoard };

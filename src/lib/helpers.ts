@@ -36,3 +36,10 @@ export const deleteBoardFromWorkspace = (
   );
   return newWorkspace;
 };
+
+export default {
+  deleteTicketFromWorkspace,
+  addBoardToWorkspace,
+  updateBoardInWorkspace,
+  deleteBoardFromWorkspace,
+};
