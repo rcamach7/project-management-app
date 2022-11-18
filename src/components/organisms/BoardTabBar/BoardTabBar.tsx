@@ -29,7 +29,7 @@ export default function BoardTabBar({
   };
 
   return (
-    <Box sx={{}}>
+    <Box>
       <TabButtons
         handleBoardFormAction={handleBoardFormAction}
         handleDeleteBoard={handleDeleteBoard}
@@ -44,9 +44,10 @@ export default function BoardTabBar({
               pl: 2,
               fontWeight: 'bold',
               fontSize: '1.2em',
+              fontFamily: 'monospace',
             }}
           >
-            Board(s):
+            Board{`${boards.length > 1 ? 's' : ''}`}:
           </Typography>
           <Tabs
             value={activeBoard}

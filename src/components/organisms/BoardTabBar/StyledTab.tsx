@@ -12,13 +12,14 @@ const StyledTab = styled((props: StyledTabProps) => (
 ))(({ theme }) => ({
   textTransform: 'none',
   fontWeight: 'bold',
-  fontSize: theme.typography.pxToRem(15),
+  fontSize: theme.typography.pxToRem(14),
   marginRight: theme.spacing(1),
+  padding: '6px 8px',
   color: 'rgba(255, 255, 255, 0.7)',
   '&.Mui-selected': {
     color: '#F3C610',
     background: '#2e3a50',
-    borderRadius: '15px',
+    borderRadius: '10px',
   },
   '&.Mui-focusVisible': {
     backgroundColor: 'rgba(100, 95, 228, 0.32)',

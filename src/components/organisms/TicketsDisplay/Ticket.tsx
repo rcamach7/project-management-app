@@ -8,6 +8,7 @@ import { Card, CardActions as TicketActions, Button } from '@mui/material';
 import { ConfirmDeleteDialog } from '@/components/atoms/index';
 import { TicketForm } from '@/components/molecules/index';
 import TicketContent from './TicketContent';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 interface Props {
   ticket: TicketType;
@@ -42,7 +43,7 @@ export default function Ticket({
           title={title}
           labels={labels}
         />
-        <TicketActions>
+        <TicketActions sx={{ py: 0.5 }}>
           <Button
             size="small"
             sx={{ color: 'secondary.main' }}
@@ -55,8 +56,9 @@ export default function Ticket({
           </Button>
           <Button
             size="small"
-            sx={{ color: 'red' }}
+            sx={{ color: 'red', fontSize: 13 }}
             onClick={() => setShowDeleteConfirmation((DC) => !DC)}
+            startIcon={<DeleteIcon />}
           >
             Delete
           </Button>
