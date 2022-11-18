@@ -6,17 +6,20 @@ interface Props {
   action: 'CREATE' | 'EDIT';
   title?: string;
   description?: string;
+  boardId?: string;
   handleClose: () => void;
   handleBoardFormAction: (
     action: BoardFormStatus['action'],
     title: string,
-    description: string
+    description: string,
+    boardId?: string
   ) => void;
 }
 
 export default function BoardForm({
   title,
   description,
+  boardId,
   action,
   handleClose,
   handleBoardFormAction,
@@ -33,6 +36,7 @@ export default function BoardForm({
           handleClose={handleClose}
           title={action === 'EDIT' ? title : undefined}
           description={action === 'EDIT' ? description : undefined}
+          boardId={action === 'EDIT' ? boardId : undefined}
           handleBoardFormAction={handleBoardFormAction}
         />
       </Box>
