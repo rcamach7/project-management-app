@@ -33,6 +33,8 @@ export default function TabButtons({
         sx={{
           flexDirection: 'row',
           justifyContent: 'space-evenly',
+          flexWrap: 'wrap',
+          gap: { xs: 1, sm: 2 },
           pt: 1,
         }}
       >
@@ -65,7 +67,7 @@ export default function TabButtons({
               onClick={() => setFormStatus({ show: true, action: 'EDIT' })}
             />
             <ActionButton
-              text="Delete Board"
+              text="Delete Current Board"
               variant="text"
               size="small"
               sx={{
