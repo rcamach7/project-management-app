@@ -59,3 +59,8 @@ export interface UxFeedbackState {
   bannerMessage: string;
   bannerType?: 'success' | 'error';
 }
+
+export interface BoardFormStatus {
+  show: boolean;
+  action: 'CREATE' | 'EDIT';
+}
