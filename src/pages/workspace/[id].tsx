@@ -9,7 +9,7 @@ import { PageTitle } from '@/components/atoms/index';
 import { TicketsDisplay } from '@/components/organisms/index';
 import { Workspace, UxFeedbackState } from 'models/client';
 import { Box } from '@mui/material';
-import { deleteTicketByID } from '@/lib/clientApi';
+import { deleteTicketByID, deleteBoardByID } from '@/lib/clientApi';
 import { deleteTicketFromWorkspace } from '@/lib/helpers';
 import { UxFeedback } from '@/components/molecules/index';
 
@@ -72,9 +72,10 @@ export default function Workspace_Continued({ mySession, workspace }) {
     }
   };
 
-  const handleDeleteBoard = (boardId: string) => {
+  const handleDeleteBoard = async (boardId: string) => {
     try {
       displayLoading();
+      await deleteBoardByID(boardId);
       setWorkspaceState((prevState) => {
         return {
           ...prevState,
@@ -126,6 +127,7 @@ export default function Workspace_Continued({ mySession, workspace }) {
             boards={workspaceState.boards}
             activeBoard={activeBoard}
             handleBoardChange={handleBoardChange}
+            handleDeleteBoard={handleDeleteBoard}
           />
           {board && (
             <TicketsDisplay
