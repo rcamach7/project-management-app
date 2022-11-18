@@ -1,5 +1,5 @@
 import { Box, Modal } from '@mui/material/';
-import { BoardFormStatus } from 'models/client';
+import { BoardFormStatus, LabelsEnum } from 'models/client';
 import Form from './Form';
 
 interface Props {
@@ -12,7 +12,9 @@ interface Props {
     action: BoardFormStatus['action'],
     title: string,
     description: string,
-    boardId?: string
+    labels?: LabelsEnum[],
+    boardId?: string,
+    ticketId?: string
   ) => void;
 }
 

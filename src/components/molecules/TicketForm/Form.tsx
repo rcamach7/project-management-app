@@ -1,6 +1,7 @@
 import { useState } from 'react';
-import { BoardFormStatus } from 'models/client';
+import { BoardFormStatus, LabelsEnum } from 'models/client';
 import { Box, Button, InputBase, Typography } from '@mui/material';
+import MultipleSelect from './MultipleSelect';
 
 interface Props {
   action: 'CREATE' | 'EDIT';
@@ -12,7 +13,9 @@ interface Props {
     action: BoardFormStatus['action'],
     title: string,
     description: string,
-    boardId?: string
+    labels?: LabelsEnum[],
+    boardId?: string,
+    ticketId?: string
   ) => void;
 }
 
@@ -83,6 +86,9 @@ export default function Form({
           placeholder="enter brief description"
           fullWidth
         />
+      </Box>
+      <Box>
+        <MultipleSelect />
       </Box>
 
       <Button
