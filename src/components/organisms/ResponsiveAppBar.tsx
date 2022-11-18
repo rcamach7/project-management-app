@@ -48,16 +48,13 @@ export default function ResponsiveAppBar({ image, name }: Props) {
           <Typography
             variant="h6"
             noWrap
-            component="a"
-            href="/me"
+            color="text.primary"
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },
               fontFamily: 'monospace',
               fontWeight: 700,
               letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
             }}
           >
             FLOW |
@@ -70,7 +67,7 @@ export default function ResponsiveAppBar({ image, name }: Props) {
               aria-controls="menu-appbar"
               aria-haspopup="true"
               onClick={handleOpenNavMenu}
-              color="inherit"
+              sx={{ color: 'text.primary' }}
             >
               <MenuIcon />
             </IconButton>
@@ -105,8 +102,7 @@ export default function ResponsiveAppBar({ image, name }: Props) {
           <Typography
             variant="h5"
             noWrap
-            component="a"
-            href=""
+            color="text.primary"
             sx={{
               mr: 2,
               display: { xs: 'flex', md: 'none' },
@@ -114,8 +110,6 @@ export default function ResponsiveAppBar({ image, name }: Props) {
               fontFamily: 'monospace',
               fontWeight: 700,
               letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
             }}
           >
             FLOW
@@ -123,14 +117,14 @@ export default function ResponsiveAppBar({ image, name }: Props) {
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             <Button
               component={NextLinkAnchor}
-              sx={{ my: 2, color: 'white', display: 'block' }}
+              sx={{ my: 2, color: 'text.primary', display: 'block' }}
               to="/me"
             >
               Account
             </Button>
             <Button
               component={NextLinkAnchor}
-              sx={{ my: 2, color: 'white', display: 'block' }}
+              sx={{ my: 2, color: 'text.primary', display: 'block' }}
               to="/me"
             >
               Contact
