@@ -2,12 +2,18 @@ import { useState, useEffect } from 'react';
 import { Box, Button, InputBase, Typography } from '@mui/material';
 
 interface Props {
-  action: 'CREATE' | 'UPDATE';
+  action: 'CREATE' | 'EDIT';
   title?: string;
   description?: string;
+  handleClose: () => void;
 }
 
-export default function Form({ title, description }: Props) {
+export default function Form({
+  action,
+  title,
+  description,
+  handleClose,
+}: Props) {
   const [formDetails, setFormDetails] = useState({
     title: title || '',
     description: description || '',
@@ -17,10 +23,6 @@ export default function Form({ title, description }: Props) {
     const { name, value } = e.target;
     setFormDetails({ ...formDetails, [name]: value });
   };
-
-  useEffect(() => {
-    console.log(formDetails);
-  }, [formDetails]);
 
   return (
     <Box
@@ -32,7 +34,7 @@ export default function Form({ title, description }: Props) {
       sx={{ pb: 2 }}
     >
       <Typography variant="h5" sx={{ fontWeight: 'bold' }} textAlign="center">
-        Board
+        {action === 'CREATE' ? 'Create ' : 'Edit '}Board
       </Typography>
       <Box pb={1}>
         <Typography variant="caption" sx={{ color: 'text.secondary' }}>
@@ -80,6 +82,7 @@ export default function Form({ title, description }: Props) {
           color: 'red',
           p: '2px 4px',
         }}
+        onClick={handleClose}
       >
         Cancel
       </Button>

@@ -3,7 +3,7 @@ import { Button, ButtonProps } from '@mui/material';
 interface Props extends ButtonProps {
   text: string;
   size?: 'small' | 'medium' | 'large';
-  variant: 'contained' | 'outlined';
+  variant: 'contained' | 'outlined' | 'text';
   onClick?: () => void;
   sx?: {};
 }

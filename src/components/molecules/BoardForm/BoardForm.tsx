@@ -2,11 +2,18 @@ import { Box, Modal } from '@mui/material/';
 import Form from './Form';
 
 interface Props {
-  action: 'CREATE' | 'UPDATE';
+  action: 'CREATE' | 'EDIT';
+  title?: string;
+  description?: string;
   handleClose: () => void;
 }
 
-export default function BoardForm({ action, handleClose }: Props) {
+export default function BoardForm({
+  title,
+  description,
+  action,
+  handleClose,
+}: Props) {
   return (
     <Modal open={true} onClose={handleClose}>
       <Box
@@ -14,7 +21,12 @@ export default function BoardForm({ action, handleClose }: Props) {
           ...style,
         }}
       >
-        <Form action={action} />
+        <Form
+          action={action}
+          handleClose={handleClose}
+          title={title}
+          description={description}
+        />
       </Box>
     </Modal>
   );
