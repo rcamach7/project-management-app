@@ -8,12 +8,18 @@ interface Props {
   activeBoard: string;
   activeBoardData: Board;
   handleDeleteBoard: (boardId: string) => void;
+  handleBoardFormAction: (
+    action: BoardFormStatus['action'],
+    title: string,
+    description: string
+  ) => void;
 }
 
 export default function TabButtons({
   activeBoardData,
   activeBoard,
   handleDeleteBoard,
+  handleBoardFormAction,
 }: Props) {
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
   const [formStatus, setFormStatus] = useState<BoardFormStatus>({
@@ -46,7 +52,7 @@ export default function TabButtons({
         {activeBoard && (
           <>
             <ActionButton
-              text="Edit Board"
+              text="Edit Current Board"
               variant="outlined"
               size="small"
               sx={{
@@ -88,6 +94,7 @@ export default function TabButtons({
           handleClose={() => setFormStatus({ show: false, action: 'CREATE' })}
           title={activeBoardData?.title}
           description={activeBoardData?.description}
+          handleBoardFormAction={handleBoardFormAction}
         />
       )}
     </>

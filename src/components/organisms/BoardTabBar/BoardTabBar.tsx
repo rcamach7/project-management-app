@@ -1,4 +1,4 @@
-import { Board } from 'models/client';
+import { Board, BoardFormStatus } from 'models/client';
 import { Box, Tabs, Typography } from '@mui/material';
 import StyledTab from './StyledTab';
 import TabButtons from './TabButtons';
@@ -9,6 +9,11 @@ interface Props {
   activeBoard: string;
   handleBoardChange: (boardId: string) => void;
   handleDeleteBoard: (boardId: string) => void;
+  handleBoardFormAction: (
+    action: BoardFormStatus['action'],
+    title: string,
+    description: string
+  ) => void;
 }
 
 export default function BoardTabBar({
@@ -16,6 +21,7 @@ export default function BoardTabBar({
   activeBoard,
   handleBoardChange,
   handleDeleteBoard,
+  handleBoardFormAction,
 }: Props) {
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {
     handleBoardChange(newValue);
@@ -24,6 +30,7 @@ export default function BoardTabBar({
   return (
     <Box sx={{}}>
       <TabButtons
+        handleBoardFormAction={handleBoardFormAction}
         handleDeleteBoard={handleDeleteBoard}
         activeBoard={activeBoard}
         activeBoardData={boards.find((board) => board._id === activeBoard)}

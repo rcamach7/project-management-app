@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { BoardFormStatus } from 'models/client';
 import { Box, Button, InputBase, Typography } from '@mui/material';
 
 interface Props {
@@ -6,6 +7,11 @@ interface Props {
   title?: string;
   description?: string;
   handleClose: () => void;
+  handleBoardFormAction: (
+    action: BoardFormStatus['action'],
+    title: string,
+    description: string
+  ) => void;
 }
 
 export default function Form({
@@ -13,6 +19,7 @@ export default function Form({
   title,
   description,
   handleClose,
+  handleBoardFormAction,
 }: Props) {
   const [formDetails, setFormDetails] = useState({
     title: title || '',
@@ -24,15 +31,14 @@ export default function Form({
     setFormDetails({ ...formDetails, [name]: value });
   };
 
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    handleClose();
+    handleBoardFormAction(action, formDetails.title, formDetails.description);
+  };
+
   return (
-    <Box
-      component="form"
-      onSubmit={(e) => {
-        e.preventDefault();
-        console.log('form submitted');
-      }}
-      sx={{ pb: 2 }}
-    >
+    <Box component="form" onSubmit={handleSubmit} sx={{ pb: 2 }}>
       <Typography variant="h5" sx={{ fontWeight: 'bold' }} textAlign="center">
         {action === 'CREATE' ? 'Create ' : 'Edit '}Board
       </Typography>

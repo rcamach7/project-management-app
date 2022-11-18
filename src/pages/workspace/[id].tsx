@@ -7,9 +7,13 @@ import { getWorkspaceById } from 'controllers/workspaceController';
 import { ResponsiveAppBar, BoardTabBar } from '@/components/organisms/index';
 import { PageTitle } from '@/components/atoms/index';
 import { TicketsDisplay } from '@/components/organisms/index';
-import { Workspace, UxFeedbackState } from 'models/client';
+import { Workspace, UxFeedbackState, BoardFormStatus } from 'models/client';
 import { Box } from '@mui/material';
-import { deleteTicketByID, deleteBoardByID } from '@/lib/clientApi';
+import {
+  deleteTicketByID,
+  deleteBoardByID,
+  createBoard,
+} from '@/lib/clientApi';
 import { deleteTicketFromWorkspace } from '@/lib/helpers';
 import { UxFeedback } from '@/components/molecules/index';
 
@@ -91,6 +95,34 @@ export default function Workspace_Continued({ mySession, workspace }) {
     }
   };
 
+  const handleBoardFormAction = async (
+    action: BoardFormStatus['action'],
+    title: string,
+    description: string
+  ) => {
+    try {
+      displayLoading();
+      if (action === 'CREATE') {
+        const board = await createBoard(title, description, workspaceState._id);
+        setWorkspaceState((prevState) => {
+          return {
+            ...prevState,
+            boards: [...prevState.boards, board],
+          };
+        });
+      }
+      if (action === 'EDIT') {
+      }
+
+      displaySuccessMessage(`Board ${action.toLowerCase()}ed successfully`);
+    } catch (error) {
+      displayErrorMessage(
+        `Error occurred while ${action.toLowerCase()}ing board. Please try again later.`,
+        error
+      );
+    }
+  };
+
   useEffect(() => {
     if (uxFeedback.showBanner) {
       setTimeout(() => {
@@ -128,6 +160,7 @@ export default function Workspace_Continued({ mySession, workspace }) {
             activeBoard={activeBoard}
             handleBoardChange={handleBoardChange}
             handleDeleteBoard={handleDeleteBoard}
+            handleBoardFormAction={handleBoardFormAction}
           />
           {board && (
             <TicketsDisplay
