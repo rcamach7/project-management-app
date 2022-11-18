@@ -1,27 +1,20 @@
 import Head from 'next/head';
+import clientApi from '@/lib/clientApi';
+import helpers from '@/lib/helpers';
 import { useEffect, useState } from 'react';
 import { unstable_getServerSession } from 'next-auth/next';
-import { AppSession } from 'models/global';
 import { authOptions } from '@/auth/[...nextauth]';
 import { getWorkspaceById } from 'controllers/workspaceController';
-import { ResponsiveAppBar, BoardTabBar } from '@/components/organisms/index';
-import { PageTitle } from '@/components/atoms/index';
-import { TicketsDisplay } from '@/components/organisms/index';
+import { AppSession } from 'models/global';
 import { Workspace, UxFeedbackState, BoardFormStatus } from 'models/client';
-import { Box } from '@mui/material';
 import {
-  deleteTicketByID,
-  deleteBoardByID,
-  createBoard,
-  updateBoard,
-} from '@/lib/clientApi';
-import {
-  deleteTicketFromWorkspace,
-  addBoardToWorkspace,
-  updateBoardInWorkspace,
-  deleteBoardFromWorkspace,
-} from '@/lib/helpers';
+  ResponsiveAppBar,
+  BoardTabBar,
+  TicketsDisplay,
+} from '@/components/organisms/index';
+import { PageTitle } from '@/components/atoms/index';
 import { UxFeedback } from '@/components/molecules/index';
+import { Box } from '@mui/material';
 
 export default function Workspace_Continued({ mySession, workspace }) {
   const { user }: AppSession = JSON.parse(mySession);
@@ -72,9 +65,9 @@ export default function Workspace_Continued({ mySession, workspace }) {
   const handleTicketDelete = async (ticketId: string) => {
     try {
       displayLoading();
-      await deleteTicketByID(ticketId);
+      await clientApi.deleteTicketByID(ticketId);
       setWorkspaceState((prevState) => {
-        return deleteTicketFromWorkspace(prevState, ticketId);
+        return helpers.deleteTicketFromWorkspace(prevState, ticketId);
       });
       displaySuccessMessage('Ticket deleted successfully');
     } catch (error) {
@@ -88,9 +81,9 @@ export default function Workspace_Continued({ mySession, workspace }) {
   const handleDeleteBoard = async (boardId: string) => {
     try {
       displayLoading();
-      await deleteBoardByID(boardId);
+      await clientApi.deleteBoardByID(boardId);
       setWorkspaceState((prevState) => {
-        return deleteBoardFromWorkspace(prevState, boardId);
+        return helpers.deleteBoardFromWorkspace(prevState, boardId);
       });
       resetActiveBoard();
       displaySuccessMessage('Board deleted successfully');
@@ -111,15 +104,23 @@ export default function Workspace_Continued({ mySession, workspace }) {
     try {
       displayLoading();
       if (action === 'CREATE') {
-        const board = await createBoard(title, description, workspaceState._id);
+        const board = await clientApi.createBoard(
+          title,
+          description,
+          workspaceState._id
+        );
         setWorkspaceState((prevState) => {
-          return addBoardToWorkspace(prevState, board);
+          return helpers.addBoardToWorkspace(prevState, board);
         });
       }
       if (action === 'EDIT' && boardId) {
-        const updatedBoard = await updateBoard(title, description, boardId);
+        const updatedBoard = await clientApi.updateBoard(
+          title,
+          description,
+          boardId
+        );
         setWorkspaceState((prevState) => {
-          return updateBoardInWorkspace(prevState, updatedBoard);
+          return helpers.updateBoardInWorkspace(prevState, updatedBoard);
         });
       }
 
