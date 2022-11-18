@@ -6,14 +6,16 @@ import { CenteredBox } from '../../layout';
 
 interface Props {
   boards: Board[];
-  handleBoardChange: (boardId: string) => void;
   activeBoard: string;
+  handleBoardChange: (boardId: string) => void;
+  handleDeleteBoard: (boardId: string) => void;
 }
 
 export default function BoardTabBar({
   boards,
   activeBoard,
   handleBoardChange,
+  handleDeleteBoard,
 }: Props) {
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {
     handleBoardChange(newValue);
@@ -21,7 +23,10 @@ export default function BoardTabBar({
 
   return (
     <Box sx={{}}>
-      <TabButtons />
+      <TabButtons
+        handleDeleteBoard={handleDeleteBoard}
+        activeBoard={activeBoard}
+      />
       {boards.length ? (
         <CenteredBox sx={{ flexDirection: 'row', mt: { xs: 2, sm: 3 } }}>
           <Typography
