@@ -1,12 +1,19 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { BoardFormStatus, LabelsEnum } from 'models/client';
-import { Box, Button, InputBase, Typography } from '@mui/material';
+import {
+  Box,
+  Button,
+  InputBase,
+  Typography,
+  SelectChangeEvent,
+} from '@mui/material';
 import MultipleSelect from './MultipleSelect';
 
 interface Props {
   action: 'CREATE' | 'EDIT';
   title?: string;
   description?: string;
+  labels?: LabelsEnum[];
   boardId?: string;
   handleClose: () => void;
   handleTicketFormAction: (
@@ -23,6 +30,7 @@ export default function Form({
   action,
   title,
   description,
+  labels,
   boardId,
   handleClose,
   handleTicketFormAction,
@@ -30,7 +38,19 @@ export default function Form({
   const [formDetails, setFormDetails] = useState({
     title: title || '',
     description: description || '',
+    selectedLabels: labels || [],
   });
+
+  const handleLabelsSelectionChange = (
+    event: SelectChangeEvent<typeof formDetails.selectedLabels>
+  ) => {
+    const {
+      target: { value },
+    } = event;
+    if (typeof value !== 'string') {
+      setFormDetails({ ...formDetails, selectedLabels: value });
+    }
+  };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -40,20 +60,20 @@ export default function Form({
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     handleClose();
-    if (action === 'CREATE') {
-      handleTicketFormAction(
-        'CREATE',
-        formDetails.title,
-        formDetails.description
-      );
-    } else {
-      handleTicketFormAction(
-        'EDIT',
-        formDetails.title,
-        formDetails.description,
-        boardId
-      );
-    }
+    // if (action === 'CREATE') {
+    //   handleTicketFormAction(
+    //     'CREATE',
+    //     formDetails.title,
+    //     formDetails.description
+    //   );
+    // } else {
+    //   handleTicketFormAction(
+    //     'EDIT',
+    //     formDetails.title,
+    //     formDetails.description,
+    //     boardId
+    //   );
+    // }
   };
 
   return (
@@ -88,7 +108,11 @@ export default function Form({
         />
       </Box>
       <Box>
-        <MultipleSelect />
+        <MultipleSelect
+          labels={labels}
+          selectedLabels={formDetails.selectedLabels}
+          handleChange={handleLabelsSelectionChange}
+        />
       </Box>
 
       <Button

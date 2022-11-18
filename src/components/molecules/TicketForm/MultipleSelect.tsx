@@ -1,44 +1,27 @@
 import { useState } from 'react';
-import Box from '@mui/material/Box';
-import OutlinedInput from '@mui/material/OutlinedInput';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
-import Chip from '@mui/material/Chip';
 import { LabelsEnum } from 'models/client';
+import {
+  Box,
+  OutlinedInput,
+  InputLabel,
+  MenuItem,
+  FormControl,
+  Select,
+  SelectChangeEvent,
+  Chip,
+} from '@mui/material';
 
-const ITEM_HEIGHT = 48;
-const ITEM_PADDING_TOP = 8;
-const MenuProps = {
-  PaperProps: {
-    style: {
-      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-      width: 250,
-    },
-  },
-};
-
-function getStyles(label: string, selectedLabels: readonly string[]) {
-  return {
-    fontWeight: selectedLabels.indexOf(label) === -1 ? 'normal' : 'bold',
-  };
+interface Props {
+  labels?: LabelsEnum[];
+  selectedLabels: LabelsEnum[];
+  handleChange: (event: SelectChangeEvent<LabelsEnum[]>) => void;
 }
 
-export default function MultipleSelectChip() {
-  const [selectedLabels, setSelectedLabels] = useState<LabelsEnum[]>([
-    LabelsEnum.WIP,
-  ]);
-
-  const handleChange = (event: SelectChangeEvent<typeof selectedLabels>) => {
-    const {
-      target: { value },
-    } = event;
-    if (typeof value !== 'string') {
-      setSelectedLabels(value);
-    }
-  };
-
+export default function MultipleSelectChip({
+  selectedLabels,
+  labels,
+  handleChange,
+}: Props) {
   return (
     <FormControl sx={{ width: '100%' }}>
       <InputLabel id="demo-multiple-chip-label">Labels</InputLabel>
@@ -83,4 +66,21 @@ export default function MultipleSelectChip() {
       </Select>
     </FormControl>
   );
+}
+
+const ITEM_HEIGHT = 48;
+const ITEM_PADDING_TOP = 8;
+const MenuProps = {
+  PaperProps: {
+    style: {
+      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+      width: 250,
+    },
+  },
+};
+
+function getStyles(label: string, selectedLabels: readonly string[]) {
+  return {
+    fontWeight: selectedLabels.indexOf(label) === -1 ? 'normal' : 'bold',
+  };
 }
