@@ -133,7 +133,28 @@ export default function Workspace_Continued({ mySession, workspace }) {
     }
   };
 
-  // Removes notification banner after 2 seconds
+  const handleTicketFormAction = async (
+    action: BoardFormStatus['action'],
+    title: string,
+    description: string,
+    boardId?: string
+  ) => {
+    try {
+      displayLoading();
+      if (action === 'CREATE') {
+      }
+      if (action === 'EDIT' && boardId) {
+      }
+
+      displaySuccessMessage(`Ticket ${action.toLowerCase()}ed successfully`);
+    } catch (error) {
+      displayErrorMessage(
+        `Error occurred while ${action.toLowerCase()}ing tickett. Please try again later.`,
+        error
+      );
+    }
+  };
+
   useEffect(() => {
     if (uxFeedback.showBanner) {
       setTimeout(() => {
@@ -177,6 +198,7 @@ export default function Workspace_Continued({ mySession, workspace }) {
             <TicketsDisplay
               tickets={board.tickets}
               handleTicketDelete={handleTicketDelete}
+              handleTicketFormAction={handleTicketFormAction}
             />
           )}
         </Box>
