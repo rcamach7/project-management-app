@@ -38,6 +38,9 @@ export default function Workspace_Continued({ mySession, workspace }) {
   const handleBoardChange = (boardId: string) => {
     setActiveBoard(boardId);
   };
+  const resetActiveBoard = () => {
+    setActiveBoard(workspaceState.boards[0]._id);
+  };
 
   const displayErrorMessage = (message: string, error: any) => {
     setUxFeedback({
@@ -86,6 +89,7 @@ export default function Workspace_Continued({ mySession, workspace }) {
           boards: prevState.boards.filter((board) => board._id !== boardId),
         };
       });
+      resetActiveBoard();
       displaySuccessMessage('Board deleted successfully');
     } catch (error) {
       displayErrorMessage(
