@@ -15,7 +15,12 @@ import {
   createBoard,
   updateBoard,
 } from '@/lib/clientApi';
-import { deleteTicketFromWorkspace } from '@/lib/helpers';
+import {
+  deleteTicketFromWorkspace,
+  addBoardToWorkspace,
+  updateBoardInWorkspace,
+  deleteBoardFromWorkspace,
+} from '@/lib/helpers';
 import { UxFeedback } from '@/components/molecules/index';
 
 export default function Workspace_Continued({ mySession, workspace }) {
@@ -85,10 +90,7 @@ export default function Workspace_Continued({ mySession, workspace }) {
       displayLoading();
       await deleteBoardByID(boardId);
       setWorkspaceState((prevState) => {
-        return {
-          ...prevState,
-          boards: prevState.boards.filter((board) => board._id !== boardId),
-        };
+        return deleteBoardFromWorkspace(prevState, boardId);
       });
       resetActiveBoard();
       displaySuccessMessage('Board deleted successfully');
@@ -111,21 +113,13 @@ export default function Workspace_Continued({ mySession, workspace }) {
       if (action === 'CREATE') {
         const board = await createBoard(title, description, workspaceState._id);
         setWorkspaceState((prevState) => {
-          return {
-            ...prevState,
-            boards: [...prevState.boards, board],
-          };
+          return addBoardToWorkspace(prevState, board);
         });
       }
       if (action === 'EDIT' && boardId) {
         const updatedBoard = await updateBoard(title, description, boardId);
         setWorkspaceState((prevState) => {
-          return {
-            ...prevState,
-            boards: prevState.boards.map((board) =>
-              board._id === updatedBoard._id ? updatedBoard : board
-            ),
-          };
+          return updateBoardInWorkspace(prevState, updatedBoard);
         });
       }
 
@@ -138,11 +132,12 @@ export default function Workspace_Continued({ mySession, workspace }) {
     }
   };
 
+  // Removes notification banner after 2 seconds
   useEffect(() => {
     if (uxFeedback.showBanner) {
       setTimeout(() => {
         setUxFeedback({ ...uxFeedback, showBanner: false, bannerMessage: '' });
-      }, 3000);
+      }, 2000);
     }
   }, [uxFeedback.showBanner]);
 
