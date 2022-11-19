@@ -5,8 +5,7 @@ import Form from './Form';
 interface Props {
   action: 'CREATE' | 'EDIT';
   ticket: Ticket;
-  labels?: LabelsEnum[];
-  boardId?: string;
+  boardId: string;
   handleClose: () => void;
   handleTicketFormAction: (
     action: BoardFormStatus['action'],
@@ -21,7 +20,6 @@ interface Props {
 export default function TicketForm({
   ticket,
   boardId,
-  labels,
   action,
   handleClose,
   handleTicketFormAction,
@@ -36,7 +34,7 @@ export default function TicketForm({
         <Form
           action={action}
           ticket={ticket}
-          boardId={action === 'EDIT' ? boardId : undefined}
+          boardId={boardId}
           handleClose={handleClose}
           handleTicketFormAction={handleTicketFormAction}
         />
