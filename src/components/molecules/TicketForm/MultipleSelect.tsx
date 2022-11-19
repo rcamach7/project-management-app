@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { LabelsEnum } from 'models/client';
 import {
   Box,
@@ -12,22 +11,20 @@ import {
 } from '@mui/material';
 
 interface Props {
-  labels?: LabelsEnum[];
   selectedLabels: LabelsEnum[];
   handleChange: (event: SelectChangeEvent<LabelsEnum[]>) => void;
 }
 
 export default function MultipleSelectChip({
   selectedLabels,
-  labels,
   handleChange,
 }: Props) {
   return (
-    <FormControl sx={{ width: '100%' }}>
-      <InputLabel id="demo-multiple-chip-label">Labels</InputLabel>
+    <FormControl sx={{ width: '100%', mb: 2 }}>
+      <InputLabel id="select-labels">Labels</InputLabel>
       <Select
-        labelId="demo-multiple-chip-label"
-        id="demo-multiple-chip"
+        labelId="select-labels"
+        id="select-labels"
         multiple
         value={selectedLabels}
         onChange={handleChange}
