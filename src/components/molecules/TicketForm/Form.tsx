@@ -57,11 +57,13 @@ export default function Form({
     e.preventDefault();
     handleClose();
     if (action === 'CREATE') {
-      // handleTicketFormAction(
-      //   'CREATE',
-      //   formDetails.title,
-      //   formDetails.description
-      // );
+      handleTicketFormAction(
+        action,
+        formDetails.title,
+        formDetails.description,
+        formDetails.selectedLabels,
+        boardId
+      );
     } else {
       handleTicketFormAction(
         action,
@@ -105,7 +107,7 @@ export default function Form({
           fullWidth
         />
       </Box>
-      <Box>
+      <Box sx={{ mb: 2 }}>
         <MultipleSelect
           labels={ticket ? ticket.labels : []}
           selectedLabels={formDetails.selectedLabels}

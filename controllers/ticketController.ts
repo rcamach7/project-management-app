@@ -54,14 +54,14 @@ export const createNewTicket = async (
   board_id: string,
   title: string,
   description: string,
-  label: string
+  labels: string[]
 ) => {
   try {
     const newTicket = new Ticket({
       board_id: new Types.ObjectId(board_id),
       title,
       description,
-      labels: [label],
+      labels,
     });
     await newTicket.save();
 
