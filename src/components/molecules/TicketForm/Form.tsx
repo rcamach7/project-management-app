@@ -56,24 +56,14 @@ export default function Form({
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     handleClose();
-    if (action === 'CREATE') {
-      handleTicketFormAction(
-        action,
-        formDetails.title,
-        formDetails.description,
-        formDetails.selectedLabels,
-        boardId
-      );
-    } else {
-      handleTicketFormAction(
-        action,
-        formDetails.title,
-        formDetails.description,
-        formDetails.selectedLabels,
-        null,
-        ticket._id
-      );
-    }
+    handleTicketFormAction(
+      action,
+      formDetails.title,
+      formDetails.description,
+      formDetails.selectedLabels,
+      action === 'CREATE' ? boardId : null,
+      action === 'EDIT' ? ticket._id : null
+    );
   };
 
   return (

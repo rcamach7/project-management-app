@@ -37,20 +37,12 @@ export default function Form({
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     handleClose();
-    if (action === 'CREATE') {
-      handleBoardFormAction(
-        'CREATE',
-        formDetails.title,
-        formDetails.description
-      );
-    } else {
-      handleBoardFormAction(
-        'EDIT',
-        formDetails.title,
-        formDetails.description,
-        boardId
-      );
-    }
+    handleBoardFormAction(
+      action,
+      formDetails.title,
+      formDetails.description,
+      action === 'EDIT' ? boardId : undefined
+    );
   };
 
   return (
