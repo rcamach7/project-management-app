@@ -6,6 +6,7 @@ import {
   InputBase,
   Typography,
   SelectChangeEvent,
+  InputLabel,
 } from '@mui/material';
 import MultipleSelect from './MultipleSelect';
 
@@ -71,39 +72,42 @@ export default function Form({
       <Typography variant="h5" sx={{ fontWeight: 'bold' }} textAlign="center">
         {action === 'CREATE' ? 'Create ' : 'Edit '}Ticket
       </Typography>
-      <Box pb={1}>
-        <Typography variant="caption" sx={{ color: 'text.secondary' }}>
-          Ticket Title:
-        </Typography>
-        <InputBase
-          onChange={handleInputChange}
-          value={formDetails.title}
-          name="title"
-          sx={{ border: 1, px: 1 }}
-          placeholder="enter board title"
-          fullWidth
-        />
-      </Box>
-      <Box pb={2}>
-        <Typography variant="caption" sx={{ color: 'text.secondary' }}>
-          Ticket Description:
-        </Typography>
-        <InputBase
-          onChange={handleInputChange}
-          value={formDetails.description}
-          name="description"
-          sx={{ border: 1, px: 1 }}
-          placeholder="enter brief description"
-          fullWidth
-        />
-      </Box>
-      <Box sx={{ mb: 2 }}>
-        <MultipleSelect
-          labels={ticket ? ticket.labels : []}
-          selectedLabels={formDetails.selectedLabels}
-          handleChange={handleLabelsSelectionChange}
-        />
-      </Box>
+
+      <InputLabel shrink htmlFor="ticket-title-input">
+        Ticket Title
+      </InputLabel>
+      <InputBase
+        id="ticket-title-input"
+        placeholder="enter ticket title"
+        name="title"
+        onChange={handleInputChange}
+        value={formDetails.title}
+        sx={{ border: 1, px: 1, borderRadius: 1, mb: 2 }}
+        inputProps={{ minLength: 3, maxLength: 100 }}
+        fullWidth
+        required
+      />
+
+      <InputLabel shrink htmlFor="ticket-description-input">
+        Ticket Description
+      </InputLabel>
+      <InputBase
+        id="ticket-description-input"
+        name="description"
+        placeholder="enter brief description"
+        onChange={handleInputChange}
+        value={formDetails.description}
+        sx={{ border: 1, px: 1, borderRadius: 1, mb: 2 }}
+        inputProps={{ minLength: 3, maxLength: 255 }}
+        fullWidth
+        required
+        multiline
+      />
+
+      <MultipleSelect
+        selectedLabels={formDetails.selectedLabels}
+        handleChange={handleLabelsSelectionChange}
+      />
 
       <Button
         variant="outlined"
