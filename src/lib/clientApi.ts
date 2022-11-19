@@ -86,7 +86,8 @@ export const createTicket = async (
     const body = {
       title,
       description,
-      labels,
+      // TODO: Update Endpoint to accept labels
+      label: labels,
       board_id,
     };
     const res = await axios.post(`/api/workspace/board/ticket`, body);
