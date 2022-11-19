@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
-import { BoardFormStatus, LabelsEnum } from 'models/client';
+import { useState } from 'react';
+import { BoardFormStatus, LabelsEnum, Ticket } from 'models/client';
 import {
   Box,
   Button,
@@ -11,9 +11,7 @@ import MultipleSelect from './MultipleSelect';
 
 interface Props {
   action: 'CREATE' | 'EDIT';
-  title?: string;
-  description?: string;
-  labels?: LabelsEnum[];
+  ticket: Ticket;
   boardId?: string;
   handleClose: () => void;
   handleTicketFormAction: (
@@ -28,17 +26,15 @@ interface Props {
 
 export default function Form({
   action,
-  title,
-  description,
-  labels,
+  ticket,
   boardId,
   handleClose,
   handleTicketFormAction,
 }: Props) {
   const [formDetails, setFormDetails] = useState({
-    title: title || '',
-    description: description || '',
-    selectedLabels: labels || [],
+    title: ticket.title || '',
+    description: ticket.description || '',
+    selectedLabels: ticket.labels || [],
   });
 
   const handleLabelsSelectionChange = (
@@ -60,20 +56,22 @@ export default function Form({
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     handleClose();
-    // if (action === 'CREATE') {
-    //   handleTicketFormAction(
-    //     'CREATE',
-    //     formDetails.title,
-    //     formDetails.description
-    //   );
-    // } else {
-    //   handleTicketFormAction(
-    //     'EDIT',
-    //     formDetails.title,
-    //     formDetails.description,
-    //     boardId
-    //   );
-    // }
+    if (action === 'CREATE') {
+      // handleTicketFormAction(
+      //   'CREATE',
+      //   formDetails.title,
+      //   formDetails.description
+      // );
+    } else {
+      handleTicketFormAction(
+        action,
+        formDetails.title,
+        formDetails.description,
+        formDetails.selectedLabels,
+        null,
+        ticket._id
+      );
+    }
   };
 
   return (
@@ -109,7 +107,7 @@ export default function Form({
       </Box>
       <Box>
         <MultipleSelect
-          labels={labels}
+          labels={ticket.labels}
           selectedLabels={formDetails.selectedLabels}
           handleChange={handleLabelsSelectionChange}
         />

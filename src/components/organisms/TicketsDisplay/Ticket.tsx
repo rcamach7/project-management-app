@@ -77,10 +77,9 @@ export default function Ticket({
       {formStatus.show && (
         <TicketForm
           action={formStatus.action}
-          handleClose={() => setFormStatus({ show: false, action: 'CREATE' })}
-          title={title}
-          description={description}
+          ticket={ticket}
           boardId={board_id}
+          handleClose={() => setFormStatus({ show: false, action: 'CREATE' })}
           handleTicketFormAction={handleTicketFormAction}
         />
       )}
