@@ -50,10 +50,25 @@ export const updateTicketInWorkspace = (
   return newWorkspace;
 };
 
+export const addTicketToWorkspaceBoard = (
+  workspace: Workspace,
+  ticket: Ticket
+) => {
+  const newWorkspace: Workspace = { ...workspace };
+  newWorkspace.boards = newWorkspace.boards.map((board) => {
+    if (board._id === ticket.board_id) {
+      board.tickets.push(ticket);
+    }
+    return board;
+  });
+  return newWorkspace;
+};
+
 export default {
   deleteTicketFromWorkspace,
   addBoardToWorkspace,
   updateBoardInWorkspace,
   deleteBoardFromWorkspace,
   updateTicketInWorkspace,
+  addTicketToWorkspaceBoard,
 };
