@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { BoardFormStatus } from 'models/client';
-import { Box, Button, InputBase, Typography } from '@mui/material';
+import { Box, Button, InputBase, Typography, InputLabel } from '@mui/material';
 
 interface Props {
   action: 'CREATE' | 'EDIT';
@@ -50,32 +50,36 @@ export default function Form({
       <Typography variant="h5" sx={{ fontWeight: 'bold' }} textAlign="center">
         {action === 'CREATE' ? 'Create ' : 'Edit '}Board
       </Typography>
-      <Box pb={1}>
-        <Typography variant="caption" sx={{ color: 'text.secondary' }}>
-          Board Title:
-        </Typography>
-        <InputBase
-          onChange={handleInputChange}
-          value={formDetails.title}
-          name="title"
-          sx={{ border: 1, px: 1 }}
-          placeholder="enter board title"
-          fullWidth
-        />
-      </Box>
-      <Box pb={2}>
-        <Typography variant="caption" sx={{ color: 'text.secondary' }}>
-          Board Description:
-        </Typography>
-        <InputBase
-          onChange={handleInputChange}
-          value={formDetails.description}
-          name="description"
-          sx={{ border: 1, px: 1 }}
-          placeholder="enter brief description"
-          fullWidth
-        />
-      </Box>
+
+      <InputLabel shrink htmlFor="board-title-input">
+        Board Title
+      </InputLabel>
+      <InputBase
+        id="board-title-input"
+        placeholder="enter board title"
+        name="title"
+        onChange={handleInputChange}
+        value={formDetails.title}
+        sx={{ border: 1, px: 1, borderRadius: 1, mb: 2 }}
+        inputProps={{ minLength: 3, maxLength: 100 }}
+        fullWidth
+        required
+      />
+
+      <InputLabel shrink htmlFor="board-description-input">
+        Board Description
+      </InputLabel>
+      <InputBase
+        id="board-description-input"
+        placeholder="enter brief description"
+        name="description"
+        onChange={handleInputChange}
+        value={formDetails.description}
+        sx={{ border: 1, px: 1, borderRadius: 1, mb: 2 }}
+        inputProps={{ minLength: 3, maxLength: 255 }}
+        fullWidth
+        required
+      />
 
       <Button
         variant="outlined"
