@@ -41,13 +41,11 @@ export default function TabButtons({
       >
         <ActionButton
           text="Create New Board"
-          variant="outlined"
+          variant="text"
           size="small"
           sx={{
             fontSize: { xs: '.7em', sm: '.9em', md: '1em' },
             color: 'secondary.main',
-            border: 1,
-            borderColor: 'secondary.main',
             p: '2px 4px',
           }}
           onClick={() => setFormStatus({ show: true, action: 'CREATE' })}
@@ -56,13 +54,11 @@ export default function TabButtons({
           <>
             <ActionButton
               text="Edit Current Board"
-              variant="outlined"
+              variant="text"
               size="small"
               sx={{
                 fontSize: { xs: '.7em', sm: '.9em', md: '1em' },
                 color: 'secondary.main',
-                border: 1,
-                borderColor: 'secondary.main',
                 p: '2px 4px',
               }}
               onClick={() => setFormStatus({ show: true, action: 'EDIT' })}
