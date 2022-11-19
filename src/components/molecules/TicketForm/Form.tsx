@@ -11,8 +11,8 @@ import MultipleSelect from './MultipleSelect';
 
 interface Props {
   action: 'CREATE' | 'EDIT';
-  ticket: Ticket;
-  boardId?: string;
+  boardId: string;
+  ticket?: Ticket;
   handleClose: () => void;
   handleTicketFormAction: (
     action: BoardFormStatus['action'],
@@ -32,9 +32,9 @@ export default function Form({
   handleTicketFormAction,
 }: Props) {
   const [formDetails, setFormDetails] = useState({
-    title: ticket.title || '',
-    description: ticket.description || '',
-    selectedLabels: ticket.labels || [],
+    title: ticket ? ticket.title : '',
+    description: ticket ? ticket.description : '',
+    selectedLabels: ticket ? ticket.labels : [],
   });
 
   const handleLabelsSelectionChange = (
@@ -107,7 +107,7 @@ export default function Form({
       </Box>
       <Box>
         <MultipleSelect
-          labels={ticket.labels}
+          labels={ticket ? ticket.labels : []}
           selectedLabels={formDetails.selectedLabels}
           handleChange={handleLabelsSelectionChange}
         />
