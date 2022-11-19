@@ -20,7 +20,7 @@ export default function LabelsDisplay({ labels, mobile }: Props) {
           key={label}
           label={label}
           variant="outlined"
-          onDelete={() => {}}
+          // onDelete={() => {}}
           size="small"
           sx={{
             fontSize: '10px',
