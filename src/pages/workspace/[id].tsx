@@ -221,6 +221,7 @@ export default function Workspace_Continued({ mySession, workspace }) {
           />
           {board && (
             <TicketsDisplay
+              boardId={board._id}
               tickets={board.tickets}
               handleTicketDelete={handleTicketDelete}
               handleTicketFormAction={handleTicketFormAction}
