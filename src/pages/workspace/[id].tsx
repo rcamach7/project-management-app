@@ -148,13 +148,22 @@ export default function Workspace_Continued({ mySession, workspace }) {
   ) => {
     try {
       displayLoading();
-      if (action === 'CREATE') {
+      if (action === 'CREATE' && boardId) {
+        const newTicket = await clientApi.createTicket(
+          title,
+          description,
+          labels ? labels : [],
+          boardId
+        );
+        setWorkspaceState((prevState) => {
+          return helpers.addTicketToWorkspaceBoard(prevState, newTicket);
+        });
       }
-      if (action === 'EDIT' && ticketId && labels) {
+      if (action === 'EDIT' && ticketId) {
         const updatedTicket = await clientApi.updateTicket(
           title,
           description,
-          labels,
+          labels ? labels : [],
           ticketId
         );
         setWorkspaceState((prevState) => {
@@ -165,7 +174,7 @@ export default function Workspace_Continued({ mySession, workspace }) {
       displaySuccessMessage(`Ticket ${action.toLowerCase()}ed successfully`);
     } catch (error) {
       displayErrorMessage(
-        `Error occurred while ${action.toLowerCase()}ing tickett. Please try again later.`,
+        `Error occurred while ${action.toLowerCase()}ing ticket. Please try again later.`,
         error
       );
     }

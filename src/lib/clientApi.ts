@@ -76,10 +76,31 @@ export const updateTicket = async (
   }
 };
 
+export const createTicket = async (
+  title: string,
+  description: string,
+  labels: LabelsEnum[],
+  board_id: string
+) => {
+  try {
+    const body = {
+      title,
+      description,
+      labels,
+      board_id,
+    };
+    const res = await axios.post(`/api/workspace/board/ticket`, body);
+    return res.data as Ticket;
+  } catch (error) {
+    return Promise.reject(error);
+  }
+};
+
 export default {
   deleteBoardByID,
   deleteTicketByID,
   createBoard,
   updateBoard,
   updateTicket,
+  createTicket,
 };
