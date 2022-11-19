@@ -14,11 +14,21 @@ export default function FloatingActionButton({
   anchorBottom,
   onClick,
 }: Props) {
+  const style = {
+    fontSize: { xs: 12, sm: 16, md: 14 },
+    backgroundColor: 'background.paper',
+    color: 'text.primary',
+    border: 1,
+    '&:hover': {
+      backgroundColor: '#828DAF',
+      color: 'black',
+    },
+    ...(anchorBottom && { position: 'absolute', bottom: 16, right: 16 }),
+  };
+
   return (
     <Fab
-      sx={
-        anchorBottom ? bottomStyles : { fontSize: { xs: 10, sm: 12, md: 14 } }
-      }
+      sx={style}
       variant="extended"
       size="small"
       aria-label="add ticket"
@@ -29,10 +39,3 @@ export default function FloatingActionButton({
     </Fab>
   );
 }
-
-const bottomStyles = {
-  fontSize: { xs: 12, sm: 16 },
-  position: 'absolute',
-  bottom: 16,
-  right: 16,
-};
