@@ -1,9 +1,5 @@
 import { useState } from 'react';
-import {
-  Ticket as TicketType,
-  BoardFormStatus,
-  LabelsEnum,
-} from 'models/client';
+import { Ticket as TicketType, FormStatus, LabelsEnum } from 'models/client';
 import { FloatingButton } from '@/components/atoms/index';
 import { Box, useMediaQuery } from '@mui/material';
 import { TicketForm } from '@/components/molecules/index';
@@ -15,7 +11,7 @@ interface Props {
   tickets: TicketType[];
   handleTicketDelete: (ticketId: string) => void;
   handleTicketFormAction: (
-    action: BoardFormStatus['action'],
+    action: FormStatus['action'],
     title: string,
     description: string,
     labels?: LabelsEnum[],
@@ -30,7 +26,7 @@ export default function TicketsDisplay({
   handleTicketDelete,
   handleTicketFormAction,
 }: Props) {
-  const [formStatus, setFormStatus] = useState<BoardFormStatus>({
+  const [formStatus, setFormStatus] = useState<FormStatus>({
     show: false,
     action: 'CREATE',
   });

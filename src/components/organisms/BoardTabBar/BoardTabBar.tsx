@@ -1,4 +1,4 @@
-import { Board, BoardFormStatus } from 'models/client';
+import { Board, FormStatus } from 'models/client';
 import { Box, Tabs, Typography } from '@mui/material';
 import StyledTab from './StyledTab';
 import TabButtons from './TabButtons';
@@ -10,7 +10,7 @@ interface Props {
   handleBoardChange: (boardId: string) => void;
   handleDeleteBoard: (boardId: string) => void;
   handleBoardFormAction: (
-    action: BoardFormStatus['action'],
+    action: FormStatus['action'],
     title: string,
     description: string,
     boardId?: string

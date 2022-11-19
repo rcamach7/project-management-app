@@ -1,6 +1,6 @@
 import { Box, Modal } from '@mui/material/';
 import Form from './Form';
-import { BoardFormStatus } from 'models/client';
+import { FormStatus } from 'models/client';
 
 interface Props {
   action: 'CREATE' | 'EDIT';
@@ -9,7 +9,7 @@ interface Props {
   boardId?: string;
   handleClose: () => void;
   handleBoardFormAction: (
-    action: BoardFormStatus['action'],
+    action: FormStatus['action'],
     title: string,
     description: string,
     boardId?: string

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { BoardFormStatus } from 'models/client';
+import { FormStatus } from 'models/client';
 import { Box, Button, InputBase, Typography, InputLabel } from '@mui/material';
 
 interface Props {
@@ -9,7 +9,7 @@ interface Props {
   boardId?: string;
   handleClose: () => void;
   handleBoardFormAction: (
-    action: BoardFormStatus['action'],
+    action: FormStatus['action'],
     title: string,
     description: string,
     boardId?: string
