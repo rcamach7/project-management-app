@@ -1,9 +1,5 @@
 import { useState } from 'react';
-import {
-  Ticket as TicketType,
-  BoardFormStatus,
-  LabelsEnum,
-} from 'models/client';
+import { Ticket as TicketType, FormStatus, LabelsEnum } from 'models/client';
 import { Card, CardActions as TicketActions, Button } from '@mui/material';
 import { ConfirmDeleteDialog } from '@/components/atoms/index';
 import { TicketForm } from '@/components/molecules/index';
@@ -14,7 +10,7 @@ interface Props {
   ticket: TicketType;
   handleTicketDelete: (ticketId: string) => void;
   handleTicketFormAction: (
-    action: BoardFormStatus['action'],
+    action: FormStatus['action'],
     title: string,
     description: string,
     labels?: LabelsEnum[],
@@ -30,7 +26,7 @@ export default function Ticket({
 }: Props) {
   const { _id, board_id, description, labels, title } = ticket;
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
-  const [formStatus, setFormStatus] = useState<BoardFormStatus>({
+  const [formStatus, setFormStatus] = useState<FormStatus>({
     show: false,
     action: 'CREATE',
   });

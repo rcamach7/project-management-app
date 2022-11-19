@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Board, BoardFormStatus } from 'models/client';
+import { Board, FormStatus } from 'models/client';
 import { CenteredBox } from '@/components/layout/index';
 import { ActionButton, ConfirmDeleteDialog } from '@/components/atoms/index';
 import { BoardForm } from '@/components/molecules/index';
@@ -9,7 +9,7 @@ interface Props {
   activeBoardData: Board;
   handleDeleteBoard: (boardId: string) => void;
   handleBoardFormAction: (
-    action: BoardFormStatus['action'],
+    action: FormStatus['action'],
     title: string,
     description: string,
     boardId?: string
@@ -23,7 +23,7 @@ export default function TabButtons({
   handleBoardFormAction,
 }: Props) {
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
-  const [formStatus, setFormStatus] = useState<BoardFormStatus>({
+  const [formStatus, setFormStatus] = useState<FormStatus>({
     show: false,
     action: 'CREATE',
   });

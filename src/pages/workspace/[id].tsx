@@ -9,7 +9,7 @@ import { AppSession } from 'models/global';
 import {
   Workspace,
   UxFeedbackState,
-  BoardFormStatus,
+  FormStatus,
   LabelsEnum,
 } from 'models/client';
 import {
@@ -101,7 +101,7 @@ export default function Workspace_Continued({ mySession, workspace }) {
   };
 
   const handleBoardFormAction = async (
-    action: BoardFormStatus['action'],
+    action: FormStatus['action'],
     title: string,
     description: string,
     boardId?: string
@@ -139,7 +139,7 @@ export default function Workspace_Continued({ mySession, workspace }) {
   };
 
   const handleTicketFormAction = async (
-    action: BoardFormStatus['action'],
+    action: FormStatus['action'],
     title: string,
     description: string,
     labels?: LabelsEnum[],

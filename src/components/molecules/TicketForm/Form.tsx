@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { BoardFormStatus, LabelsEnum, Ticket } from 'models/client';
+import { FormStatus, LabelsEnum, Ticket } from 'models/client';
 import {
   Box,
   Button,
@@ -16,7 +16,7 @@ interface Props {
   ticket?: Ticket;
   handleClose: () => void;
   handleTicketFormAction: (
-    action: BoardFormStatus['action'],
+    action: FormStatus['action'],
     title: string,
     description: string,
     labels?: LabelsEnum[],
