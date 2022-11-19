@@ -4,8 +4,10 @@ import {
   BoardFormStatus,
   LabelsEnum,
 } from 'models/client';
-import { Box } from '@mui/material';
+import { FloatingButton } from '@/components/atoms/index';
+import { Box, useMediaQuery } from '@mui/material';
 import { TicketForm } from '@/components/molecules/index';
+import AddIcon from '@mui/icons-material/Add';
 import { default as TicketComponent } from './Ticket';
 
 interface Props {
@@ -32,6 +34,8 @@ export default function TicketsDisplay({
     show: false,
     action: 'CREATE',
   });
+  const isWindowDesktop = useMediaQuery('(min-width:800px)');
+
   return (
     <>
       <Box
@@ -52,7 +56,23 @@ export default function TicketsDisplay({
             handleTicketFormAction={handleTicketFormAction}
           />
         ))}
+        {isWindowDesktop && (
+          <FloatingButton
+            icon={<AddIcon />}
+            text="Add Ticket"
+            anchorBottom={false}
+            onClick={() => setFormStatus({ show: true, action: 'CREATE' })}
+          />
+        )}
       </Box>
+      {!isWindowDesktop && (
+        <FloatingButton
+          icon={<AddIcon />}
+          text="Add Ticket"
+          anchorBottom={true}
+          onClick={() => setFormStatus({ show: true, action: 'CREATE' })}
+        />
+      )}
       {formStatus.show && (
         <TicketForm
           action={formStatus.action}
