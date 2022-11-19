@@ -1,11 +1,10 @@
 import { Box, Modal } from '@mui/material/';
-import { BoardFormStatus, LabelsEnum } from 'models/client';
+import { BoardFormStatus, LabelsEnum, Ticket } from 'models/client';
 import Form from './Form';
 
 interface Props {
   action: 'CREATE' | 'EDIT';
-  title?: string;
-  description?: string;
+  ticket: Ticket;
   labels?: LabelsEnum[];
   boardId?: string;
   handleClose: () => void;
@@ -20,8 +19,7 @@ interface Props {
 }
 
 export default function TicketForm({
-  title,
-  description,
+  ticket,
   boardId,
   labels,
   action,
@@ -37,11 +35,9 @@ export default function TicketForm({
       >
         <Form
           action={action}
-          handleClose={handleClose}
-          title={action === 'EDIT' ? title : undefined}
-          description={action === 'EDIT' ? description : undefined}
-          labels={action === 'EDIT' ? labels : undefined}
+          ticket={ticket}
           boardId={action === 'EDIT' ? boardId : undefined}
+          handleClose={handleClose}
           handleTicketFormAction={handleTicketFormAction}
         />
       </Box>
