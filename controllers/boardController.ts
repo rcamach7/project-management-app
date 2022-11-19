@@ -28,7 +28,10 @@ export const updateBoardDescriptionById = async (
       _id,
       { $set: fields },
       { new: true }
-    );
+    ).populate({
+      path: 'tickets',
+      model: 'Ticket',
+    });
     return board;
   } catch (error) {
     console.error('Error updating board: ', error);
