@@ -24,7 +24,7 @@ export default function Ticket({
   handleTicketDelete,
   handleTicketFormAction,
 }: Props) {
-  const { _id, board_id, description, labels, title } = ticket;
+  const { _id, board_id, title } = ticket;
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
   const [formStatus, setFormStatus] = useState<FormStatus>({
     show: false,
@@ -34,11 +34,7 @@ export default function Ticket({
   return (
     <>
       <Card sx={{ border: 1 }}>
-        <TicketContent
-          description={description}
-          title={title}
-          labels={labels}
-        />
+        <TicketContent ticket={ticket} />
         <TicketActions sx={{ py: 0.5 }}>
           <Button
             size="small"
