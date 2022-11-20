@@ -4,12 +4,24 @@ import { authOptions } from '@/auth/[...nextauth]';
 import { unstable_getServerSession } from 'next-auth/next';
 import { AppSession } from 'models/global';
 import { ImageButton, InformationDialog } from '@/components/atoms/index';
-import { ProfileBar, WorkspaceSummary } from '@/components/molecules/index';
+import {
+  ProfileBar,
+  WorkspaceSummary,
+  WorkspaceForm,
+} from '@/components/molecules/index';
 import { CenteredBox } from '@/components/layout/index';
 import { Box, Typography } from '@mui/material';
+import { FormStatus, UxFeedbackState } from 'models/client';
+import clientApi from '@/lib/clientApi';
+import helpers from '@/lib/helpers';
 
 export default function Me({ mySession }) {
-  const { user }: AppSession = JSON.parse(mySession);
+  const [session, setSession] = useState<AppSession>(JSON.parse(mySession));
+
+  const [formStatus, setFormStatus] = useState<FormStatus>({
+    show: false,
+    action: 'CREATE',
+  });
   const [informationDialog, setInformationDialog] = useState({
     show: false,
     title: '',
@@ -18,6 +30,28 @@ export default function Me({ mySession }) {
 
   const closeInformationDialog = () =>
     setInformationDialog({ show: false, title: '', content: '' });
+
+  const handleWorkspaceFormAction = async (
+    action: FormStatus['action'],
+    title: string,
+    description: string,
+    workspaceId?: string
+  ) => {
+    try {
+      if (action === 'CREATE') {
+        const newWorkspace = await clientApi.createWorkspace(
+          title,
+          description
+        );
+        setSession(helpers.addWorkspaceToUserSession(session, newWorkspace));
+      }
+      if (action === 'EDIT' && workspaceId) {
+        await clientApi.editWorkspace(title, description, workspaceId);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <>
@@ -33,14 +67,14 @@ export default function Me({ mySession }) {
           flexDirection: 'column',
         }}
       >
-        <ProfileBar user={user} />
+        <ProfileBar user={session.user} />
         <CenteredBox
           sx={{ p: 3, flexDirection: 'row', justifyContent: 'space-evenly' }}
         >
           <ImageButton
             text="New Project"
             image="/buttons/plus.svg"
-            onClick={() => alert('clicked on new project')}
+            onClick={() => setFormStatus({ show: true, action: 'CREATE' })}
           />
           <ImageButton
             text="Invitations"
@@ -80,7 +114,7 @@ export default function Me({ mySession }) {
             overflow: 'scroll',
           }}
         >
-          {user.workspaces.map((workspace) => (
+          {session.user.workspaces.map((workspace) => (
             <WorkspaceSummary key={workspace._id} workspace={workspace} />
           ))}
         </Box>
@@ -90,6 +124,13 @@ export default function Me({ mySession }) {
           title={informationDialog.title}
           content={informationDialog.content}
           handleClose={closeInformationDialog}
+        />
+      )}
+      {formStatus.show && (
+        <WorkspaceForm
+          action={formStatus.action}
+          handleClose={() => setFormStatus({ show: false, action: 'CREATE' })}
+          handleWorkspaceFormAction={handleWorkspaceFormAction}
         />
       )}
     </>

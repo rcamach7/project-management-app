@@ -1,4 +1,5 @@
 import { Workspace, Board, Ticket } from 'models/client';
+import { AppSession, WorkspaceSummary } from 'models/global';
 
 export const deleteTicketFromWorkspace = (
   workspace: Workspace,
@@ -64,6 +65,15 @@ export const addTicketToWorkspaceBoard = (
   return newWorkspace;
 };
 
+export const addWorkspaceToUserSession = (
+  session: AppSession,
+  workspace: WorkspaceSummary
+) => {
+  const newSession: AppSession = { ...session };
+  newSession.user.workspaces.push(workspace);
+  return newSession;
+};
+
 export default {
   deleteTicketFromWorkspace,
   addBoardToWorkspace,
@@ -71,4 +81,5 @@ export default {
   deleteBoardFromWorkspace,
   updateTicketInWorkspace,
   addTicketToWorkspaceBoard,
+  addWorkspaceToUserSession,
 };

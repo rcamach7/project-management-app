@@ -13,9 +13,9 @@ export default function UsersSummary({ users, owner }: Props) {
       sx={{ display: 'flex', p: 0.5, gap: 1, alignItems: 'center', mt: 'auto' }}
     >
       <Typography variant="caption">Users:</Typography>
-      {users.map((currentUser) => (
+      {users.map((currentUser, i) => (
         <UserPopper
-          key={currentUser._id}
+          key={currentUser._id + i}
           user={currentUser}
           owner={currentUser._id === owner._id}
         />

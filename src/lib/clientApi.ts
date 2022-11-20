@@ -1,5 +1,6 @@
 import axios from 'axios';
-import { Board, LabelsEnum, Ticket } from 'models/client';
+import { Board, LabelsEnum, Ticket, Workspace } from 'models/client';
+import { AppSession, WorkspaceSummary } from 'models/global';
 
 export const deleteTicketByID = async (id: string) => {
   try {
@@ -97,6 +98,36 @@ export const createTicket = async (
   }
 };
 
+export const createWorkspace = async (name: string, description: string) => {
+  try {
+    const body = {
+      name,
+      description,
+    };
+    const res = await axios.post(`/api/workspace`, body);
+    return res.data as WorkspaceSummary;
+  } catch (error) {
+    return Promise.reject(error);
+  }
+};
+
+export const editWorkspace = async (
+  name: string,
+  description: string,
+  _id: string
+) => {
+  try {
+    const body = {
+      name,
+      description,
+    };
+    const res = await axios.put(`/api/workspace/${_id}`, body);
+    return res.data as Workspace;
+  } catch (error) {
+    return Promise.reject(error);
+  }
+};
+
 export default {
   deleteBoardByID,
   deleteTicketByID,
@@ -104,4 +135,6 @@ export default {
   updateBoard,
   updateTicket,
   createTicket,
+  createWorkspace,
+  editWorkspace,
 };
