@@ -128,6 +128,15 @@ export const editWorkspace = async (
   }
 };
 
+const deleteWorkspace = async (_id: string) => {
+  try {
+    await axios.delete(`/api/workspace/${_id}`);
+    return true;
+  } catch (error) {
+    return Promise.reject(error);
+  }
+};
+
 export default {
   deleteBoardByID,
   deleteTicketByID,
@@ -137,4 +146,5 @@ export default {
   createTicket,
   createWorkspace,
   editWorkspace,
+  deleteWorkspace,
 };

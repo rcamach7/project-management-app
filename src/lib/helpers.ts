@@ -85,6 +85,17 @@ const updateWorkspaceInUserSession = (
   return newSession;
 };
 
+const deleteWorkspaceFromUserSession = (
+  session: AppSession,
+  workspaceId: string
+) => {
+  const newSession: AppSession = { ...session };
+  newSession.user.workspaces = newSession.user.workspaces.filter(
+    (w) => w._id !== workspaceId
+  );
+  return newSession;
+};
+
 export default {
   deleteTicketFromWorkspace,
   addBoardToWorkspace,
@@ -94,4 +105,5 @@ export default {
   addTicketToWorkspaceBoard,
   addWorkspaceToUserSession,
   updateWorkspaceInUserSession,
+  deleteWorkspaceFromUserSession,
 };
