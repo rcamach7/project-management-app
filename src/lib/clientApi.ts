@@ -122,7 +122,7 @@ export const editWorkspace = async (
       description,
     };
     const res = await axios.put(`/api/workspace/${_id}`, body);
-    return res.data as Workspace;
+    return res.data as WorkspaceSummary;
   } catch (error) {
     return Promise.reject(error);
   }

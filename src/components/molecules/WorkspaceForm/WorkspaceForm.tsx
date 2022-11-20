@@ -1,10 +1,11 @@
 import { Box, Modal } from '@mui/material/';
-import { FormStatus, Workspace } from 'models/client';
+import { FormStatus } from 'models/client';
+import { WorkspaceSummary } from 'models/global';
 import Form from './Form';
 
 interface Props {
   action: 'CREATE' | 'EDIT';
-  workspace?: Workspace;
+  workspace?: WorkspaceSummary;
   handleClose: () => void;
   handleWorkspaceFormAction: (
     action: FormStatus['action'],

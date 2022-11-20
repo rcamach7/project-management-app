@@ -110,7 +110,10 @@ export const updateGeneralWorkspaceDetails = async (
         $set: fields,
       },
       { new: true }
-    );
+    ).populate({
+      path: 'owner users',
+      select: ['name', 'email', 'image', '_id'],
+    });
 
     return workspace;
   } catch (error) {
