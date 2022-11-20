@@ -7,6 +7,7 @@ import {
   CardActions,
   Button,
 } from '@mui/material';
+import { ConfirmDeleteDialog } from '@/components/atoms/index';
 import { WorkspaceForm } from '@/components/molecules/index';
 import UsersSummary from './UsersSummary';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -22,14 +23,17 @@ interface Props {
     description: string,
     workspaceId?: string
   ) => Promise<void>;
+  handleWorkspaceDelete: (workspaceId: string) => Promise<void>;
 }
 
 export default function WorkspaceSummary({
   userId,
   workspace,
   handleWorkspaceFormAction,
+  handleWorkspaceDelete,
 }: Props) {
   const { _id, description, name, owner, users } = workspace;
+  const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
   const [formStatus, setFormStatus] = useState<FormStatus>({
     show: false,
     action: 'CREATE',
@@ -84,6 +88,7 @@ export default function WorkspaceSummary({
               size="small"
               sx={{ color: 'red', fontSize: 13 }}
               startIcon={<DeleteIcon />}
+              onClick={() => setShowDeleteConfirmation(true)}
             >
               Delete
             </Button>
@@ -96,6 +101,16 @@ export default function WorkspaceSummary({
           workspace={workspace}
           handleClose={() => setFormStatus({ show: false, action: 'EDIT' })}
           handleWorkspaceFormAction={handleWorkspaceFormAction}
+        />
+      )}
+      {showDeleteConfirmation && (
+        <ConfirmDeleteDialog
+          title={`Are you sure you want to delete this workspace? (${workspace.name})`}
+          content={`This will delete all data related to this workspace and all of its data will be lost. This action cannot be undone.`}
+          open={showDeleteConfirmation}
+          asset_id={_id}
+          handleClose={() => setShowDeleteConfirmation(false)}
+          handleDelete={handleWorkspaceDelete}
         />
       )}
     </>

@@ -54,8 +54,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     case 'DELETE':
       try {
         const workspaceToDelete = await getWorkspaceById(wid);
-        if (workspaceToDelete.owner.toString() !== session.user._id) {
-          res.status(401).json({
+        if (workspaceToDelete.owner._id.toString() !== session.user._id) {
+          return res.status(401).json({
             message: 'You are not authorized to delete this workspace',
           });
         }

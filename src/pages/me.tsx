@@ -31,6 +31,15 @@ export default function Me({ mySession }) {
   const closeInformationDialog = () =>
     setInformationDialog({ show: false, title: '', content: '' });
 
+  const handleWorkspaceDelete = async (workspaceId: string) => {
+    try {
+      await clientApi.deleteWorkspace(workspaceId);
+      setSession(helpers.deleteWorkspaceFromUserSession(session, workspaceId));
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   const handleWorkspaceFormAction = async (
     action: FormStatus['action'],
     title: string,
@@ -127,6 +136,7 @@ export default function Me({ mySession }) {
               key={workspace._id}
               workspace={workspace}
               handleWorkspaceFormAction={handleWorkspaceFormAction}
+              handleWorkspaceDelete={handleWorkspaceDelete}
             />
           ))}
         </Box>
