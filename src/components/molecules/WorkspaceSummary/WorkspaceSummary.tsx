@@ -14,6 +14,7 @@ import Link from 'next/link';
 import { FormStatus } from 'models/client';
 
 interface Props {
+  userId: string;
   workspace: WorkspaceSummaryType;
   handleWorkspaceFormAction: (
     action: FormStatus['action'],
@@ -24,6 +25,7 @@ interface Props {
 }
 
 export default function WorkspaceSummary({
+  userId,
   workspace,
   handleWorkspaceFormAction,
 }: Props) {
@@ -77,13 +79,15 @@ export default function WorkspaceSummary({
           >
             Edit
           </Button>
-          <Button
-            size="small"
-            sx={{ color: 'red', fontSize: 13 }}
-            startIcon={<DeleteIcon />}
-          >
-            Delete
-          </Button>
+          {workspace.owner._id === userId && (
+            <Button
+              size="small"
+              sx={{ color: 'red', fontSize: 13 }}
+              startIcon={<DeleteIcon />}
+            >
+              Delete
+            </Button>
+          )}
         </CardActions>
       </Card>
       {formStatus.show && (

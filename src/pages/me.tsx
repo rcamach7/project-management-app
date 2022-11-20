@@ -123,6 +123,7 @@ export default function Me({ mySession }) {
         >
           {session.user.workspaces.map((workspace) => (
             <WorkspaceSummary
+              userId={session.user._id}
               key={workspace._id}
               workspace={workspace}
               handleWorkspaceFormAction={handleWorkspaceFormAction}
