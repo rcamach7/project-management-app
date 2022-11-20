@@ -74,6 +74,17 @@ export const addWorkspaceToUserSession = (
   return newSession;
 };
 
+const updateWorkspaceInUserSession = (
+  session: AppSession,
+  workspace: WorkspaceSummary
+) => {
+  const newSession: AppSession = { ...session };
+  newSession.user.workspaces = newSession.user.workspaces.map((w) =>
+    w._id === workspace._id ? workspace : w
+  );
+  return newSession;
+};
+
 export default {
   deleteTicketFromWorkspace,
   addBoardToWorkspace,
@@ -82,4 +93,5 @@ export default {
   updateTicketInWorkspace,
   addTicketToWorkspaceBoard,
   addWorkspaceToUserSession,
+  updateWorkspaceInUserSession,
 };

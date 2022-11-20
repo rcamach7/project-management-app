@@ -46,7 +46,14 @@ export default function Me({ mySession }) {
         setSession(helpers.addWorkspaceToUserSession(session, newWorkspace));
       }
       if (action === 'EDIT' && workspaceId) {
-        await clientApi.editWorkspace(title, description, workspaceId);
+        const updatedWorkspace = await clientApi.editWorkspace(
+          title,
+          description,
+          workspaceId
+        );
+        setSession(
+          helpers.updateWorkspaceInUserSession(session, updatedWorkspace)
+        );
       }
     } catch (error) {
       console.error(error);
@@ -115,7 +122,11 @@ export default function Me({ mySession }) {
           }}
         >
           {session.user.workspaces.map((workspace) => (
-            <WorkspaceSummary key={workspace._id} workspace={workspace} />
+            <WorkspaceSummary
+              key={workspace._id}
+              workspace={workspace}
+              handleWorkspaceFormAction={handleWorkspaceFormAction}
+            />
           ))}
         </Box>
       </Box>

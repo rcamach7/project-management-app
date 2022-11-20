@@ -1,10 +1,11 @@
 import { useState } from 'react';
-import { FormStatus, Workspace } from 'models/client';
+import { FormStatus } from 'models/client';
 import { Box, Button, InputBase, Typography, InputLabel } from '@mui/material';
+import { WorkspaceSummary } from 'models/global';
 
 interface Props {
   action: 'CREATE' | 'EDIT';
-  workspace?: Workspace;
+  workspace?: WorkspaceSummary;
   handleClose: () => void;
   handleWorkspaceFormAction: (
     action: FormStatus['action'],
