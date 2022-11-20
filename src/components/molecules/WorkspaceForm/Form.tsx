@@ -1,12 +1,17 @@
 import { useState } from 'react';
-import { Workspace } from 'models/client';
+import { FormStatus, Workspace } from 'models/client';
 import { Box, Button, InputBase, Typography, InputLabel } from '@mui/material';
 
 interface Props {
   action: 'CREATE' | 'EDIT';
   workspace?: Workspace;
   handleClose: () => void;
-  handleWorkspaceFormAction: () => void;
+  handleWorkspaceFormAction: (
+    action: FormStatus['action'],
+    title: string,
+    description: string,
+    workspaceId?: string
+  ) => void;
 }
 
 export default function Form({
@@ -28,12 +33,21 @@ export default function Form({
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     handleClose();
-    // handleWorkspaceFormAction();
+    handleWorkspaceFormAction(
+      action,
+      formDetails.title,
+      formDetails.description,
+      workspace ? workspace._id : undefined
+    );
   };
 
   return (
     <Box component="form" onSubmit={handleSubmit} sx={{ pb: 2 }}>
-      <Typography variant="h5" sx={{ fontWeight: 'bold' }} textAlign="center">
+      <Typography
+        variant="h5"
+        sx={{ fontWeight: 'bold', pb: 1 }}
+        textAlign="center"
+      >
         {action === 'CREATE' ? 'Create ' : 'Edit '}Workspace
       </Typography>
 
@@ -61,7 +75,7 @@ export default function Form({
         placeholder="enter brief description"
         onChange={handleInputChange}
         value={formDetails.description}
-        sx={{ border: 1, px: 1, borderRadius: 1, mb: 2 }}
+        sx={{ border: 1, px: 1, borderRadius: 1, mb: 4 }}
         inputProps={{ minLength: 3, maxLength: 255 }}
         fullWidth
         required

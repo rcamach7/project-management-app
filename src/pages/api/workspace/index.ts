@@ -38,7 +38,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
           session.user._id
         );
 
-        res.json({ workspace });
+        res.json(workspace);
       } catch (error) {
         res.status(500).json({ message: 'Error creating workspace', error });
       }

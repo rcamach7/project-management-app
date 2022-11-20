@@ -16,7 +16,12 @@ export const createNewWorkspace = async (
       users: [new Types.ObjectId(userId)],
       boards: [],
     });
-    const workspace = await newWorkspace.save();
+
+    await newWorkspace.save();
+    const workspace = await newWorkspace.populate({
+      path: 'users',
+      model: 'User',
+    });
 
     try {
       await User.findOneAndUpdate(

@@ -1,14 +1,25 @@
 import { Box, Modal } from '@mui/material/';
-import { Workspace } from 'models/client';
+import { FormStatus, Workspace } from 'models/client';
 import Form from './Form';
 
 interface Props {
   action: 'CREATE' | 'EDIT';
   workspace?: Workspace;
   handleClose: () => void;
+  handleWorkspaceFormAction: (
+    action: FormStatus['action'],
+    title: string,
+    description: string,
+    workspaceId?: string
+  ) => void;
 }
 
-export default function TicketForm({ workspace, action, handleClose }: Props) {
+export default function TicketForm({
+  workspace,
+  action,
+  handleWorkspaceFormAction,
+  handleClose,
+}: Props) {
   return (
     <Modal open={true} onClose={handleClose}>
       <Box
@@ -20,9 +31,7 @@ export default function TicketForm({ workspace, action, handleClose }: Props) {
           action={action}
           workspace={workspace ? workspace : undefined}
           handleClose={handleClose}
-          handleWorkspaceFormAction={() =>
-            console.log('handleWorkspaceFormAction')
-          }
+          handleWorkspaceFormAction={handleWorkspaceFormAction}
         />
       </Box>
     </Modal>
