@@ -53,8 +53,9 @@ export default function Me({ mySession }) {
             flex: 1,
             display: 'flex',
             flexWrap: 'wrap',
-            gap: { xs: 1, sm: 2, md: 5, lg: 7 },
+            alignContent: 'flex-start',
             justifyContent: 'center',
+            gap: { xs: 1, sm: 2, md: 5, lg: 7 },
             overflow: 'scroll',
           }}
         >
