@@ -8,6 +8,7 @@ import {
   ProfileBar,
   WorkspaceSummary,
   WorkspaceForm,
+  UxFeedback,
 } from '@/components/molecules/index';
 import { CenteredBox } from '@/components/layout/index';
 import { Box, Typography } from '@mui/material';
@@ -27,16 +28,42 @@ export default function Me({ mySession }) {
     title: '',
     content: '',
   });
+  const [uxFeedback, setUxFeedback] = useState<UxFeedbackState>({
+    loading: false,
+    showBanner: false,
+    bannerMessage: '',
+  });
+
+  const displayErrorMessage = (message: string, error: any) => {
+    setUxFeedback({
+      loading: false,
+      showBanner: true,
+      bannerType: 'error',
+      bannerMessage: message,
+    });
+    console.error(error);
+  };
+  const displaySuccessMessage = (message: string) => {
+    setUxFeedback({
+      loading: false,
+      showBanner: true,
+      bannerType: 'success',
+      bannerMessage: message,
+    });
+  };
+  const displayLoading = () => setUxFeedback({ ...uxFeedback, loading: true });
 
   const closeInformationDialog = () =>
     setInformationDialog({ show: false, title: '', content: '' });
 
   const handleWorkspaceDelete = async (workspaceId: string) => {
     try {
+      displayLoading();
       await clientApi.deleteWorkspace(workspaceId);
       setSession(helpers.deleteWorkspaceFromUserSession(session, workspaceId));
+      displaySuccessMessage('Workspace deleted successfully');
     } catch (error) {
-      console.error(error);
+      displayErrorMessage('Error deleting workspace', error);
     }
   };
 
@@ -47,12 +74,14 @@ export default function Me({ mySession }) {
     workspaceId?: string
   ) => {
     try {
+      displayLoading();
       if (action === 'CREATE') {
         const newWorkspace = await clientApi.createWorkspace(
           title,
           description
         );
         setSession(helpers.addWorkspaceToUserSession(session, newWorkspace));
+        displaySuccessMessage('Workspace created successfully');
       }
       if (action === 'EDIT' && workspaceId) {
         const updatedWorkspace = await clientApi.editWorkspace(
@@ -63,9 +92,10 @@ export default function Me({ mySession }) {
         setSession(
           helpers.updateWorkspaceInUserSession(session, updatedWorkspace)
         );
+        displaySuccessMessage('Workspace updated successfully');
       }
     } catch (error) {
-      console.error(error);
+      displayErrorMessage('Error creating workspace', error);
     }
   };
 
@@ -155,6 +185,12 @@ export default function Me({ mySession }) {
           handleWorkspaceFormAction={handleWorkspaceFormAction}
         />
       )}
+      <UxFeedback
+        loading={uxFeedback.loading}
+        showBanner={uxFeedback.showBanner}
+        bannerMessage={uxFeedback.bannerMessage}
+        bannerType={uxFeedback.bannerType ? uxFeedback.bannerType : 'success'}
+      />
     </>
   );
 }
