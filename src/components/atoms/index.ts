@@ -5,3 +5,4 @@ export { default as PageTitle } from './PageTitle';
 export { default as NextLinkAnchor } from './NextLinkAnchor';
 export { default as ConfirmDeleteDialog } from './ConfirmDeleteDialog';
 export { default as FloatingButton } from './FloatingButton';
+export { default as InformationDialog } from './InformationDialog';

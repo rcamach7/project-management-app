@@ -1,14 +1,23 @@
 import Head from 'next/head';
+import { useState } from 'react';
 import { authOptions } from '@/auth/[...nextauth]';
 import { unstable_getServerSession } from 'next-auth/next';
 import { AppSession } from 'models/global';
-import { ImageButton } from '@/components/atoms/index';
+import { ImageButton, InformationDialog } from '@/components/atoms/index';
 import { ProfileBar, WorkspaceSummary } from '@/components/molecules/index';
 import { CenteredBox } from '@/components/layout/index';
 import { Box, Typography } from '@mui/material';
 
 export default function Me({ mySession }) {
   const { user }: AppSession = JSON.parse(mySession);
+  const [informationDialog, setInformationDialog] = useState({
+    show: false,
+    title: '',
+    content: '',
+  });
+
+  const closeInformationDialog = () =>
+    setInformationDialog({ show: false, title: '', content: '' });
 
   return (
     <>
@@ -36,12 +45,24 @@ export default function Me({ mySession }) {
           <ImageButton
             text="Invitations"
             image="/buttons/invite.svg"
-            onClick={() => alert('clicked on invitations')}
+            onClick={() =>
+              setInformationDialog({
+                show: true,
+                title: 'Invitations feature is currently being worked on',
+                content: 'Please check back later!',
+              })
+            }
           />
           <ImageButton
             text="Templates"
             image="/buttons/template.svg"
-            onClick={() => alert('clicked on templates')}
+            onClick={() =>
+              setInformationDialog({
+                show: true,
+                title: 'Templates feature is currently being worked on',
+                content: 'Please check back later!',
+              })
+            }
           />
         </CenteredBox>
 
@@ -64,6 +85,13 @@ export default function Me({ mySession }) {
           ))}
         </Box>
       </Box>
+      {informationDialog.show && (
+        <InformationDialog
+          title={informationDialog.title}
+          content={informationDialog.content}
+          handleClose={closeInformationDialog}
+        />
+      )}
     </>
   );
 }
