@@ -95,8 +95,7 @@ const deleteWorkspaceFromUserSession = (
   );
   return newSession;
 };
-
-export default {
+const helpers = {
   deleteTicketFromWorkspace,
   addBoardToWorkspace,
   updateBoardInWorkspace,
@@ -107,3 +106,5 @@ export default {
   updateWorkspaceInUserSession,
   deleteWorkspaceFromUserSession,
 };
+
+export default helpers;

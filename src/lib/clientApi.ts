@@ -1,6 +1,6 @@
 import axios from 'axios';
-import { Board, LabelsEnum, Ticket, Workspace } from 'models/client';
-import { AppSession, WorkspaceSummary } from 'models/global';
+import { Board, LabelsEnum, Ticket } from 'models/client';
+import { WorkspaceSummary } from 'models/global';
 
 export const deleteTicketByID = async (id: string) => {
   try {
@@ -137,9 +137,9 @@ const deleteWorkspace = async (_id: string) => {
   }
 };
 
-export default {
-  deleteBoardByID,
+const clientApi = {
   deleteTicketByID,
+  deleteBoardByID,
   createBoard,
   updateBoard,
   updateTicket,
@@ -148,3 +148,5 @@ export default {
   editWorkspace,
   deleteWorkspace,
 };
+
+export default clientApi;
