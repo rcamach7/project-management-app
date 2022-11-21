@@ -12,7 +12,7 @@ interface NextLinkComposedProps
 }
 
 const NextLinkAnchor = forwardRef<HTMLAnchorElement, NextLinkComposedProps>(
-  function (props, ref) {
+  function NextLinkAnchorFunc(props, ref) {
     const {
       to,
       linkAs,

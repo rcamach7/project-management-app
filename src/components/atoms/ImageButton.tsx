@@ -29,7 +29,13 @@ export default function ImageButton({ text, image, onClick }: Props) {
         }}
         onClick={onClick}
       >
-        <Image src={image} width="20" height="20" layout="responsive" />
+        <Image
+          src={image}
+          width="20"
+          height="20"
+          layout="responsive"
+          alt={text}
+        />
       </Box>
       <Typography>{text}</Typography>
     </CenteredBox>

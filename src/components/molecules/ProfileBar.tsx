@@ -34,7 +34,13 @@ export default function ProfileBar({ user }: Props) {
           borderColor: 'secondary.main',
         }}
       >
-        <Image src={user.image} width="50" height="50" layout="responsive" />
+        <Image
+          src={user.image}
+          width="50"
+          height="50"
+          layout="responsive"
+          alt={user.name}
+        />
       </Box>
       <Box sx={{ p: 0.5 }}>
         <Typography sx={{ fontSize: { xs: '1em', sm: '1.1em', md: '1.2em' } }}>
