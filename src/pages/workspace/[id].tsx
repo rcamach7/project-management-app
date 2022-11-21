@@ -190,7 +190,11 @@ export default function Workspace_Continued({ mySession, workspace }) {
 
   return (
     <>
-      <Head>Flow: Workspace Page</Head>
+      <Head>
+        <title>Flow: Workspace</title>
+        <link rel="icon" href="/hero/f.svg" />
+      </Head>
+
       <Box
         sx={{
           minWidth: '100%',
