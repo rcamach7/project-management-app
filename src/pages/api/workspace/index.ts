@@ -7,7 +7,10 @@ import {
 } from 'controllers/workspaceController';
 import { AppSession } from 'models/global';
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
   const session: AppSession = await unstable_getServerSession(
     req,
     res,
@@ -47,4 +50,4 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       res.setHeader('Allow', ['GET', 'POST']);
       res.status(405).end(`Method ${method} Not Allowed`);
   }
-};
+}

@@ -8,7 +8,10 @@ import {
   deleteBoardById,
 } from 'controllers/boardController';
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
   const session: AppSession = await unstable_getServerSession(
     req,
     res,
@@ -59,4 +62,4 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       res.setHeader('Allow', ['GET', 'PUT', 'DELETE']);
       res.status(405).end(`Method ${method} Not Allowed`);
   }
-};
+}
