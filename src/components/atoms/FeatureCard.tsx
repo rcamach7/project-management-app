@@ -12,6 +12,9 @@ export default function FeatureCard({ image, title, description }: Feature) {
           transform: 'scale(1.1)',
         },
         background: 'background.paper',
+        minHeight: { xs: 190, md: 225 },
+        display: 'flex',
+        flexDirection: 'column',
       }}
     >
       <Box
@@ -24,8 +27,23 @@ export default function FeatureCard({ image, title, description }: Feature) {
       >
         <Image src={image} alt={title} width={75} height={75} layout="fixed" />
       </Box>
-      <CardContent sx={{ padding: '.50em !important', textAlign: 'center' }}>
-        <Typography gutterBottom variant="h6" component="div">
+      <CardContent
+        sx={{
+          p: 0,
+          textAlign: 'center',
+          paddingBottom: '5px !important',
+          flex: 1,
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+        }}
+      >
+        <Typography
+          gutterBottom
+          variant="h6"
+          component="div"
+          sx={{ display: { xs: 'none', sm: 'block' } }}
+        >
           {title}
         </Typography>
         <Typography variant="body2" color="text.secondary">
