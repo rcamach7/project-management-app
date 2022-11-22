@@ -36,7 +36,7 @@ export default function PageTitle({
         >
           {subheading}
           <Typography
-            variant="h2"
+            component="span"
             sx={{ fontSize: '1.25rem', display: { xs: 'none', md: 'block' } }}
           >
             {additionalText}
