@@ -70,7 +70,7 @@ export default function Home({ featuresList }: Props) {
         >
           {featuresList.map((feature, i) => (
             <Grid key={i} xs={5} md={4} lg={3}>
-              <FeatureCard key={feature.title} {...feature} />
+              <FeatureCard key={feature.title} index={i} {...feature} />
             </Grid>
           ))}
         </Grid>

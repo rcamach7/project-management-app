@@ -2,7 +2,16 @@ import { Card, CardContent, Box, Typography } from '@mui/material';
 import { Feature } from 'models/client';
 import Image from 'next/image';
 
-export default function FeatureCard({ image, title, description }: Feature) {
+interface Props extends Feature {
+  index: number;
+}
+
+export default function FeatureCard({
+  image,
+  title,
+  description,
+  index,
+}: Props) {
   return (
     <Card
       sx={{
@@ -16,6 +25,7 @@ export default function FeatureCard({ image, title, description }: Feature) {
         display: 'flex',
         flexDirection: 'column',
       }}
+      className={`animate__animated animate__fadeInDown animate__delay-${index}s`}
     >
       <Box
         sx={{
