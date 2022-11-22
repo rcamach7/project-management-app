@@ -4,6 +4,7 @@ import Image from 'next/image';
 interface Props {
   title?: string;
   subheading?: string;
+  additionalText?: string;
   image?: string;
   bold?: boolean;
   sx?: {};
@@ -12,6 +13,7 @@ interface Props {
 export default function PageTitle({
   title,
   subheading,
+  additionalText,
   image,
   bold,
   sx,
@@ -33,6 +35,12 @@ export default function PageTitle({
           sx={{ fontSize: '1.25rem', fontWeight: bold ? 'bold' : '' }}
         >
           {subheading}
+          <Typography
+            variant="h2"
+            sx={{ fontSize: '1.25rem', display: { xs: 'none', md: 'block' } }}
+          >
+            {additionalText}
+          </Typography>
         </Typography>
       )}
     </Box>

@@ -3,7 +3,7 @@ import { Feature } from 'models/client';
 import { signIn } from 'next-auth/react';
 import { unstable_getServerSession } from 'next-auth/next';
 import { authOptions } from '@/auth/[...nextauth]';
-import { Box, Unstable_Grid2 as Grid } from '@mui/material';
+import { Box, Typography, Unstable_Grid2 as Grid } from '@mui/material';
 import { PageTitle, FeatureCard, ActionButton } from '@/components/atoms/index';
 import { CenteredBox } from '@/components/layout/index';
 
@@ -30,14 +30,24 @@ export default function Home({ featuresList }: Props) {
           maxWidth: '1000px',
         }}
       >
-        <CenteredBox flex={1}>
+        <CenteredBox sx={{ flex: { xs: 1, md: 0.5 } }}>
           <PageTitle
-            subheading="Manage your software projects and tasks by creating workspaces, boards, and tickets!"
+            subheading="Organize yourself and your team by taking advantage of this project management tool!"
+            additionalText="Flow is built with Next.js, TypeScript, Material-UI, and MongoDB. It uses NextAuth for authentication and is deployed on Vercel."
             image="/hero/flow.svg"
           />
         </CenteredBox>
 
         <CenteredBox flex={1} sx={{ padding: '1em 0 0 0' }}>
+          <Typography
+            sx={{
+              pb: 1,
+              fontWeight: 'bold',
+              display: { xs: 'none', md: 'block' },
+            }}
+          >
+            Click the link below to sign in with Google
+          </Typography>
           <ActionButton
             text="Get Started"
             variant="outlined"
@@ -87,22 +97,22 @@ export async function getServerSideProps({ req, res }) {
             image: '/features/organized.svg',
             title: 'Organization',
             description:
-              'Create workspaces, boards, and tickets to organize your projects.',
+              'Create workspaces, boards, and tickets to organize your projects',
           },
           {
             image: '/features/collaborate.svg',
-            title: 'Feature 2',
-            description: 'This is a description of feature 2',
+            title: 'Collaboration',
+            description: 'Collaborate with your team on projects and tasks',
           },
           {
             image: '/features/productivity.svg',
-            title: 'Feature 3',
-            description: 'This is a description of feature 3',
+            title: 'Productivity',
+            description: 'Increase your productivity with Flow',
           },
           {
             image: '/features/accessible.svg',
-            title: 'Feature 4',
-            description: 'This is a description of feature 4',
+            title: 'Accessibility',
+            description: 'Access your projects and tasks from anywhere',
           },
         ],
       },
