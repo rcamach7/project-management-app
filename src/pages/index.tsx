@@ -32,7 +32,7 @@ export default function Home({ featuresList }: Props) {
       >
         <CenteredBox flex={1}>
           <PageTitle
-            subheading="Collaborative Project Management Tool"
+            subheading="Manage your software projects and tasks by creating workspaces, boards, and tickets!"
             image="/hero/flow.svg"
           />
         </CenteredBox>
@@ -84,22 +84,23 @@ export async function getServerSideProps({ req, res }) {
       props: {
         featuresList: [
           {
-            image: 'https://placekitten.com/300/300',
-            title: 'Feature 1',
-            description: 'This is a description of feature 1',
+            image: '/features/organized.svg',
+            title: 'Organization',
+            description:
+              'Create workspaces, boards, and tickets to organize your projects.',
           },
           {
-            image: 'https://placekitten.com/300/300',
+            image: '/features/collaborate.svg',
             title: 'Feature 2',
             description: 'This is a description of feature 2',
           },
           {
-            image: 'https://placekitten.com/300/300',
+            image: '/features/productivity.svg',
             title: 'Feature 3',
             description: 'This is a description of feature 3',
           },
           {
-            image: 'https://placekitten.com/300/300',
+            image: '/features/accessible.svg',
             title: 'Feature 4',
             description: 'This is a description of feature 4',
           },

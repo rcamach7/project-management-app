@@ -14,15 +14,15 @@ export default function FeatureCard({ image, title, description }: Feature) {
         background: 'background.paper',
       }}
     >
-      <Box sx={{ height: 'clamp(100px, 25vw, 150px)', overflow: 'hidden' }}>
-        <Image
-          src={image}
-          alt={title}
-          width={200}
-          height={200}
-          layout="responsive"
-          objectFit="cover"
-        />
+      <Box
+        sx={{
+          height: 100,
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+      >
+        <Image src={image} alt={title} width={75} height={75} layout="fixed" />
       </Box>
       <CardContent sx={{ padding: '.50em !important', textAlign: 'center' }}>
         <Typography gutterBottom variant="h6" component="div">
