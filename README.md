@@ -4,12 +4,15 @@ A web application that helps you manage your software projects and tasks by crea
 
 <div align="center">
 
-[Visit Flow](https://rcamach7.github.io/crypto-exchange/#/)
+[Visit Flow](https://github.com/rcamach7/project-management-app)
 
 </div>
 
-![project_demo](crypto_demo.gif)
+<div align="center">
 
+![project_demo](flow_demo.gif)
+
+</div>
 ## Key Features
 
 - Utilized static and server rendered pages where applicable to optimize SEO and improve load performance
