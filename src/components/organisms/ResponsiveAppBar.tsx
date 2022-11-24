@@ -122,13 +122,6 @@ export default function ResponsiveAppBar({ image, name }: Props) {
             >
               Account
             </Button>
-            <Button
-              component={NextLinkAnchor}
-              sx={{ my: 2, color: 'text.primary', display: 'block' }}
-              to="/me"
-            >
-              Contact
-            </Button>
           </Box>
 
           {/* Persistent User Icon */}
