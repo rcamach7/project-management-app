@@ -23,7 +23,7 @@ export default function FloatingActionButton({
       backgroundColor: '#828DAF',
       color: 'black',
     },
-    ...(anchorBottom && { position: 'absolute', bottom: 16, right: 16 }),
+    ...(anchorBottom && { position: 'fixed', bottom: 16, right: 16 }),
   };
 
   return (
