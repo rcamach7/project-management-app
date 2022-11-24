@@ -1,15 +1,10 @@
 import Head from 'next/head';
-import { useRouter } from 'next/router';
 import clientApi from '@/lib/clientApi';
 import helpers from '@/lib/helpers';
+import { useRouter } from 'next/router';
 import { useSession } from 'next-auth/react';
 import { useEffect, useState } from 'react';
-import {
-  Workspace,
-  UxFeedbackState,
-  FormStatus,
-  LabelsEnum,
-} from 'models/client';
+import * as models from 'models/client';
 import {
   ResponsiveAppBar,
   BoardTabBar,
@@ -21,9 +16,9 @@ import { Box } from '@mui/material';
 
 export default function Workspace_Continued() {
   const { data: session, status } = useSession();
-  const [workspaceState, setWorkspaceState] = useState<Workspace>(null);
+  const [workspaceState, setWorkspaceState] = useState<models.Workspace>(null);
   const { query } = useRouter();
-  const [uxFeedback, setUxFeedback] = useState<UxFeedbackState>({
+  const [uxFeedback, setUxFeedback] = useState<models.UxFeedbackState>({
     loading: false,
     showBanner: false,
     bannerMessage: '',
@@ -98,7 +93,7 @@ export default function Workspace_Continued() {
   };
 
   const handleBoardFormAction = async (
-    action: FormStatus['action'],
+    action: models.FormStatus['action'],
     title: string,
     description: string,
     boardId?: string
@@ -136,10 +131,10 @@ export default function Workspace_Continued() {
   };
 
   const handleTicketFormAction = async (
-    action: FormStatus['action'],
+    action: models.FormStatus['action'],
     title: string,
     description: string,
-    labels?: LabelsEnum[],
+    labels?: models.LabelsEnum[],
     boardId?: string,
     ticketId?: string
   ) => {
@@ -203,7 +198,14 @@ export default function Workspace_Continued() {
   }, [query]);
 
   if (!workspaceState || status === 'loading' || session.user === null) {
-    return <>Loading</>;
+    return (
+      <UxFeedback
+        loading={true}
+        showBanner={false}
+        bannerMessage={''}
+        bannerType={'success'}
+      />
+    );
   }
   return (
     <>
@@ -232,9 +234,9 @@ export default function Workspace_Continued() {
             mx: 'auto',
           }}
         >
-          <PageTitle subheading={workspaceState?.name} sx={{ pt: 2, pb: 1 }} />
+          <PageTitle subheading={workspaceState.name} sx={{ pt: 2, pb: 1 }} />
           <BoardTabBar
-            boards={workspaceState?.boards}
+            boards={workspaceState.boards}
             activeBoard={activeBoard}
             handleBoardChange={handleBoardChange}
             handleDeleteBoard={handleDeleteBoard}
