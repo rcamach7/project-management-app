@@ -1,10 +1,10 @@
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 import clientApi from '@/lib/clientApi';
 import helpers from '@/lib/helpers';
 import { useEffect, useState } from 'react';
 import { unstable_getServerSession } from 'next-auth/next';
 import { authOptions } from '@/auth/[...nextauth]';
-import { getWorkspaceById } from 'controllers/workspaceController';
 import { AppSession } from 'models/global';
 import {
   Workspace,
@@ -21,11 +21,10 @@ import { PageTitle } from '@/components/atoms/index';
 import { UxFeedback } from '@/components/molecules/index';
 import { Box } from '@mui/material';
 
-export default function Workspace_Continued({ mySession, workspace }) {
+export default function Workspace_Continued({ mySession }) {
   const { user }: AppSession = JSON.parse(mySession);
-  const [workspaceState, setWorkspaceState] = useState<Workspace>(
-    JSON.parse(workspace)
-  );
+  const [workspaceState, setWorkspaceState] = useState<Workspace>(null);
+  const { query } = useRouter();
   const [uxFeedback, setUxFeedback] = useState<UxFeedbackState>({
     loading: false,
     showBanner: false,
@@ -33,9 +32,9 @@ export default function Workspace_Continued({ mySession, workspace }) {
   });
 
   const [activeBoard, setActiveBoard] = useState(
-    workspaceState.boards.length ? workspaceState.boards[0]._id : ''
+    workspaceState?.boards.length ? workspaceState.boards[0]._id : ''
   );
-  const board = workspaceState.boards.find(
+  const board = workspaceState?.boards.find(
     (board) => board._id === activeBoard
   );
 
@@ -188,6 +187,24 @@ export default function Workspace_Continued({ mySession, workspace }) {
     }
   }, [uxFeedback.showBanner]);
 
+  useEffect(() => {
+    const getWorkspace = async () => {
+      try {
+        const workspace = await clientApi.getWorkspaceById(query.id as string);
+        setWorkspaceState(workspace);
+      } catch (error) {
+        displayErrorMessage(
+          'Error occurred while fetching workspace. Please try again later.',
+          error
+        );
+      }
+    };
+    getWorkspace();
+  }, []);
+
+  if (!workspaceState) {
+    return <>Loading</>;
+  }
   return (
     <>
       <Head>
@@ -215,9 +232,9 @@ export default function Workspace_Continued({ mySession, workspace }) {
             mx: 'auto',
           }}
         >
-          <PageTitle subheading={workspaceState.name} sx={{ pt: 2, pb: 1 }} />
+          <PageTitle subheading={workspaceState?.name} sx={{ pt: 2, pb: 1 }} />
           <BoardTabBar
-            boards={workspaceState.boards}
+            boards={workspaceState?.boards}
             activeBoard={activeBoard}
             handleBoardChange={handleBoardChange}
             handleDeleteBoard={handleDeleteBoard}
@@ -243,21 +260,18 @@ export default function Workspace_Continued({ mySession, workspace }) {
   );
 }
 
-export async function getServerSideProps({ req, res, query }) {
+export async function getServerSideProps({ req, res }) {
   const session: AppSession = await unstable_getServerSession(
     req,
     res,
     authOptions
   );
-  const { id } = query;
 
   if (session) {
     const mySession = JSON.stringify(session);
-    const workspace = await getWorkspaceById(id);
     return {
       props: {
         mySession,
-        workspace: JSON.stringify(workspace),
       },
     };
   } else {
