@@ -24,16 +24,12 @@ export default function Workspace_Continued() {
     bannerMessage: '',
   });
 
-  const [activeBoard, setActiveBoard] = useState(
-    workspaceState?.boards.length ? workspaceState.boards[0]._id : ''
-  );
+  const [activeBoard, setActiveBoard] = useState(null);
   const board = workspaceState?.boards.find(
     (board) => board._id === activeBoard
   );
 
   const handleBoardChange = (boardId: string) => setActiveBoard(boardId);
-
-  const resetActiveBoard = () => setActiveBoard(workspaceState.boards[0]._id);
 
   const displaySuccessMessage = (message: string) =>
     setUxFeedback({
@@ -76,9 +72,10 @@ export default function Workspace_Continued() {
       displayLoading();
       await clientApi.deleteBoardByID(boardId);
       setWorkspaceState((prevState) => {
-        return helpers.deleteBoardFromWorkspace(prevState, boardId);
+        const newState = helpers.deleteBoardFromWorkspace(prevState, boardId);
+        setActiveBoard(newState.boards.length ? newState.boards[0]._id : null);
+        return newState;
       });
-      resetActiveBoard();
       displaySuccessMessage('Board deleted successfully');
     } catch (error) {
       displayErrorMessage(
@@ -103,7 +100,9 @@ export default function Workspace_Continued() {
           workspaceState._id
         );
         setWorkspaceState((prevState) => {
-          return helpers.addBoardToWorkspace(prevState, board);
+          const newState = helpers.addBoardToWorkspace(prevState, board);
+          setActiveBoard(newState.boards[newState.boards.length - 1]._id);
+          return newState;
         });
       }
       if (action === 'EDIT' && boardId) {
@@ -181,6 +180,9 @@ export default function Workspace_Continued() {
       try {
         const workspace = await clientApi.getWorkspaceById(query.id as string);
         setWorkspaceState(workspace);
+        setActiveBoard(
+          workspace.boards.length ? workspace.boards[0]._id : null
+        );
       } catch (error) {
         displayErrorMessage(
           'Error occurred while fetching workspace. Please try again later.',
