@@ -16,7 +16,7 @@ export default function Home({ featuresList }: Props) {
     <>
       <Head>
         <title>Flow: Home</title>
-        <link rel="icon" href="/hero/f.svg" />
+        <link rel="icon" href="/hero/flow_letter.svg" />
       </Head>
 
       <Box

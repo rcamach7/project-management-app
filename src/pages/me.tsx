@@ -103,7 +103,7 @@ export default function Me({ mySession }) {
     <>
       <Head>
         <title>Flow: Account</title>
-        <link rel="icon" href="/hero/f.svg" />
+        <link rel="icon" href="/hero/flow_letter.svg" />
       </Head>
 
       <Box

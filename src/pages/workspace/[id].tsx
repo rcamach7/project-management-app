@@ -209,7 +209,7 @@ export default function Workspace_Continued() {
     <>
       <Head>
         <title>Flow: Workspace</title>
-        <link rel="icon" href="/hero/f.svg" />
+        <link rel="icon" href="/hero/flow_letter.svg" />
       </Head>
 
       <Box
