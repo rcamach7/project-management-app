@@ -15,9 +15,14 @@ import { UxFeedback } from '@/components/molecules/index';
 import { Box } from '@mui/material';
 
 export default function Workspace_Continued() {
-  const { data: session, status } = useSession();
+  const { query, push } = useRouter();
+  const { data: session, status } = useSession({
+    required: true,
+    onUnauthenticated() {
+      push('/');
+    },
+  });
   const [workspaceState, setWorkspaceState] = useState<models.Workspace>(null);
-  const { query } = useRouter();
   const [uxFeedback, setUxFeedback] = useState<models.UxFeedbackState>({
     loading: false,
     showBanner: false,
