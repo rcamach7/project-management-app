@@ -16,3 +16,5 @@ export interface AppSession extends Session {
     workspaces?: WorkspaceSummary[];
   };
 }
+
+// export interface clientSession extends Session {

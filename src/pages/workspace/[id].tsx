@@ -2,10 +2,8 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import clientApi from '@/lib/clientApi';
 import helpers from '@/lib/helpers';
+import { useSession } from 'next-auth/react';
 import { useEffect, useState } from 'react';
-import { unstable_getServerSession } from 'next-auth/next';
-import { authOptions } from '@/auth/[...nextauth]';
-import { AppSession } from 'models/global';
 import {
   Workspace,
   UxFeedbackState,
@@ -21,8 +19,8 @@ import { PageTitle } from '@/components/atoms/index';
 import { UxFeedback } from '@/components/molecules/index';
 import { Box } from '@mui/material';
 
-export default function Workspace_Continued({ mySession }) {
-  const { user }: AppSession = JSON.parse(mySession);
+export default function Workspace_Continued() {
+  const { data: session, status } = useSession();
   const [workspaceState, setWorkspaceState] = useState<Workspace>(null);
   const { query } = useRouter();
   const [uxFeedback, setUxFeedback] = useState<UxFeedbackState>({
@@ -199,10 +197,12 @@ export default function Workspace_Continued({ mySession }) {
         );
       }
     };
-    getWorkspace();
-  }, []);
+    if (query.id) {
+      getWorkspace();
+    }
+  }, [query]);
 
-  if (!workspaceState) {
+  if (!workspaceState || status === 'loading' || session.user === null) {
     return <>Loading</>;
   }
   return (
@@ -220,7 +220,7 @@ export default function Workspace_Continued({ mySession }) {
           flexDirection: 'column',
         }}
       >
-        <ResponsiveAppBar name={user.name} image={user.image} />
+        <ResponsiveAppBar name={session.user.name} image={session.user.image} />
         <Box
           sx={{
             flex: 1,
@@ -258,28 +258,4 @@ export default function Workspace_Continued({ mySession }) {
       />
     </>
   );
-}
-
-export async function getServerSideProps({ req, res }) {
-  const session: AppSession = await unstable_getServerSession(
-    req,
-    res,
-    authOptions
-  );
-
-  if (session) {
-    const mySession = JSON.stringify(session);
-    return {
-      props: {
-        mySession,
-      },
-    };
-  } else {
-    return {
-      redirect: {
-        destination: '/',
-        permanent: false,
-      },
-    };
-  }
 }
