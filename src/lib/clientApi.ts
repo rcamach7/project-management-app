@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { Board, LabelsEnum, Ticket } from 'models/client';
+import { Workspace, Board, LabelsEnum, Ticket } from 'models/client';
 import { WorkspaceSummary } from 'models/global';
 
 export const deleteTicketByID = async (id: string) => {
@@ -137,6 +137,15 @@ const deleteWorkspace = async (_id: string) => {
   }
 };
 
+const getWorkspaceById = async (_id: string) => {
+  try {
+    const res = await axios.get(`/api/workspace/${_id}`);
+    return res.data as Workspace;
+  } catch (error) {
+    return Promise.reject(error);
+  }
+};
+
 const clientApi = {
   deleteTicketByID,
   deleteBoardByID,
@@ -147,6 +156,7 @@ const clientApi = {
   createWorkspace,
   editWorkspace,
   deleteWorkspace,
+  getWorkspaceById,
 };
 
 export default clientApi;
