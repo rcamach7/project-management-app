@@ -42,7 +42,7 @@ export const getLabelColor = (label: LabelsEnum) => {
     case LabelsEnum.FRONTEND:
       return '#999950';
     case LabelsEnum.FEAT:
-      return '#7D8471';
+      return '#c7d903';
     case LabelsEnum.REFACTOR:
       return '#3B83BD';
     case LabelsEnum.TEST:
@@ -50,7 +50,7 @@ export const getLabelColor = (label: LabelsEnum) => {
     case LabelsEnum.PERF:
       return '#C35831';
     case LabelsEnum.STYLE:
-      return '#4A192C';
+      return '#0af1d5';
     case LabelsEnum.ASSET:
       return '#6A5F31';
     case LabelsEnum.DOC:
