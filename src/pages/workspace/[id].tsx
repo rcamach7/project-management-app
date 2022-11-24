@@ -31,12 +31,17 @@ export default function Workspace_Continued() {
     (board) => board._id === activeBoard
   );
 
-  const handleBoardChange = (boardId: string) => {
-    setActiveBoard(boardId);
-  };
-  const resetActiveBoard = () => {
-    setActiveBoard(workspaceState.boards[0]._id);
-  };
+  const handleBoardChange = (boardId: string) => setActiveBoard(boardId);
+
+  const resetActiveBoard = () => setActiveBoard(workspaceState.boards[0]._id);
+
+  const displaySuccessMessage = (message: string) =>
+    setUxFeedback({
+      loading: false,
+      showBanner: true,
+      bannerType: 'success',
+      bannerMessage: message,
+    });
 
   const displayErrorMessage = (message: string, error: any) => {
     setUxFeedback({
@@ -46,15 +51,6 @@ export default function Workspace_Continued() {
       bannerMessage: message,
     });
     console.error(error);
-  };
-
-  const displaySuccessMessage = (message: string) => {
-    setUxFeedback({
-      loading: false,
-      showBanner: true,
-      bannerType: 'success',
-      bannerMessage: message,
-    });
   };
 
   const displayLoading = () => setUxFeedback({ ...uxFeedback, loading: true });
