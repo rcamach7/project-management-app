@@ -1,6 +1,6 @@
 # Flow
 
-A web application that helps you manage your software projects and tasks by creating workspaces, boards, and tickets!
+A web application that helps you manage your software projects by creating workspaces, boards, and tickets!
 
 <div align="center">
 
@@ -15,10 +15,10 @@ A web application that helps you manage your software projects and tasks by crea
 </div>
 ## Key Features
 
-- Utilized static and server rendered pages where applicable to optimize SEO and improve load performance
+- Enhanced SEO by taking advantage of Next.js' static generation and server-side rendering capabilities
+- Utilized NextAuth to authenticate users and store their data in a MongoDB database
+- Created a fully responsive design that works on all devices and screen sizes
 - Incorporated a atomic design pattern that allows for easy scaling and maintenance
-- Use NextAuth to authenticate users and allow them to create and manage their own projects, and store them in a MongoDB database
-- Fully responsive design that works on all devices and screen sizes
 
 #### Built Using:
 
