@@ -4,7 +4,7 @@ import { authOptions } from '@/auth/[...nextauth]';
 import { Types } from 'mongoose';
 import { AppSession } from 'models/global';
 import { Board } from 'schemas';
-import { createNewTicket, getAllTickets } from 'controllers/ticketController';
+import { createNewTicket } from 'controllers/ticketController';
 
 export default async function handler(
   req: NextApiRequest,
@@ -17,18 +17,7 @@ export default async function handler(
   );
   if (!session) res.status(401).json({ message: 'Unauthorized' });
 
-  const { method } = req;
-  switch (method) {
-    // TODO: Delete this endpoint before production - only for testing
-    case 'GET':
-      try {
-        const tickets = await getAllTickets();
-        res.json(tickets);
-      } catch (error) {
-        res.status(500).json({ message: 'Error retrieving board', error });
-      }
-      break;
-
+  switch (req.method) {
     case 'POST':
       try {
         const { title, description, board_id, label } = req.body;
@@ -52,7 +41,7 @@ export default async function handler(
       }
       break;
     default:
-      res.setHeader('Allow', ['GET', 'POST']);
-      res.status(405).end(`Method ${method} Not Allowed`);
+      res.setHeader('Allow', ['POST']);
+      res.status(405).end(`Method ${req.method} Not Allowed`);
   }
 }

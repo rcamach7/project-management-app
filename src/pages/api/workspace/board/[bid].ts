@@ -23,8 +23,7 @@ export default async function handler(
   if (!bid || Array.isArray(bid))
     return res.status(400).json({ message: 'Missing board id' });
 
-  const { method } = req;
-  switch (method) {
+  switch (req.method) {
     case 'GET':
       try {
         const board = await getBoardById(bid);
@@ -60,6 +59,6 @@ export default async function handler(
       break;
     default:
       res.setHeader('Allow', ['GET', 'PUT', 'DELETE']);
-      res.status(405).end(`Method ${method} Not Allowed`);
+      res.status(405).end(`Method ${req.method} Not Allowed`);
   }
 }

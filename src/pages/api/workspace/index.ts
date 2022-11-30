@@ -19,8 +19,7 @@ export default async function handler(
   if (!session) res.status(401).json({ message: 'Unauthorized' });
 
   const { name, description } = req.body;
-  const { method } = req;
-  switch (method) {
+  switch (req.method) {
     case 'GET':
       try {
         const workspaces = await getUserWorkspaces(session.user._id);
@@ -48,6 +47,6 @@ export default async function handler(
       break;
     default:
       res.setHeader('Allow', ['GET', 'POST']);
-      res.status(405).end(`Method ${method} Not Allowed`);
+      res.status(405).end(`Method ${req.method} Not Allowed`);
   }
 }

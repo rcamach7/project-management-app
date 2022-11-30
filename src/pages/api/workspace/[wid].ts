@@ -24,8 +24,7 @@ export default async function handler(
     return res.status(400).json({ message: 'Missing valid workspace Id' });
 
   const { name, description } = req.body;
-  const { method } = req;
-  switch (method) {
+  switch (req.method) {
     case 'GET':
       try {
         const workspace = await getWorkspaceById(wid);
@@ -73,7 +72,7 @@ export default async function handler(
       }
       break;
     default:
-      res.setHeader('Allow', ['GET', 'POST', 'DELETE']);
-      res.status(405).end(`Method ${method} Not Allowed`);
+      res.setHeader('Allow', ['GET', 'PUT', 'DELETE']);
+      res.status(405).end(`Method ${req.method} Not Allowed`);
   }
 }

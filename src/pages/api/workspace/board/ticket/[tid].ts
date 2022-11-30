@@ -25,13 +25,7 @@ export default async function handler(
       .status(400)
       .json({ message: 'Ticket id is not provided, or valid' });
 
-  if (!tid)
-    return res
-      .status(400)
-      .json({ message: 'Please provide a valid ticket ID' });
-
-  const { method } = req;
-  switch (method) {
+  switch (req.method) {
     case 'GET':
       try {
         const ticket = await getTicketById(tid);
@@ -54,7 +48,9 @@ export default async function handler(
         });
         res.json(ticket);
       } catch (error) {
-        res.status(500).json({ error });
+        res
+          .status(500)
+          .json({ message: 'Error occurred while updating ticket', error });
       }
       break;
 
@@ -63,12 +59,14 @@ export default async function handler(
         const ticket = await deleteTicketById(tid);
         res.json(ticket);
       } catch (error) {
-        res.status(500).json({ error });
+        res
+          .status(500)
+          .json({ message: 'Error ocurred deleting ticket from board', error });
       }
       break;
 
     default:
-      res.setHeader('Allow', ['GET']);
-      res.status(405).end(`Method ${method} Not Allowed`);
+      res.setHeader('Allow', ['GET', 'PUT', 'DELETE']);
+      res.status(405).end(`Method ${req.method} Not Allowed`);
   }
 }

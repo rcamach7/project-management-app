@@ -3,7 +3,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { authOptions } from '@/auth/[...nextauth]';
 import { Types } from 'mongoose';
 import { AppSession } from 'models/global';
-import { Board, Workspace } from 'schemas';
+import { Workspace } from 'schemas';
 import { createNewBoard } from 'controllers/boardController';
 
 export default async function handler(
@@ -17,18 +17,7 @@ export default async function handler(
   );
   if (!session) res.status(401).json({ message: 'Unauthorized' });
 
-  const { method } = req;
-  switch (method) {
-    // TODO: Delete this endpoint before production - only for testing
-    case 'GET':
-      try {
-        const boards = await Board.find();
-        res.json(boards);
-      } catch (error) {
-        res.status(500).json({ message: 'Error retrieving board', error });
-      }
-      break;
-
+  switch (req.method) {
     case 'POST':
       try {
         const { title, description, workspace_id } = req.body;
@@ -48,7 +37,7 @@ export default async function handler(
       }
       break;
     default:
-      res.setHeader('Allow', ['GET', 'POST']);
-      res.status(405).end(`Method ${method} Not Allowed`);
+      res.setHeader('Allow', ['POST']);
+      res.status(405).end(`Method ${req.method} Not Allowed`);
   }
 }
