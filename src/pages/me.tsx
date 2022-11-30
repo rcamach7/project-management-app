@@ -117,6 +117,7 @@ export default function Me({ mySession }) {
       <Box
         sx={{
           minHeight: '100vh',
+          width: '100%',
           maxWidth: '900px',
           display: 'flex',
           flexDirection: 'column',
