@@ -90,7 +90,7 @@ export default function ResponsiveAppBar({ image, name }: Props) {
               }}
             >
               <MenuItem component={NextLinkAnchor} to="/me">
-                <Typography textAlign="center">Account</Typography>
+                <Typography textAlign="center">My Account</Typography>
               </MenuItem>
               <MenuItem component={NextLinkAnchor} to="/me">
                 <Typography textAlign="center">Contact</Typography>
@@ -120,7 +120,7 @@ export default function ResponsiveAppBar({ image, name }: Props) {
               sx={{ my: 2, color: 'text.primary', display: 'block' }}
               to="/me"
             >
-              Account
+              My Account
             </Button>
           </Box>
 

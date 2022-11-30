@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { authOptions } from '@/auth/[...nextauth]';
 import { unstable_getServerSession } from 'next-auth/next';
 import { AppSession } from 'models/global';
@@ -98,6 +98,14 @@ export default function Me({ mySession }) {
       displayErrorMessage('Error creating workspace', error);
     }
   };
+
+  useEffect(() => {
+    if (uxFeedback.showBanner) {
+      setTimeout(() => {
+        setUxFeedback({ ...uxFeedback, showBanner: false, bannerMessage: '' });
+      }, 2000);
+    }
+  }, [uxFeedback.showBanner]);
 
   return (
     <>
