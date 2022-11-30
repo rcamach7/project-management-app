@@ -17,7 +17,6 @@ import { FormStatus } from 'models/client';
 interface Props {
   userId: string;
   workspace: WorkspaceSummaryType;
-  index: number;
   handleWorkspaceFormAction: (
     action: FormStatus['action'],
     title: string,
@@ -30,7 +29,6 @@ interface Props {
 export default function WorkspaceSummary({
   userId,
   workspace,
-  index,
   handleWorkspaceFormAction,
   handleWorkspaceDelete,
 }: Props) {
@@ -50,9 +48,7 @@ export default function WorkspaceSummary({
           display: 'flex',
           flexDirection: 'column',
         }}
-        className={`animate__animated animate__fadeInDown animate__delay-${
-          index + 1
-        }s`}
+        className="animate__animated animate__fadeInUp"
       >
         <CardContent sx={{ display: 'flex', flexDirection: 'column', pb: 0 }}>
           <Typography variant="caption" component="p" sx={{ fontSize: 10 }}>

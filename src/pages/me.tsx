@@ -162,9 +162,8 @@ export default function Me({ mySession }) {
             overflow: 'scroll',
           }}
         >
-          {session.user.workspaces.map((workspace, i) => (
+          {session.user.workspaces.map((workspace) => (
             <WorkspaceSummary
-              index={i}
               userId={session.user._id}
               key={workspace._id}
               workspace={workspace}
