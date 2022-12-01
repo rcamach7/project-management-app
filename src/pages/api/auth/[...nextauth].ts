@@ -29,6 +29,9 @@ export const authOptions = {
   },
   adapter: MongoDBAdapter(clientPromise),
   secret: process.env.NEXT_PUBLIC_SECRET,
+  theme: {
+    logo: '/hero/flow.svg',
+  },
 };
 
 export default NextAuth(authOptions);
