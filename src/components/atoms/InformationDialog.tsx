@@ -22,12 +22,12 @@ export default function InformationDialog({
     <Dialog
       open={true}
       onClose={handleClose}
-      aria-labelledby="alert-dialog-title"
-      aria-describedby="alert-dialog-description"
+      aria-labelledby="alert-dialog-information-title"
+      aria-describedby="alert-dialog-information"
     >
-      <DialogTitle id="alert-dialog-title">{title}</DialogTitle>
+      <DialogTitle id="alert-dialog-information-title">{title}</DialogTitle>
       <DialogContent>
-        <DialogContentText id="alert-dialog-description">
+        <DialogContentText id="alert-dialog-information">
           {content}
         </DialogContentText>
       </DialogContent>

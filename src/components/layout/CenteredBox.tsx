@@ -6,7 +6,7 @@ interface Props extends BoxProps {
   sx?: {};
 }
 
-const CenteredBox: FC<Props> = ({ children, flex, sx }) => {
+export default function CenteredBox({ children, flex, sx }: Props) {
   return (
     <MuiBox
       sx={{
@@ -21,6 +21,4 @@ const CenteredBox: FC<Props> = ({ children, flex, sx }) => {
       {children}
     </MuiBox>
   );
-};
-
-export default CenteredBox;
+}

@@ -33,12 +33,12 @@ export default function ConfirmDeleteDialog({
     <Dialog
       open={open}
       onClose={handleClose}
-      aria-labelledby="alert-dialog-title"
-      aria-describedby="alert-dialog-description"
+      aria-labelledby="alert-delete-dialog"
+      aria-describedby="alert-confirm-deletion"
     >
-      <DialogTitle id="alert-dialog-title">{title}</DialogTitle>
+      <DialogTitle id="alert-delete-dialog">{title}</DialogTitle>
       <DialogContent>
-        <DialogContentText id="alert-dialog-description">
+        <DialogContentText id="alert-confirm-deletion">
           {content}
         </DialogContentText>
       </DialogContent>

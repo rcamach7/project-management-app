@@ -9,6 +9,7 @@ export default function Layout({ children }) {
         alignItems: 'center',
         justifyContent: 'center',
       }}
+      component="main"
     >
       {children}
     </Box>

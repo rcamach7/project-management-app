@@ -95,6 +95,7 @@ const deleteWorkspaceFromUserSession = (
   );
   return newSession;
 };
+
 const helpers = {
   deleteTicketFromWorkspace,
   addBoardToWorkspace,

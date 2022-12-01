@@ -23,6 +23,7 @@ export default function ProfileBar({ user }: Props) {
         p: 1,
         pt: { xs: 1, sm: 3, md: 5 },
       }}
+      component="nav"
     >
       <Box
         sx={{
