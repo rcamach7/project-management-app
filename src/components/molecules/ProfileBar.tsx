@@ -61,7 +61,7 @@ export default function ProfileBar({ user }: Props) {
             text="Sign Out"
             variant="outlined"
             size="small"
-            onClick={signOut}
+            onClick={() => signOut({ callbackUrl: '/' })}
             sx={{
               fontSize: { xs: '.5em', sm: '.7em', md: '.9em' },
               color: 'secondary.main',

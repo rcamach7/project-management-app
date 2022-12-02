@@ -89,11 +89,11 @@ export default function ResponsiveAppBar({ image, name }: Props) {
                 display: { xs: 'block', md: 'none' },
               }}
             >
-              <MenuItem component={NextLinkAnchor} to="/me">
-                <Typography textAlign="center">My Account</Typography>
+              <MenuItem component={NextLinkAnchor} to="/">
+                <Typography textAlign="center">Home</Typography>
               </MenuItem>
               <MenuItem component={NextLinkAnchor} to="/me">
-                <Typography textAlign="center">Contact</Typography>
+                <Typography textAlign="center">My Account</Typography>
               </MenuItem>
             </Menu>
           </Box>
@@ -115,6 +115,13 @@ export default function ResponsiveAppBar({ image, name }: Props) {
             FLOW
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+            <Button
+              component={NextLinkAnchor}
+              sx={{ my: 2, color: 'text.primary', display: 'block' }}
+              to="/"
+            >
+              Home
+            </Button>
             <Button
               component={NextLinkAnchor}
               sx={{ my: 2, color: 'text.primary', display: 'block' }}
@@ -147,7 +154,7 @@ export default function ResponsiveAppBar({ image, name }: Props) {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              <MenuItem onClick={() => signOut()}>
+              <MenuItem onClick={() => signOut({ callbackUrl: '/' })}>
                 <Typography textAlign="center">Sign Out</Typography>
               </MenuItem>
             </Menu>
