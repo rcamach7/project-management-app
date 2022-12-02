@@ -1,8 +1,8 @@
 import Head from 'next/head';
 import { Feature } from 'models/client';
+import { useRouter } from 'next/router';
 import { signIn } from 'next-auth/react';
-import { unstable_getServerSession } from 'next-auth/next';
-import { authOptions } from '@/auth/[...nextauth]';
+import { useSession } from 'next-auth/react';
 import { Box, Typography, Unstable_Grid2 as Grid } from '@mui/material';
 import { PageTitle, FeatureCard, ActionButton } from '@/components/atoms/index';
 import { CenteredBox } from '@/components/layout/index';
@@ -12,6 +12,17 @@ interface Props {
 }
 
 export default function Home({ featuresList }: Props) {
+  const { data: session } = useSession();
+  const { push } = useRouter();
+
+  const handleSignIn = () => {
+    if (session) {
+      push('/me');
+    } else {
+      signIn('google', { callbackUrl: '/me' });
+    }
+  };
+
   return (
     <>
       <Head>
@@ -51,7 +62,7 @@ export default function Home({ featuresList }: Props) {
           <ActionButton
             text="Get Started"
             variant="outlined"
-            onClick={signIn}
+            onClick={handleSignIn}
             sx={{
               fontSize: { xs: '.9em', sm: '1em', md: '1.2em' },
               color: 'secondary.main',
@@ -79,43 +90,32 @@ export default function Home({ featuresList }: Props) {
   );
 }
 
-export async function getServerSideProps({ req, res }) {
-  const session = await unstable_getServerSession(req, res, authOptions);
-
-  if (session) {
-    return {
-      redirect: {
-        destination: '/me',
-        permanent: false,
-      },
-    };
-  } else {
-    return {
-      props: {
-        featuresList: [
-          {
-            image: '/features/organized.svg',
-            title: 'Organization',
-            description:
-              'Create workspaces, boards, and tickets to organize your projects',
-          },
-          {
-            image: '/features/collaborate.svg',
-            title: 'Collaboration',
-            description: 'Collaborate with your team on projects and tasks',
-          },
-          {
-            image: '/features/productivity.svg',
-            title: 'Productivity',
-            description: 'Increase your productivity with Flow',
-          },
-          {
-            image: '/features/accessible.svg',
-            title: 'Accessibility',
-            description: 'Access your projects and tasks from anywhere',
-          },
-        ],
-      },
-    };
-  }
+export async function getStaticProps() {
+  return {
+    props: {
+      featuresList: [
+        {
+          image: '/features/organized.svg',
+          title: 'Organization',
+          description:
+            'Create workspaces, boards, and tickets to organize your projects',
+        },
+        {
+          image: '/features/collaborate.svg',
+          title: 'Collaboration',
+          description: 'Collaborate with your team on projects and tasks',
+        },
+        {
+          image: '/features/productivity.svg',
+          title: 'Productivity',
+          description: 'Increase your productivity with Flow',
+        },
+        {
+          image: '/features/accessible.svg',
+          title: 'Accessibility',
+          description: 'Access your projects and tasks from anywhere',
+        },
+      ],
+    },
+  };
 }
