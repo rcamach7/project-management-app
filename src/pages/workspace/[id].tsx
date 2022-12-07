@@ -22,19 +22,18 @@ export default function Workspace_Continued() {
       push('/');
     },
   });
-  const [workspaceState, setWorkspaceState] = useState<models.Workspace>(null);
-  const [uxFeedback, setUxFeedback] = useState<models.UxFeedbackState>({
-    loading: false,
-    showBanner: false,
-    bannerMessage: '',
-  });
 
+  const [workspaceState, setWorkspaceState] = useState<models.Workspace>(null);
   const [activeBoard, setActiveBoard] = useState(null);
   const board = workspaceState?.boards.find(
     (board) => board._id === activeBoard
   );
 
-  const handleBoardChange = (boardId: string) => setActiveBoard(boardId);
+  const [uxFeedback, setUxFeedback] = useState<models.UxFeedbackState>({
+    loading: false,
+    showBanner: false,
+    bannerMessage: '',
+  });
 
   const displayUxMessage = (message: string, error?: any) => {
     setUxFeedback({
@@ -47,6 +46,8 @@ export default function Workspace_Continued() {
   };
 
   const displayLoading = () => setUxFeedback({ ...uxFeedback, loading: true });
+
+  const handleBoardChange = (boardId: string) => setActiveBoard(boardId);
 
   const handleTicketDelete = async (ticketId: string) => {
     try {
@@ -159,14 +160,6 @@ export default function Workspace_Continued() {
   };
 
   useEffect(() => {
-    if (uxFeedback.showBanner) {
-      setTimeout(() => {
-        setUxFeedback({ ...uxFeedback, showBanner: false, bannerMessage: '' });
-      }, 2000);
-    }
-  }, [uxFeedback.showBanner]);
-
-  useEffect(() => {
     const getWorkspace = async () => {
       try {
         const workspace = await clientApi.getWorkspaceById(query.id as string);
@@ -185,6 +178,14 @@ export default function Workspace_Continued() {
       getWorkspace();
     }
   }, [query]);
+
+  useEffect(() => {
+    if (uxFeedback.showBanner) {
+      setTimeout(() => {
+        setUxFeedback({ ...uxFeedback, showBanner: false, bannerMessage: '' });
+      }, 2000);
+    }
+  }, [uxFeedback.showBanner]);
 
   if (!workspaceState || status === 'loading' || session.user === null) {
     return (
