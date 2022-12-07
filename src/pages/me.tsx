@@ -34,23 +34,16 @@ export default function Me({ mySession }) {
     bannerMessage: '',
   });
 
-  const displayErrorMessage = (message: string, error: any) => {
+  const displayUxMessage = (message: string, error?: any) => {
     setUxFeedback({
       loading: false,
       showBanner: true,
-      bannerType: 'error',
+      bannerType: error ? 'error' : 'success',
       bannerMessage: message,
     });
-    console.error(error);
+    if (error) console.error(error);
   };
-  const displaySuccessMessage = (message: string) => {
-    setUxFeedback({
-      loading: false,
-      showBanner: true,
-      bannerType: 'success',
-      bannerMessage: message,
-    });
-  };
+
   const displayLoading = () => setUxFeedback({ ...uxFeedback, loading: true });
 
   const closeInformationDialog = () =>
@@ -61,9 +54,9 @@ export default function Me({ mySession }) {
       displayLoading();
       await clientApi.deleteWorkspace(workspaceId);
       setSession(helpers.deleteWorkspaceFromUserSession(session, workspaceId));
-      displaySuccessMessage('Workspace deleted successfully');
+      displayUxMessage('Workspace deleted successfully');
     } catch (error) {
-      displayErrorMessage('Error deleting workspace', error);
+      displayUxMessage('Error deleting workspace', error);
     }
   };
 
@@ -81,7 +74,7 @@ export default function Me({ mySession }) {
           description
         );
         setSession(helpers.addWorkspaceToUserSession(session, newWorkspace));
-        displaySuccessMessage('Workspace created successfully');
+        displayUxMessage('Workspace created successfully');
       }
       if (action === 'EDIT' && workspaceId) {
         const updatedWorkspace = await clientApi.editWorkspace(
@@ -92,10 +85,10 @@ export default function Me({ mySession }) {
         setSession(
           helpers.updateWorkspaceInUserSession(session, updatedWorkspace)
         );
-        displaySuccessMessage('Workspace updated successfully');
+        displayUxMessage('Workspace updated successfully');
       }
     } catch (error) {
-      displayErrorMessage('Error creating workspace', error);
+      displayUxMessage('Error creating workspace', error);
     }
   };
 
