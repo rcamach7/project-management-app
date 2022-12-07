@@ -36,22 +36,14 @@ export default function Workspace_Continued() {
 
   const handleBoardChange = (boardId: string) => setActiveBoard(boardId);
 
-  const displaySuccessMessage = (message: string) =>
+  const displayUxMessage = (message: string, error?: any) => {
     setUxFeedback({
       loading: false,
       showBanner: true,
-      bannerType: 'success',
+      bannerType: error ? 'error' : 'success',
       bannerMessage: message,
     });
-
-  const displayErrorMessage = (message: string, error: any) => {
-    setUxFeedback({
-      loading: false,
-      showBanner: true,
-      bannerType: 'error',
-      bannerMessage: message,
-    });
-    console.error(error);
+    if (error) console.error(error);
   };
 
   const displayLoading = () => setUxFeedback({ ...uxFeedback, loading: true });
@@ -63,12 +55,9 @@ export default function Workspace_Continued() {
       setWorkspaceState((prevState) => {
         return helpers.deleteTicketFromWorkspace(prevState, ticketId);
       });
-      displaySuccessMessage('Ticket deleted successfully');
+      displayUxMessage('Ticket deleted successfully');
     } catch (error) {
-      displayErrorMessage(
-        'Error deleting Ticket. Please try again later.',
-        error
-      );
+      displayUxMessage('Error deleting Ticket. Please try again later.', error);
     }
   };
 
@@ -81,12 +70,9 @@ export default function Workspace_Continued() {
         setActiveBoard(newState.boards.length ? newState.boards[0]._id : null);
         return newState;
       });
-      displaySuccessMessage('Board deleted successfully');
+      displayUxMessage('Board deleted successfully');
     } catch (error) {
-      displayErrorMessage(
-        'Error deleting board. Please try again later.',
-        error
-      );
+      displayUxMessage('Error deleting board. Please try again later.', error);
     }
   };
 
@@ -121,9 +107,9 @@ export default function Workspace_Continued() {
         });
       }
 
-      displaySuccessMessage(`Board ${action.toLowerCase()}ed successfully`);
+      displayUxMessage(`Board ${action.toLowerCase()}ed successfully`);
     } catch (error) {
-      displayErrorMessage(
+      displayUxMessage(
         `Error occurred while ${action.toLowerCase()}ing board. Please try again later.`,
         error
       );
@@ -163,9 +149,9 @@ export default function Workspace_Continued() {
         });
       }
 
-      displaySuccessMessage(`Ticket ${action.toLowerCase()}ed successfully`);
+      displayUxMessage(`Ticket ${action.toLowerCase()}ed successfully`);
     } catch (error) {
-      displayErrorMessage(
+      displayUxMessage(
         `Error occurred while ${action.toLowerCase()}ing ticket. Please try again later.`,
         error
       );
@@ -189,7 +175,7 @@ export default function Workspace_Continued() {
           workspace.boards.length ? workspace.boards[0]._id : null
         );
       } catch (error) {
-        displayErrorMessage(
+        displayUxMessage(
           'Error occurred while fetching workspace. Please try again later.',
           error
         );
