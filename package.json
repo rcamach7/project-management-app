@@ -6,7 +6,11 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "cypress": "cypress open",
+    "cypress:headless": "cypress run",
+    "e2e": "start-server-and-test start http://localhost:3000 cypress",
+    "e2e:headless": "start-server-and-test start http://localhost:3000 cypress:headless"
   },
   "simple-git-hooks": {
     "pre-commit": "lint-staged --quiet --no-stash --concurrent true",
@@ -31,6 +35,7 @@
     "@types/node": "^18.7.14",
     "@types/react": "^18.0.18",
     "autoprefixer": "^10.4.8",
+    "cypress": "^12.0.1",
     "eslint": "8.23.0",
     "eslint-config-next": "^12.2.5",
     "eslint-config-prettier": "^8.5.0",
