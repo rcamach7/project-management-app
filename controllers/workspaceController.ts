@@ -81,7 +81,14 @@ export const getWorkspaceById = async (_id: string) => {
         populate: {
           path: 'tickets',
           model: 'Ticket',
-          select: ['title', 'description', 'labels', 'board_id', '_id'],
+          select: [
+            'title',
+            'description',
+            'labels',
+            'board_id',
+            '_id',
+            'createdAt',
+          ],
         },
       });
     return workspace;

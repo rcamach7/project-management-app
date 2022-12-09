@@ -29,6 +29,7 @@ const Ticket = new Schema({
       required: true,
     },
   ],
+  createdAt: { type: Date, default: Date.now },
 });
 
 Ticket.pre('findOneAndDelete', async function (next) {
