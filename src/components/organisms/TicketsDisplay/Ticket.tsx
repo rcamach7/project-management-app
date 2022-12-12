@@ -11,6 +11,7 @@ import { ConfirmDeleteDialog } from '@/components/atoms/index';
 import { TicketForm } from '@/components/molecules/index';
 import TicketContent from './TicketContent';
 import DeleteIcon from '@mui/icons-material/Delete';
+import { formatDistance, subDays } from 'date-fns';
 
 interface Props {
   ticket: TicketType;
@@ -67,10 +68,18 @@ export default function Ticket({
             sx={{
               fontSize: 10,
               color: 'text.secondary',
-              pl: 1,
+              pr: 1.5,
+              textAlign: 'right',
             }}
           >
-            created on {ticket.createdAt.toString()}
+            created{' '}
+            {formatDistance(
+              subDays(new Date(ticket.createdAt), 3),
+              new Date(),
+              {
+                addSuffix: true,
+              }
+            )}
           </Typography>
         </CardContent>
       </Card>
