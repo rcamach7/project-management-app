@@ -1,5 +1,10 @@
 import { useState } from 'react';
-import { Ticket as TicketType, FormStatus, LabelsEnum } from 'models/client';
+import {
+  Ticket as TicketType,
+  FormStatus,
+  LabelsEnum,
+  Ticket,
+} from 'models/client';
 import { FloatingButton } from '@/components/atoms/index';
 import { Box, useMediaQuery } from '@mui/material';
 import { TicketForm } from '@/components/molecules/index';
@@ -44,14 +49,20 @@ export default function TicketsDisplay({
           overflow: 'scroll',
         }}
       >
-        {tickets.map((ticket) => (
-          <TicketComponent
-            key={ticket._id}
-            ticket={ticket}
-            handleTicketDelete={handleTicketDelete}
-            handleTicketFormAction={handleTicketFormAction}
-          />
-        ))}
+        {[...tickets]
+          .sort((a, b) => {
+            return (
+              new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+            );
+          })
+          .map((ticket) => (
+            <TicketComponent
+              key={ticket._id}
+              ticket={ticket}
+              handleTicketDelete={handleTicketDelete}
+              handleTicketFormAction={handleTicketFormAction}
+            />
+          ))}
         {isWindowDesktop && (
           <FloatingButton
             icon={<AddIcon />}

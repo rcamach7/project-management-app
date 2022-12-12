@@ -5,13 +5,12 @@ import {
   CardActions as TicketActions,
   Button,
   Typography,
-  CardContent,
 } from '@mui/material';
 import { ConfirmDeleteDialog } from '@/components/atoms/index';
 import { TicketForm } from '@/components/molecules/index';
 import TicketContent from './TicketContent';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { formatDistance, subDays } from 'date-fns';
+import { formatDistance } from 'date-fns';
 
 interface Props {
   ticket: TicketType;
@@ -42,7 +41,7 @@ export default function Ticket({
     <>
       <Card sx={{ border: 1 }}>
         <TicketContent ticket={ticket} />
-        <TicketActions sx={{ py: 0.5 }}>
+        <TicketActions sx={{ py: 0.5, display: 'flex', flexWrap: 'wrap' }}>
           <Button
             size="small"
             sx={{ color: 'secondary.main' }}
@@ -61,8 +60,7 @@ export default function Ticket({
           >
             Delete
           </Button>
-        </TicketActions>
-        <CardContent sx={{ p: 0, paddingBottom: '6px !important' }}>
+
           <Typography
             variant="body2"
             sx={{
@@ -70,18 +68,15 @@ export default function Ticket({
               color: 'text.secondary',
               pr: 1.5,
               textAlign: 'right',
+              ml: 'auto',
             }}
           >
             created{' '}
-            {formatDistance(
-              subDays(new Date(ticket.createdAt), 3),
-              new Date(),
-              {
-                addSuffix: true,
-              }
-            )}
+            {formatDistance(new Date(ticket.createdAt), new Date(), {
+              addSuffix: true,
+            })}
           </Typography>
-        </CardContent>
+        </TicketActions>
       </Card>
       {showDeleteConfirmation && (
         <ConfirmDeleteDialog
