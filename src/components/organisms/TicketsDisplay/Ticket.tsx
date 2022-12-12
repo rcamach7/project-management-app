@@ -1,6 +1,12 @@
 import { useState } from 'react';
 import { Ticket as TicketType, FormStatus, LabelsEnum } from 'models/client';
-import { Card, CardActions as TicketActions, Button } from '@mui/material';
+import {
+  Card,
+  CardActions as TicketActions,
+  Button,
+  Typography,
+  CardContent,
+} from '@mui/material';
 import { ConfirmDeleteDialog } from '@/components/atoms/index';
 import { TicketForm } from '@/components/molecules/index';
 import TicketContent from './TicketContent';
@@ -55,6 +61,18 @@ export default function Ticket({
             Delete
           </Button>
         </TicketActions>
+        <CardContent sx={{ p: 0, paddingBottom: '6px !important' }}>
+          <Typography
+            variant="body2"
+            sx={{
+              fontSize: 10,
+              color: 'text.secondary',
+              pl: 1,
+            }}
+          >
+            created on {ticket.createdAt.toString()}
+          </Typography>
+        </CardContent>
       </Card>
       {showDeleteConfirmation && (
         <ConfirmDeleteDialog

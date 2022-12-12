@@ -30,6 +30,7 @@ export interface Ticket {
   title: string;
   description: string;
   labels: LabelsEnum[];
+  createdAt: Date;
 }
 
 export enum LabelsEnum {
