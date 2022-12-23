@@ -36,7 +36,7 @@ export default async function handler(
       break;
 
     case 'PUT':
-      const { title, description, labels } = req.body;
+      const { title, description, labels, board_id } = req.body;
       if (!title && !description && !labels)
         return res.status(400).json({ message: 'Missing required fields' });
 
@@ -45,6 +45,7 @@ export default async function handler(
           title,
           description,
           labels,
+          board_id,
         });
         res.json(ticket);
       } catch (error) {

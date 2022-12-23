@@ -31,7 +31,12 @@ export const getTicketById = async (_id: string) => {
 
 export const updateTicketFieldsById = async (
   _id: string,
-  fields: { title?: string; description?: string; labels?: string[] }
+  fields: {
+    title?: string;
+    description?: string;
+    labels?: string[];
+    board_id?: string;
+  }
 ) => {
   try {
     const ticket = await Ticket.findByIdAndUpdate(
