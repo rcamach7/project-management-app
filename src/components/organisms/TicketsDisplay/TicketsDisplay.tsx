@@ -3,7 +3,7 @@ import {
   Ticket as TicketType,
   FormStatus,
   LabelsEnum,
-  Ticket,
+  BoardOption,
 } from 'models/client';
 import { FloatingButton } from '@/components/atoms/index';
 import { Box, useMediaQuery } from '@mui/material';
@@ -14,6 +14,7 @@ import { default as TicketComponent } from './Ticket';
 interface Props {
   boardId: string;
   tickets: TicketType[];
+  boardOptions: BoardOption[];
   handleTicketDelete: (ticketId: string) => void;
   handleTicketFormAction: (
     action: FormStatus['action'],
@@ -28,6 +29,7 @@ interface Props {
 export default function TicketsDisplay({
   boardId,
   tickets,
+  boardOptions,
   handleTicketDelete,
   handleTicketFormAction,
 }: Props) {
@@ -59,6 +61,7 @@ export default function TicketsDisplay({
             <TicketComponent
               key={ticket._id}
               ticket={ticket}
+              boardOptions={boardOptions}
               handleTicketDelete={handleTicketDelete}
               handleTicketFormAction={handleTicketFormAction}
             />

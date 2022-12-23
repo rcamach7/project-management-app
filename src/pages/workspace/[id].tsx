@@ -25,6 +25,13 @@ export default function Workspace_Continued() {
 
   const [workspaceState, setWorkspaceState] = useState<models.Workspace>(null);
   const [activeBoard, setActiveBoard] = useState(null);
+  const boardOptions: models.BoardOption[] = workspaceState?.boards.map(
+    (board) => ({
+      boardName: board.title,
+      board_id: board._id,
+    })
+  );
+
   const board = workspaceState?.boards.find(
     (board) => board._id === activeBoard
   );
@@ -238,6 +245,7 @@ export default function Workspace_Continued() {
               tickets={board.tickets}
               handleTicketDelete={handleTicketDelete}
               handleTicketFormAction={handleTicketFormAction}
+              boardOptions={boardOptions}
             />
           )}
         </Box>

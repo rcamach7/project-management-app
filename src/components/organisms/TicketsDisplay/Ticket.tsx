@@ -1,5 +1,10 @@
 import { useState } from 'react';
-import { Ticket as TicketType, FormStatus, LabelsEnum } from 'models/client';
+import {
+  Ticket as TicketType,
+  FormStatus,
+  LabelsEnum,
+  BoardOption,
+} from 'models/client';
 import {
   Card,
   CardActions as TicketActions,
@@ -14,6 +19,7 @@ import { formatDistance } from 'date-fns';
 
 interface Props {
   ticket: TicketType;
+  boardOptions: BoardOption[];
   handleTicketDelete: (ticketId: string) => void;
   handleTicketFormAction: (
     action: FormStatus['action'],
@@ -27,6 +33,7 @@ interface Props {
 
 export default function Ticket({
   ticket,
+  boardOptions,
   handleTicketDelete,
   handleTicketFormAction,
 }: Props) {

@@ -65,3 +65,8 @@ export interface FormStatus {
   show: boolean;
   action: 'CREATE' | 'EDIT';
 }
+
+export interface BoardOption {
+  boardName: string;
+  board_id: string;
+}
