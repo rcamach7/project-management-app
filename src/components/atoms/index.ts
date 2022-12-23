@@ -6,3 +6,4 @@ export { default as NextLinkAnchor } from './NextLinkAnchor';
 export { default as ConfirmDeleteDialog } from './ConfirmDeleteDialog';
 export { default as FloatingButton } from './FloatingButton';
 export { default as InformationDialog } from './InformationDialog';
+export { default as MoveToMenu } from './MoveToMenu';
