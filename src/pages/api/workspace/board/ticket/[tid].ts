@@ -44,6 +44,7 @@ export default async function handler(
         // TODO: Move ticket to another board
         if (board_id) {
           console.log('detected moving ticket to another board');
+          // remove ticket id from board
         }
 
         const ticket = await updateTicketFieldsById(tid, {
