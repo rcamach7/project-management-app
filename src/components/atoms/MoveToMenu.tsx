@@ -3,6 +3,7 @@ import { BoardOption, Ticket } from 'models/client';
 import { Button, Menu, MenuItem } from '@mui/material';
 
 interface Props {
+  ticket: Ticket;
   boardOptions: BoardOption[];
   handleMoveTicket: (
     ticket: Ticket,
@@ -11,7 +12,11 @@ interface Props {
   ) => Promise<void>;
 }
 
-export default function BasicMenu({ boardOptions, handleMoveTicket }: Props) {
+export default function BasicMenu({
+  ticket,
+  boardOptions,
+  handleMoveTicket,
+}: Props) {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -19,6 +24,11 @@ export default function BasicMenu({ boardOptions, handleMoveTicket }: Props) {
   };
   const handleClose = () => {
     setAnchorEl(null);
+  };
+
+  const handleMoveTicketClick = (destinationBoardId: string) => {
+    handleMoveTicket(ticket, ticket.board_id, destinationBoardId);
+    handleClose();
   };
 
   return (
@@ -44,7 +54,10 @@ export default function BasicMenu({ boardOptions, handleMoveTicket }: Props) {
         }}
       >
         {boardOptions.map((boardOption) => (
-          <MenuItem key={boardOption.board_id} onClick={handleClose}>
+          <MenuItem
+            key={boardOption.board_id}
+            onClick={() => handleMoveTicketClick(boardOption.board_id)}
+          >
             {boardOption.boardName}
           </MenuItem>
         ))}
