@@ -41,6 +41,11 @@ export default async function handler(
         return res.status(400).json({ message: 'Missing required fields' });
 
       try {
+        // TODO: Move ticket to another board
+        if (board_id) {
+          console.log('detected moving ticket to another board');
+        }
+
         const ticket = await updateTicketFieldsById(tid, {
           title,
           description,

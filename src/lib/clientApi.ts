@@ -59,13 +59,15 @@ export const updateTicket = async (
   title: string,
   description: string,
   labels: LabelsEnum[],
-  ticket_id: string
+  ticket_id: string,
+  board_id?: string
 ) => {
   try {
     const body = {
       title,
       description,
       labels,
+      board_id,
     };
     const res = await axios.put(
       `/api/workspace/board/ticket/${ticket_id}`,
@@ -146,19 +148,6 @@ export const getWorkspaceById = async (_id: string) => {
   }
 };
 
-export const moveTicket = async (ticket_id: string, board_id: string) => {
-  try {
-    const body = {
-      ticket_id,
-      board_id,
-    };
-    const res = await axios.put(`/api/workspace/board/ticket/move`, body);
-    return res.data as Ticket;
-  } catch (error) {
-    return Promise.reject(error);
-  }
-};
-
 const clientApi = {
   deleteTicketByID,
   deleteBoardByID,
@@ -170,7 +159,6 @@ const clientApi = {
   editWorkspace,
   deleteWorkspace,
   getWorkspaceById,
-  moveTicket,
 };
 
 export default clientApi;
