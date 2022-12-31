@@ -29,6 +29,11 @@ interface Props {
     boardId?: string,
     ticketId?: string
   ) => void;
+  handleMoveTicket: (
+    ticket: TicketType,
+    sourceBoardId: string,
+    destinationBoardId: string
+  ) => Promise<void>;
 }
 
 export default function Ticket({
@@ -36,6 +41,7 @@ export default function Ticket({
   boardOptions,
   handleTicketDelete,
   handleTicketFormAction,
+  handleMoveTicket,
 }: Props) {
   const { _id, board_id, title } = ticket;
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
@@ -56,7 +62,10 @@ export default function Ticket({
           >
             Edit
           </Button>
-          <MoveToMenu boardOptions={boardOptions} />
+          <MoveToMenu
+            boardOptions={boardOptions}
+            handleMoveTicket={handleMoveTicket}
+          />
           <Button
             size="small"
             sx={{ color: 'red', fontSize: 13 }}

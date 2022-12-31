@@ -24,6 +24,11 @@ interface Props {
     boardId?: string,
     ticketId?: string
   ) => void;
+  handleMoveTicket: (
+    ticket: TicketType,
+    sourceBoardId: string,
+    destinationBoardId: string
+  ) => Promise<void>;
 }
 
 export default function TicketsDisplay({
@@ -32,6 +37,7 @@ export default function TicketsDisplay({
   boardOptions,
   handleTicketDelete,
   handleTicketFormAction,
+  handleMoveTicket,
 }: Props) {
   const [formStatus, setFormStatus] = useState<FormStatus>({
     show: false,
@@ -64,6 +70,7 @@ export default function TicketsDisplay({
               boardOptions={boardOptions}
               handleTicketDelete={handleTicketDelete}
               handleTicketFormAction={handleTicketFormAction}
+              handleMoveTicket={handleMoveTicket}
             />
           ))}
         {isWindowDesktop && (
