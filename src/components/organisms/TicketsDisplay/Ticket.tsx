@@ -63,6 +63,7 @@ export default function Ticket({
             Edit
           </Button>
           <MoveToMenu
+            ticket={ticket}
             boardOptions={boardOptions}
             handleMoveTicket={handleMoveTicket}
           />
