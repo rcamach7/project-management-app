@@ -167,28 +167,29 @@ export default function Workspace_Continued() {
   };
 
   const handleMoveTicket = async (
-    ticketId: string,
+    ticket: models.Ticket,
     sourceBoardId: string,
     destinationBoardId: string
   ) => {
     try {
       displayLoading();
-      await clientApi.moveTicket(ticketId, destinationBoardId);
-      // setWorkspaceState((prevState) => {
-      //   return helpers.moveTicketInWorkspace(
-      //     prevState,
-      //     ticketId,
-      //     sourceBoardId,
-      //     destinationBoardId
-      //   );
-      // });
+      // TODO: uncomment when API / Server is ready
+      // await clientApi.moveTicket(ticket, destinationBoardId);
+
+      // Will only move ticket in the UI, not in the database
+      setWorkspaceState((prevState) => {
+        return helpers.moveTicketInWorkspace(
+          prevState,
+          ticket,
+          sourceBoardId,
+          destinationBoardId
+        );
+      });
       displayUxMessage('Ticket moved successfully');
     } catch (error) {
       displayUxMessage('Error moving ticket. Please try again later.', error);
     }
   };
-
-  console.log(workspaceState);
 
   useEffect(() => {
     const getWorkspace = async () => {
@@ -269,6 +270,7 @@ export default function Workspace_Continued() {
               tickets={board.tickets}
               handleTicketDelete={handleTicketDelete}
               handleTicketFormAction={handleTicketFormAction}
+              handleMoveTicket={handleMoveTicket}
               boardOptions={boardOptions}
             />
           )}

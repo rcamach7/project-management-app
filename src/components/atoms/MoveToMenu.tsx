@@ -1,12 +1,17 @@
 import { useState } from 'react';
-import { BoardOption } from 'models/client';
+import { BoardOption, Ticket } from 'models/client';
 import { Button, Menu, MenuItem } from '@mui/material';
 
 interface Props {
   boardOptions: BoardOption[];
+  handleMoveTicket: (
+    ticket: Ticket,
+    sourceBoardId: string,
+    destinationBoardId: string
+  ) => Promise<void>;
 }
 
-export default function BasicMenu({ boardOptions }: Props) {
+export default function BasicMenu({ boardOptions, handleMoveTicket }: Props) {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
