@@ -173,10 +173,14 @@ export default function Workspace_Continued() {
   ) => {
     try {
       displayLoading();
-      // TODO: uncomment when API / Server is ready
-      // await clientApi.moveTicket(ticket, destinationBoardId);
+      await clientApi.updateTicket(
+        ticket.title,
+        ticket.description,
+        ticket.labels,
+        ticket._id,
+        destinationBoardId
+      );
 
-      // Will only move ticket in the UI, not in the database
       setWorkspaceState((prevState) => {
         return helpers.moveTicketInWorkspace(
           prevState,
