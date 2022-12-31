@@ -128,7 +128,7 @@ export const editWorkspace = async (
   }
 };
 
-const deleteWorkspace = async (_id: string) => {
+export const deleteWorkspace = async (_id: string) => {
   try {
     await axios.delete(`/api/workspace/${_id}`);
     return true;
@@ -137,7 +137,7 @@ const deleteWorkspace = async (_id: string) => {
   }
 };
 
-const getWorkspaceById = async (_id: string) => {
+export const getWorkspaceById = async (_id: string) => {
   try {
     const res = await axios.get(`/api/workspace/${_id}`);
     return res.data as Workspace;
@@ -146,7 +146,7 @@ const getWorkspaceById = async (_id: string) => {
   }
 };
 
-const moveTicket = async (ticket_id: string, board_id: string) => {
+export const moveTicket = async (ticket_id: string, board_id: string) => {
   try {
     const body = {
       ticket_id,
