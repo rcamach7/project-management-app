@@ -11,7 +11,7 @@ import {
   Button,
   Typography,
 } from '@mui/material';
-import { ConfirmDeleteDialog } from '@/components/atoms/index';
+import { ConfirmDeleteDialog, MoveToMenu } from '@/components/atoms/index';
 import { TicketForm } from '@/components/molecules/index';
 import TicketContent from './TicketContent';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -56,9 +56,7 @@ export default function Ticket({
           >
             Edit
           </Button>
-          <Button size="small" sx={{ color: 'secondary.main' }}>
-            Move to...
-          </Button>
+          <MoveToMenu boardOptions={boardOptions} />
           <Button
             size="small"
             sx={{ color: 'red', fontSize: 13 }}

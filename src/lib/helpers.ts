@@ -96,6 +96,25 @@ const deleteWorkspaceFromUserSession = (
   return newSession;
 };
 
+// const moveTicketInWorkspace = (
+//   workspace: Workspace,
+//   ticketId: string,
+//   sourceId: string,
+//   destinationId: string
+// ) => {
+//   const newWorkspace: Workspace = { ...workspace };
+//   newWorkspace.boards = newWorkspace.boards.map((board) => {
+//     if (board._id === sourceId) {
+//       board.tickets = board.tickets.filter((ticket) => ticket._id !== ticketId);
+//     }
+//     if (board._id === destinationId) {
+//       board.tickets.push({ _id: ticketId });
+//     }
+//     return board;
+//   });
+//   return newWorkspace;
+// };
+
 const helpers = {
   deleteTicketFromWorkspace,
   addBoardToWorkspace,
