@@ -39,6 +39,43 @@ export const updateBoardDescriptionById = async (
   }
 };
 
+export const removeTicketFromBoard = async (
+  board_id: string,
+  ticket_id: string
+) => {
+  try {
+    const board = await Board.findByIdAndUpdate(
+      board_id,
+      { $pull: { tickets: ticket_id } },
+      { new: true }
+    ).populate({
+      path: 'tickets',
+      model: 'Ticket',
+    });
+    return board;
+  } catch (error) {
+    console.error('Error removing ticket from board: ', error);
+    return Promise.reject(error);
+  }
+};
+
+export const addTicketToBoard = async (board_id: string, ticket_id: string) => {
+  try {
+    const board = await Board.findByIdAndUpdate(
+      board_id,
+      { $push: { tickets: ticket_id } },
+      { new: true }
+    ).populate({
+      path: 'tickets',
+      model: 'Ticket',
+    });
+    return board;
+  } catch (error) {
+    console.error('Error adding ticket to board: ', error);
+    return Promise.reject(error);
+  }
+};
+
 /**
  * POST Controllers
  */
