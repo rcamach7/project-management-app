@@ -103,14 +103,23 @@ const moveTicketInWorkspace = (
   destinationSourceId: string
 ) => {
   const newWorkspace: Workspace = { ...workspace };
+
   newWorkspace.boards = newWorkspace.boards.map((currentBoard) => {
+    // Remove ticket from source board
     if (currentBoard._id === boardSourceId) {
       currentBoard.tickets = currentBoard.tickets.filter(
         (currentTicket) => currentTicket._id !== ticket._id
       );
     }
+
+    // Add ticket to destination board
     if (currentBoard._id === destinationSourceId) {
-      currentBoard.tickets.push(ticket);
+      const ticketExists = currentBoard.tickets.find(
+        (currentTicket) => currentTicket._id === ticket._id
+      );
+      if (!ticketExists) {
+        currentBoard.tickets.push({ ...ticket, board_id: currentBoard._id });
+      }
     }
     return currentBoard;
   });
