@@ -166,6 +166,28 @@ export default function Workspace_Continued() {
     }
   };
 
+  const handleMoveTicket = async (
+    ticketId: string,
+    sourceBoardId: string,
+    destinationBoardId: string
+  ) => {
+    try {
+      displayLoading();
+      await clientApi.moveTicket(ticketId, destinationBoardId);
+      // setWorkspaceState((prevState) => {
+      //   return helpers.moveTicketInWorkspace(
+      //     prevState,
+      //     ticketId,
+      //     sourceBoardId,
+      //     destinationBoardId
+      //   );
+      // });
+      displayUxMessage('Ticket moved successfully');
+    } catch (error) {
+      displayUxMessage('Error moving ticket. Please try again later.', error);
+    }
+  };
+
   useEffect(() => {
     const getWorkspace = async () => {
       try {
