@@ -96,24 +96,26 @@ const deleteWorkspaceFromUserSession = (
   return newSession;
 };
 
-// const moveTicketInWorkspace = (
-//   workspace: Workspace,
-//   ticketId: string,
-//   sourceId: string,
-//   destinationId: string
-// ) => {
-//   const newWorkspace: Workspace = { ...workspace };
-//   newWorkspace.boards = newWorkspace.boards.map((board) => {
-//     if (board._id === sourceId) {
-//       board.tickets = board.tickets.filter((ticket) => ticket._id !== ticketId);
-//     }
-//     if (board._id === destinationId) {
-//       board.tickets.push({ _id: ticketId });
-//     }
-//     return board;
-//   });
-//   return newWorkspace;
-// };
+const moveTicketInWorkspace = (
+  workspace: Workspace,
+  ticket: Ticket,
+  boardSourceId: string,
+  destinationSourceId: string
+) => {
+  const newWorkspace: Workspace = { ...workspace };
+  newWorkspace.boards = newWorkspace.boards.map((currentBoard) => {
+    if (currentBoard._id === boardSourceId) {
+      currentBoard.tickets = currentBoard.tickets.filter(
+        (currentTicket) => currentTicket._id !== ticket._id
+      );
+    }
+    if (currentBoard._id === destinationSourceId) {
+      currentBoard.tickets.push(ticket);
+    }
+    return currentBoard;
+  });
+  return newWorkspace;
+};
 
 const helpers = {
   deleteTicketFromWorkspace,
@@ -125,6 +127,7 @@ const helpers = {
   addWorkspaceToUserSession,
   updateWorkspaceInUserSession,
   deleteWorkspaceFromUserSession,
+  moveTicketInWorkspace,
 };
 
 export default helpers;
