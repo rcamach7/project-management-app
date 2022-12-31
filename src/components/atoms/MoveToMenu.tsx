@@ -53,14 +53,16 @@ export default function BasicMenu({
           'aria-labelledby': 'basic-button',
         }}
       >
-        {boardOptions.map((boardOption) => (
-          <MenuItem
-            key={boardOption.board_id}
-            onClick={() => handleMoveTicketClick(boardOption.board_id)}
-          >
-            {boardOption.boardName}
-          </MenuItem>
-        ))}
+        {boardOptions
+          .filter((board) => board.board_id !== ticket.board_id)
+          .map((boardOption) => (
+            <MenuItem
+              key={boardOption.board_id}
+              onClick={() => handleMoveTicketClick(boardOption.board_id)}
+            >
+              {boardOption.boardName}
+            </MenuItem>
+          ))}
       </Menu>
     </>
   );
