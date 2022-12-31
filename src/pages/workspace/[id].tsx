@@ -188,6 +188,8 @@ export default function Workspace_Continued() {
     }
   };
 
+  console.log(workspaceState);
+
   useEffect(() => {
     const getWorkspace = async () => {
       try {
