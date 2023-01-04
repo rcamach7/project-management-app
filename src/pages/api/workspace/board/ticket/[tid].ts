@@ -7,6 +7,10 @@ import {
   deleteTicketById,
   updateTicketFieldsById,
 } from 'controllers/ticketController';
+import {
+  removeTicketFromBoard,
+  addTicketToBoard,
+} from 'controllers/boardController';
 
 export default async function handler(
   req: NextApiRequest,
@@ -41,12 +45,14 @@ export default async function handler(
         return res.status(400).json({ message: 'Missing required fields' });
 
       try {
-        // TODO: Move ticket to another board
+        // If board_id is provided, remove ticket from current board and add to new board
         if (board_id) {
-          console.log('detected moving ticket to another board');
-          // remove ticket id from board
+          const currentTicket = await getTicketById(tid);
+          await removeTicketFromBoard(currentTicket.board_id, tid);
+          await addTicketToBoard(board_id, tid);
         }
 
+        // Update the actual ticket fields
         const ticket = await updateTicketFieldsById(tid, {
           title,
           description,
