@@ -15,6 +15,7 @@ import {
   Tooltip,
 } from '@mui/material';
 import { Menu as MenuIcon } from '@mui/icons-material/';
+import Image from 'next/image';
 
 interface Props {
   image: string;
@@ -40,11 +41,23 @@ export default function ResponsiveAppBar({ image, name }: Props) {
     setAnchorElUser(null);
   };
 
+  const logoImage = (
+    <Image src="/hero/logo_icon.svg" alt="logo" width={30} height={25} />
+  );
+
   return (
     <AppBar position="static" sx={{ backgroundColor: 'background.paper' }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           {/* Desktop */}
+          <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
+            <Image
+              src="/hero/logo_icon.svg"
+              alt="logo"
+              width={25}
+              height={25}
+            />
+          </Box>
           <Typography
             variant="h6"
             noWrap
@@ -55,6 +68,7 @@ export default function ResponsiveAppBar({ image, name }: Props) {
               fontFamily: 'monospace',
               fontWeight: 700,
               letterSpacing: '.3rem',
+              pl: 1.5,
             }}
           >
             FLOW |
@@ -99,21 +113,33 @@ export default function ResponsiveAppBar({ image, name }: Props) {
           </Box>
 
           {/* Mobile */}
-          <Typography
-            variant="h5"
-            noWrap
-            color="text.primary"
+          <Box
             sx={{
               mr: 2,
               display: { xs: 'flex', md: 'none' },
               flexGrow: 1,
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.3rem',
+              alignItems: 'center',
             }}
           >
-            FLOW
-          </Typography>
+            <Image
+              src="/hero/logo_icon.svg"
+              alt="logo"
+              width={30}
+              height={25}
+            />
+            <Typography
+              variant="h5"
+              color="text.primary"
+              sx={{
+                fontFamily: 'monospace',
+                fontWeight: 700,
+                letterSpacing: '.3rem',
+                pl: 1,
+              }}
+            >
+              FLOW
+            </Typography>
+          </Box>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             <Button
               component={NextLinkAnchor}
