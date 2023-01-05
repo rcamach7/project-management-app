@@ -37,6 +37,9 @@ export default function TabButtons({
           flexWrap: 'wrap',
           gap: { xs: 1, sm: 2 },
           pt: 1,
+          pb: { xs: 1, sm: 2 },
+          borderBottom: '3px solid #112240',
+          borderRadius: 2,
         }}
       >
         <ActionButton
