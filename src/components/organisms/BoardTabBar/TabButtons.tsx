@@ -38,7 +38,7 @@ export default function TabButtons({
           gap: { xs: 1, sm: 2 },
           pt: 1,
           pb: { xs: 1, sm: 2 },
-          borderBottom: '3px solid #112240',
+          borderBottom: '1px solid #C3CDED',
           borderRadius: 2,
         }}
       >
