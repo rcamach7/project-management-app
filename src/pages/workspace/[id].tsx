@@ -12,7 +12,7 @@ import {
 } from '@/components/organisms/index';
 import { PageTitle } from '@/components/atoms/index';
 import { UxFeedback } from '@/components/molecules/index';
-import { Box } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 
 export default function Workspace_Continued() {
   const { query, push } = useRouter();
@@ -260,7 +260,27 @@ export default function Workspace_Continued() {
             mx: 'auto',
           }}
         >
-          <PageTitle subheading={workspaceState.name} sx={{ pt: 2, pb: 1 }} />
+          <Box
+            sx={{
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              p: 0.5,
+            }}
+          >
+            <Typography
+              variant="h1"
+              sx={{
+                p: 0.5,
+                borderBottom: '1px solid #C3CDED',
+                borderRadius: 1,
+                fontSize: 24,
+                fontWeight: 600,
+              }}
+            >
+              {workspaceState.name.toUpperCase()}
+            </Typography>
+          </Box>
           <BoardTabBar
             boards={workspaceState.boards}
             activeBoard={activeBoard}
