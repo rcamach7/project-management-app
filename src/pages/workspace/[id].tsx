@@ -273,7 +273,6 @@ export default function Workspace_Continued() {
               sx={{
                 p: 0.5,
                 borderBottom: '1px solid #C3CDED',
-                borderRadius: 1,
                 fontSize: 24,
                 fontWeight: 600,
               }}
