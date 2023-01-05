@@ -40,27 +40,27 @@ export const getLabelColor = (label: LabelsEnum) => {
     case LabelsEnum.BACKEND:
       return '#EFA94A';
     case LabelsEnum.FRONTEND:
-      return '#999950';
+      return '#ffffff';
     case LabelsEnum.FEAT:
       return '#c7d903';
     case LabelsEnum.REFACTOR:
-      return '#3B83BD';
+      return '#f6ffb5';
     case LabelsEnum.TEST:
-      return '#3D642D';
+      return '#f0fc03';
     case LabelsEnum.PERF:
-      return '#C35831';
+      return '#fc0303';
     case LabelsEnum.STYLE:
-      return '#0af1d5';
-    case LabelsEnum.ASSET:
-      return '#6A5F31';
-    case LabelsEnum.DOC:
-      return '#3F888F';
-    case LabelsEnum.CI:
-      return '#B44C43';
-    case LabelsEnum.CHORE:
-      return '#316650';
-    case LabelsEnum.WIP:
       return '#00BB2D';
+    case LabelsEnum.ASSET:
+      return '#03f8fc';
+    case LabelsEnum.DOC:
+      return '#b5bfff';
+    case LabelsEnum.CI:
+      return '#0f42db';
+    case LabelsEnum.CHORE:
+      return '#ffd9b5';
+    case LabelsEnum.WIP:
+      return '#0af1d5';
     default:
       return '#F3C610';
   }
