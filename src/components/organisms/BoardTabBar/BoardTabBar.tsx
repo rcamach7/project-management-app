@@ -37,7 +37,7 @@ export default function BoardTabBar({
         activeBoardData={boards.find((board) => board._id === activeBoard)}
       />
       {boards.length ? (
-        <CenteredBox sx={{ flexDirection: 'row', mt: { xs: 2, sm: 3 } }}>
+        <CenteredBox sx={{ flexDirection: 'row', mt: 1 }}>
           <Typography
             sx={{
               display: { xs: 'none', sm: 'block' },
