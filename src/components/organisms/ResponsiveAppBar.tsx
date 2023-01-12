@@ -104,10 +104,10 @@ export default function ResponsiveAppBar({ image, name }: Props) {
               }}
             >
               <MenuItem component={NextLinkAnchor} to="/">
-                <Typography textAlign="center">Home</Typography>
+                <Typography textAlign="center">Welcome</Typography>
               </MenuItem>
               <MenuItem component={NextLinkAnchor} to="/me">
-                <Typography textAlign="center">My Account</Typography>
+                <Typography textAlign="center">My Workspaces</Typography>
               </MenuItem>
             </Menu>
           </Box>
@@ -145,14 +145,14 @@ export default function ResponsiveAppBar({ image, name }: Props) {
               sx={{ my: 2, color: 'text.primary', display: 'block' }}
               to="/"
             >
-              Home
+              Welcome
             </Button>
             <Button
               component={NextLinkAnchor}
               sx={{ my: 2, color: 'text.primary', display: 'block' }}
               to="/me"
             >
-              My Account
+              My Workspaces
             </Button>
           </Box>
 
