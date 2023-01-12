@@ -132,7 +132,6 @@ export default function ResponsiveAppBar({ image, name }: Props) {
               color="text.primary"
               sx={{
                 fontFamily: 'monospace',
-                fontWeight: 700,
                 letterSpacing: '.3rem',
                 pl: 1,
               }}
