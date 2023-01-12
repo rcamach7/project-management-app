@@ -262,7 +262,6 @@ export default function Workspace_Continued() {
         >
           <Box
             sx={{
-              backgroundColor: '#182e52',
               display: 'flex',
               justifyContent: 'center',
               alignItems: 'center',

@@ -32,15 +32,12 @@ export default function TabButtons({
     <>
       <CenteredBox
         sx={{
-          borderBottom: '1px solid #C3CDED',
-          backgroundColor: '#182e52',
           borderRadius: '0 0 5px 5px',
           flexDirection: 'row',
           justifyContent: 'space-evenly',
           flexWrap: 'wrap',
           pt: 1,
           gap: { xs: 1, sm: 2 },
-          pb: { xs: 1, sm: 2 },
         }}
       >
         <ActionButton
