@@ -267,15 +267,16 @@ export default function Workspace_Continued() {
               alignItems: 'center',
               p: 0.5,
               mt: 0.5,
+              borderBottom: '.5px dashed #C3CDED',
             }}
           >
             <Typography
               variant="h1"
               sx={{
                 p: 0.5,
-                borderBottom: '1px solid #C3CDED',
                 fontSize: 24,
                 fontWeight: 600,
+                pb: 1,
               }}
             >
               {workspaceState.name.toUpperCase()}
