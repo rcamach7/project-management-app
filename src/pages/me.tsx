@@ -185,7 +185,11 @@ export default function Me({ mySession }) {
           handleWorkspaceFormAction={handleWorkspaceFormAction}
         />
       )}
-      {showTemplateSelection && <TemplateSelection />}
+      {showTemplateSelection && (
+        <TemplateSelection
+          setShowTemplateSelection={setShowTemplateSelection}
+        />
+      )}
       {informationDialog.show && (
         <InformationDialog
           title={informationDialog.title}
