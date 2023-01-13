@@ -7,3 +7,4 @@ export { default as ConfirmDeleteDialog } from './ConfirmDeleteDialog';
 export { default as FloatingButton } from './FloatingButton';
 export { default as InformationDialog } from './InformationDialog';
 export { default as MoveToMenu } from './MoveToMenu';
+export { default as TemplateSelection } from './TemplateSelection';

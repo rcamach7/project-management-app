@@ -3,7 +3,11 @@ import { useState, useEffect } from 'react';
 import { authOptions } from '@/auth/[...nextauth]';
 import { unstable_getServerSession } from 'next-auth/next';
 import { AppSession } from 'models/global';
-import { ImageButton, InformationDialog } from '@/components/atoms/index';
+import {
+  ImageButton,
+  InformationDialog,
+  TemplateSelection,
+} from '@/components/atoms/index';
 import {
   ProfileBar,
   WorkspaceSummary,
@@ -181,7 +185,7 @@ export default function Me({ mySession }) {
           handleWorkspaceFormAction={handleWorkspaceFormAction}
         />
       )}
-      {showTemplateSelection && <p>TEMPLATE SELECTION</p>}
+      {showTemplateSelection && <TemplateSelection />}
       {informationDialog.show && (
         <InformationDialog
           title={informationDialog.title}
