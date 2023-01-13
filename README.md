@@ -13,6 +13,7 @@ A web application that helps you manage your software projects by creating works
 ![project_demo](flow_demo.gif)
 
 </div>
+
 ## Key Features
 
 - Enhanced SEO by taking advantage of Next.js' static generation and server-side rendering capabilities
