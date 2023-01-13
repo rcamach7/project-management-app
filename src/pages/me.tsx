@@ -116,7 +116,10 @@ export default function Me({ mySession }) {
           flexDirection: 'column',
         }}
       >
-        <ProfileBar user={session.user} />
+        <ProfileBar
+          user={session.user}
+          setInformationDialog={setInformationDialog}
+        />
         <CenteredBox
           sx={{ p: 3, flexDirection: 'row', justifyContent: 'space-evenly' }}
         >
@@ -131,8 +134,9 @@ export default function Me({ mySession }) {
             onClick={() =>
               setInformationDialog({
                 show: true,
-                title: 'Invitations feature is currently being worked on',
-                content: 'Please check back later!',
+                title: 'Under Construction!',
+                content:
+                  'Invitations feature is currently being worked on. Please check back later!',
               })
             }
           />
@@ -142,8 +146,9 @@ export default function Me({ mySession }) {
             onClick={() =>
               setInformationDialog({
                 show: true,
-                title: 'Templates feature is currently being worked on',
-                content: 'Please check back later!',
+                title: 'Under Construction!',
+                content:
+                  'Templates feature is currently being worked on. Please check back later!',
               })
             }
           />

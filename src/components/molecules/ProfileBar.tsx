@@ -3,12 +3,20 @@ import Image from 'next/image';
 import { signOut } from 'next-auth/react';
 import { Box, Typography } from '@mui/material';
 import { ActionButton } from '@/components/atoms/index';
+import { Dispatch, SetStateAction } from 'react';
 
 interface Props {
   user: AppSession['user'];
+  setInformationDialog: Dispatch<
+    SetStateAction<{
+      show: boolean;
+      title: string;
+      content: string;
+    }>
+  >;
 }
 
-export default function ProfileBar({ user }: Props) {
+export default function ProfileBar({ user, setInformationDialog }: Props) {
   return (
     <Box
       sx={{
@@ -81,6 +89,14 @@ export default function ProfileBar({ user }: Props) {
               borderColor: 'secondary.main',
               p: '2px 4px',
             }}
+            onClick={() =>
+              setInformationDialog({
+                show: true,
+                title: 'Under Construction!',
+                content:
+                  'Settings Panel is currently being worked on. Please check back later!',
+              })
+            }
           />
         </Box>
       </Box>
