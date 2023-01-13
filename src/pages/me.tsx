@@ -23,6 +23,7 @@ export default function Me({ mySession }) {
     show: false,
     action: 'CREATE',
   });
+  const [showTemplateSelection, setShowTemplateSelection] = useState(false);
   const [informationDialog, setInformationDialog] = useState({
     show: false,
     title: '',
@@ -143,14 +144,7 @@ export default function Me({ mySession }) {
           <ImageButton
             text="Templates"
             image="/buttons/template.svg"
-            onClick={() =>
-              setInformationDialog({
-                show: true,
-                title: 'Under Construction!',
-                content:
-                  'Templates feature is currently being worked on. Please check back later!',
-              })
-            }
+            onClick={() => setShowTemplateSelection(!showTemplateSelection)}
           />
         </CenteredBox>
 
@@ -180,18 +174,19 @@ export default function Me({ mySession }) {
           ))}
         </Box>
       </Box>
-      {informationDialog.show && (
-        <InformationDialog
-          title={informationDialog.title}
-          content={informationDialog.content}
-          handleClose={closeInformationDialog}
-        />
-      )}
       {formStatus.show && (
         <WorkspaceForm
           action={formStatus.action}
           handleClose={() => setFormStatus({ show: false, action: 'CREATE' })}
           handleWorkspaceFormAction={handleWorkspaceFormAction}
+        />
+      )}
+      {showTemplateSelection && <p>TEMPLATE SELECTION</p>}
+      {informationDialog.show && (
+        <InformationDialog
+          title={informationDialog.title}
+          content={informationDialog.content}
+          handleClose={closeInformationDialog}
         />
       )}
       <UxFeedback
