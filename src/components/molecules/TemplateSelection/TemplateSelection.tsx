@@ -13,7 +13,7 @@ const options = [
     image: '/template_cards/software.svg',
   },
   {
-    title: 'Planning',
+    title: 'General',
     description: 'Template for planning a project.',
     image: '/template_cards/planning.svg',
   },
@@ -44,7 +44,11 @@ export default function TemplateSelection({ setShowTemplateSelection }: Props) {
         <Typography
           variant="h2"
           component="h2"
-          sx={{ fontSize: '1.5em' }}
+          sx={{
+            fontSize: '1.25em',
+            textAlign: 'center',
+            mb: 2,
+          }}
           gutterBottom
         >
           Select a template
