@@ -4,3 +4,4 @@ export { default as UxFeedback } from './UxFeedback/UxFeedback';
 export { default as BoardForm } from './BoardForm/BoardForm';
 export { default as TicketForm } from './TicketForm/TicketForm';
 export { default as WorkspaceForm } from './WorkspaceForm/WorkspaceForm';
+export { default as TemplateSelection } from './TemplateSelection/TemplateSelection';
