@@ -49,15 +49,23 @@ export default function TemplateSelection({ setShowTemplateSelection }: Props) {
         >
           Select a template
         </Typography>
-        <Box sx={{ display: 'flex' }}>
-          {/* {options.map((option) => (
+        <Box
+          sx={{
+            display: 'flex',
+            flexWrap: 'wrap',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: 1,
+          }}
+        >
+          {options.map((option) => (
             <TemplateCard
               key={option.title}
               title={option.title}
               description={option.description}
               image={option.image}
             />
-          ))} */}
+          ))}
         </Box>
       </Box>
     </Modal>
