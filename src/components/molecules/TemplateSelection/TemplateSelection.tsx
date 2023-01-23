@@ -10,12 +10,12 @@ const options = [
   {
     title: 'Software Project',
     description: 'Template for a software project.',
-    image: '/static/images/cards/contemplative-reptile.jpg',
+    image: '/template_cards/software.svg',
   },
   {
     title: 'Planning',
     description: 'Template for planning a project.',
-    image: '/static/images/cards/contemplative-reptile.jpg',
+    image: '/template_cards/planning.svg',
   },
 ];
 
