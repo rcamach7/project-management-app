@@ -3,16 +3,13 @@ import { useState, useEffect } from 'react';
 import { authOptions } from '@/auth/[...nextauth]';
 import { unstable_getServerSession } from 'next-auth/next';
 import { AppSession } from 'models/global';
-import {
-  ImageButton,
-  InformationDialog,
-  TemplateSelection,
-} from '@/components/atoms/index';
+import { ImageButton, InformationDialog } from '@/components/atoms/index';
 import {
   ProfileBar,
   WorkspaceSummary,
   WorkspaceForm,
   UxFeedback,
+  TemplateSelection,
 } from '@/components/molecules/index';
 import { CenteredBox } from '@/components/layout/index';
 import { Box, Typography } from '@mui/material';
