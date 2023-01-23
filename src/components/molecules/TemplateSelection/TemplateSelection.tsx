@@ -1,9 +1,23 @@
 import { Dispatch, SetStateAction } from 'react';
 import { Modal, Typography, Box } from '@mui/material';
+import TemplateCard from './TemplateCard';
 
 interface Props {
   setShowTemplateSelection: Dispatch<SetStateAction<boolean>>;
 }
+
+const options = [
+  {
+    title: 'Software Project',
+    description: 'Template for a software project.',
+    image: '/static/images/cards/contemplative-reptile.jpg',
+  },
+  {
+    title: 'Planning',
+    description: 'Template for planning a project.',
+    image: '/static/images/cards/contemplative-reptile.jpg',
+  },
+];
 
 export default function TemplateSelection({ setShowTemplateSelection }: Props) {
   return (
@@ -27,12 +41,24 @@ export default function TemplateSelection({ setShowTemplateSelection }: Props) {
           p: 4,
         }}
       >
-        <Typography id="modal-modal-title" variant="h6" component="h2">
-          Text in a modal
+        <Typography
+          variant="h2"
+          component="h2"
+          sx={{ fontSize: '1.5em' }}
+          gutterBottom
+        >
+          Select a template
         </Typography>
-        <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-          Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-        </Typography>
+        <Box sx={{ display: 'flex' }}>
+          {/* {options.map((option) => (
+            <TemplateCard
+              key={option.title}
+              title={option.title}
+              description={option.description}
+              image={option.image}
+            />
+          ))} */}
+        </Box>
       </Box>
     </Modal>
   );
