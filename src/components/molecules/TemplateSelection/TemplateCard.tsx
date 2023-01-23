@@ -11,17 +11,25 @@ interface Props {
   image: string;
 }
 
-export default function TemplateCard({ title, description, image }: Props) {
+export default function TemplateCard({ title, image }: Props) {
   return (
-    <Card sx={{ maxWidth: 345 }}>
-      <CardActionArea>
-        <CardMedia component="img" height="140" image={image} alt={title} />
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
+    <Card sx={{ maxWidth: 300, minWidth: 225 }} elevation={0}>
+      <CardActionArea sx={{ pt: 1 }}>
+        <CardMedia
+          component="img"
+          height="100"
+          image={image}
+          alt={title}
+          style={{ width: '100%', objectFit: 'contain' }}
+        />
+        <CardContent sx={{ pt: 1 }}>
+          <Typography
+            gutterBottom
+            variant="h5"
+            component="div"
+            sx={{ textAlign: 'center' }}
+          >
             {title}
-          </Typography>
-          <Typography variant="body2" color="text.secondary">
-            {description}
           </Typography>
         </CardContent>
       </CardActionArea>
