@@ -2,6 +2,7 @@ import { unstable_getServerSession } from 'next-auth/next';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { authOptions } from '@/auth/[...nextauth]';
 import { AppSession } from 'models/global';
+import { templateOptions } from '../../../lib/template';
 
 export default async function handler(
   req: NextApiRequest,
@@ -15,6 +16,10 @@ export default async function handler(
   if (!session) res.status(401).json({ message: 'Unauthorized' });
 
   const { template } = req.body;
+  if (!template || !templateOptions.includes(template)) {
+    return res.status(400).json({ message: 'Invalid or missing template' });
+  }
+
   switch (req.method) {
     case 'POST':
       try {
