@@ -2,7 +2,7 @@ import { unstable_getServerSession } from 'next-auth/next';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { authOptions } from '@/auth/[...nextauth]';
 import { AppSession } from 'models/global';
-import { templateOptions } from '@/lib/template';
+import { templateOptions, createTemplate } from '@/lib/templateScript';
 
 export default async function handler(
   req: NextApiRequest,
@@ -23,15 +23,12 @@ export default async function handler(
       .json({ message: `Invalid or missing template: ${template}` });
   }
 
-  res.json({ message: 'Endpoint hit' });
-  return;
-
   switch (req.method) {
     case 'POST':
       try {
-        res.json({ message: 'POST' });
+        await createTemplate(template, session.user._id);
       } catch (error) {
-        res.status(500).json({ message: 'Error creating workspace', error });
+        res.status(500).json({ message: 'Error generating template', error });
       }
       break;
     default:
