@@ -4,8 +4,6 @@ import { createNewWorkspace } from 'controllers/workspaceController';
 
 export const templateOptions = ['software project', 'basic'];
 export const createTemplate = async (template: string, userId: string) => {
-  template = template.toLowerCase();
-
   try {
     switch (template) {
       case 'software project':
