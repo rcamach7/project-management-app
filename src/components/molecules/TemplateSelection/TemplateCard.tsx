@@ -9,12 +9,13 @@ interface Props {
   title: string;
   description: string;
   image: string;
+  onClick: (template: string) => Promise<void>;
 }
 
-export default function TemplateCard({ title, image }: Props) {
+export default function TemplateCard({ title, image, onClick }: Props) {
   return (
     <Card sx={{ maxWidth: 300, minWidth: 225 }} elevation={0}>
-      <CardActionArea sx={{ pt: 1 }}>
+      <CardActionArea sx={{ pt: 1 }} onClick={() => onClick(title)}>
         <CardMedia
           component="img"
           height="100"

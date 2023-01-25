@@ -15,10 +15,16 @@ export default async function handler(
   );
   if (!session) res.status(401).json({ message: 'Unauthorized' });
 
-  const { template } = req.body;
+  let { template } = req.body;
+  template = template.toLowerCase();
   if (!template || templateOptions.indexOf(template) === -1) {
-    res.status(400).json({ message: 'Invalid or missing template' });
+    res
+      .status(400)
+      .json({ message: `Invalid or missing template: ${template}` });
   }
+
+  res.json({ message: 'Endpoint hit' });
+  return;
 
   switch (req.method) {
     case 'POST':

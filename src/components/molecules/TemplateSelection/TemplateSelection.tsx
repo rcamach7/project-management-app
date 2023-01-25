@@ -1,6 +1,7 @@
 import { Dispatch, SetStateAction } from 'react';
 import { Modal, Typography, Box } from '@mui/material';
 import TemplateCard from './TemplateCard';
+import axios from 'axios';
 
 interface Props {
   setShowTemplateSelection: Dispatch<SetStateAction<boolean>>;
@@ -13,13 +14,18 @@ const options = [
     image: '/template_cards/software.svg',
   },
   {
-    title: 'General',
+    title: 'Basic',
     description: 'Template for planning a project.',
     image: '/template_cards/planning.svg',
   },
 ];
 
 export default function TemplateSelection({ setShowTemplateSelection }: Props) {
+  const handleTemplateSelection = async (template: string) => {
+    const res = await axios.post('/api/workspace/template', { template });
+    console.log(res);
+  };
+
   return (
     <Modal
       open={true}
@@ -68,6 +74,7 @@ export default function TemplateSelection({ setShowTemplateSelection }: Props) {
               title={option.title}
               description={option.description}
               image={option.image}
+              onClick={handleTemplateSelection}
             />
           ))}
         </Box>
