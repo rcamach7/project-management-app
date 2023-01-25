@@ -1,17 +1,26 @@
 import { createNewBoard } from 'controllers/boardController';
 import { createNewTicket } from 'controllers/ticketController';
+import { createNewWorkspace } from 'controllers/workspaceController';
 
 export const templateOptions = ['software project', 'basic'];
-export const createTemplate = async (template: string, workspaceId: string) => {
+export const createTemplate = async (template: string, userId: string) => {
   template = template.toLowerCase();
 
   try {
     switch (template) {
       case 'software project':
+        const workspace = await createNewWorkspace(
+          {
+            name: 'Software Project',
+            description: 'A basic template for building software projects',
+          },
+          userId
+        );
+
         const backlogBoard = await createNewBoard(
           'Backlog',
           'Backlog of tickets',
-          workspaceId
+          workspace._id
         );
         await createNewTicket(
           backlogBoard._id,
@@ -23,7 +32,7 @@ export const createTemplate = async (template: string, workspaceId: string) => {
         const todoBoard = await createNewBoard(
           'To Do',
           'Tickets awaiting to be worked on',
-          workspaceId
+          workspace._id
         );
         await createNewTicket(
           todoBoard._id,
@@ -35,7 +44,7 @@ export const createTemplate = async (template: string, workspaceId: string) => {
         const inProgressBoard = await createNewBoard(
           'In Progress',
           'Tickets currently in progress',
-          workspaceId
+          workspace._id
         );
         await createNewTicket(
           inProgressBoard._id,
@@ -47,7 +56,7 @@ export const createTemplate = async (template: string, workspaceId: string) => {
         const doneBoard = await createNewBoard(
           'Done',
           'Tickets that are done',
-          workspaceId
+          workspace._id
         );
         await createNewTicket(
           doneBoard._id,
@@ -58,12 +67,6 @@ export const createTemplate = async (template: string, workspaceId: string) => {
         break;
 
       case 'basic':
-        await createNewBoard(
-          'To Do',
-          'Tickets that need to be done',
-          workspaceId
-        );
-        await createNewBoard('Done', 'Tickets that are done', workspaceId);
         break;
       default:
         break;
