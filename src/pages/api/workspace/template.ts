@@ -27,6 +27,7 @@ export default async function handler(
     case 'POST':
       try {
         await createTemplate(template, session.user._id);
+        res.json({ message: 'Template generated successfully' });
       } catch (error) {
         res.status(500).json({ message: 'Error generating template', error });
       }
