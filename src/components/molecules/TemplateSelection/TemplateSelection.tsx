@@ -1,10 +1,10 @@
 import { Dispatch, SetStateAction } from 'react';
 import { Modal, Typography, Box } from '@mui/material';
 import TemplateCard from './TemplateCard';
-import axios from 'axios';
 
 interface Props {
   setShowTemplateSelection: Dispatch<SetStateAction<boolean>>;
+  handleTemplateCreation: (template: string) => Promise<void>;
 }
 
 const options = [
@@ -20,12 +20,10 @@ const options = [
   },
 ];
 
-export default function TemplateSelection({ setShowTemplateSelection }: Props) {
-  const handleTemplateSelection = async (template: string) => {
-    const res = await axios.post('/api/workspace/template', { template });
-    console.log(res);
-  };
-
+export default function TemplateSelection({
+  setShowTemplateSelection,
+  handleTemplateCreation,
+}: Props) {
   return (
     <Modal
       open={true}
@@ -74,7 +72,7 @@ export default function TemplateSelection({ setShowTemplateSelection }: Props) {
               title={option.title}
               description={option.description}
               image={option.image}
-              onClick={handleTemplateSelection}
+              handleTemplateCreation={handleTemplateCreation}
             />
           ))}
         </Box>

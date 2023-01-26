@@ -26,8 +26,11 @@ export default async function handler(
   switch (req.method) {
     case 'POST':
       try {
-        await createTemplate(template, session.user._id);
-        res.json({ message: 'Template generated successfully' });
+        const templateWorkspace = await createTemplate(
+          template,
+          session.user._id
+        );
+        res.json(templateWorkspace);
       } catch (error) {
         res.status(500).json({ message: 'Error generating template', error });
       }
