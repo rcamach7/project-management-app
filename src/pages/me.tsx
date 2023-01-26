@@ -64,10 +64,12 @@ export default function Me({ mySession }) {
 
   const handleTemplateCreation = async (template: string) => {
     try {
+      displayLoading();
       const newWorkspace = await clientApi.createWorkspaceFromTemplate(
         template
       );
       setSession(helpers.addWorkspaceToUserSession(session, newWorkspace));
+      setShowTemplateSelection(false);
       displayUxMessage('Workspace created successfully');
     } catch (error) {
       displayUxMessage('Error creating template', error);
