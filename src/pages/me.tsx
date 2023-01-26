@@ -62,6 +62,18 @@ export default function Me({ mySession }) {
     }
   };
 
+  const handleTemplateCreation = async (template: string) => {
+    try {
+      const newWorkspace = await clientApi.createWorkspaceFromTemplate(
+        template
+      );
+      setSession(helpers.addWorkspaceToUserSession(session, newWorkspace));
+      displayUxMessage('Workspace created successfully');
+    } catch (error) {
+      displayUxMessage('Error creating template', error);
+    }
+  };
+
   const handleWorkspaceFormAction = async (
     action: FormStatus['action'],
     title: string,
@@ -185,6 +197,7 @@ export default function Me({ mySession }) {
       {showTemplateSelection && (
         <TemplateSelection
           setShowTemplateSelection={setShowTemplateSelection}
+          handleTemplateCreation={handleTemplateCreation}
         />
       )}
       {informationDialog.show && (

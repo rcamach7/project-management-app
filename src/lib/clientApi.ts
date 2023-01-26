@@ -148,6 +148,15 @@ export const getWorkspaceById = async (_id: string) => {
   }
 };
 
+export const createWorkspaceFromTemplate = async (template: string) => {
+  try {
+    const res = await axios.post('/api/workspace/template', { template });
+    return res.data as WorkspaceSummary;
+  } catch (error) {
+    return Promise.reject(error);
+  }
+};
+
 const clientApi = {
   deleteTicketByID,
   deleteBoardByID,
@@ -159,6 +168,7 @@ const clientApi = {
   editWorkspace,
   deleteWorkspace,
   getWorkspaceById,
+  createWorkspaceFromTemplate,
 };
 
 export default clientApi;

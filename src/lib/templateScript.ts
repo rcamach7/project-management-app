@@ -1,10 +1,14 @@
 import { createNewBoard } from 'controllers/boardController';
 import { createNewTicket } from 'controllers/ticketController';
-import { createNewWorkspace } from 'controllers/workspaceController';
+import {
+  createNewWorkspace,
+  getWorkspaceById,
+} from 'controllers/workspaceController';
 import { Board, Workspace } from 'schemas';
 import { Types } from 'mongoose';
 
 export const templateOptions = ['software project', 'basic'];
+
 export const createTemplate = async (template: string, userId: string) => {
   try {
     switch (template) {
@@ -93,12 +97,10 @@ export const createTemplate = async (template: string, userId: string) => {
           $push: { tickets: new Types.ObjectId(doneTicket._id) },
         });
 
-        break;
-
-      case 'basic':
-        break;
+        const populatedWorkspace = await getWorkspaceById(workspace._id);
+        return populatedWorkspace;
       default:
-        break;
+        return null;
     }
   } catch (error) {
     console.error(error);
