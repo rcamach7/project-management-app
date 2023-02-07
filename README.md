@@ -1,7 +1,23 @@
 <h1 align="center">
   📑 Flow
 </h1>
+
 A web application that helps you manage your software projects by creating workspaces, boards, and tickets!
+
+<div align="center">
+
+![project_demo](https://res.cloudinary.com/de2ymful4/image/upload/v1675736580/main-portfolio/projects/flow_jycaab.png)
+
+</div>
+
+## Key Features ✨
+
+- Enhanced SEO by taking advantage of Next.js' static generation and server-side rendering capabilities
+- Utilized NextAuth to authenticate users and store their data in a MongoDB database
+- Created a fully responsive design that works on all devices and screen sizes
+- Incorporated a atomic design pattern that allows for easy scaling and maintenance
+
+## Showcase 🎥
 
 <div align="center">
 
@@ -15,14 +31,7 @@ A web application that helps you manage your software projects by creating works
 
 </div>
 
-## Key Features ✨
-
-- Enhanced SEO by taking advantage of Next.js' static generation and server-side rendering capabilities
-- Utilized NextAuth to authenticate users and store their data in a MongoDB database
-- Created a fully responsive design that works on all devices and screen sizes
-- Incorporated a atomic design pattern that allows for easy scaling and maintenance
-
-### Technologies Used 💻
+## Technologies Used 💻
 
 <p align="center">
   <img src="https://res.cloudinary.com/de2ymful4/image/upload/v1660605410/main-portfolio/tech-skills/nextjs_mf7wiy.png" width="40" height="40" alt="NextJS" />
