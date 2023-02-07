@@ -43,8 +43,8 @@ export default function Home({ featuresList }: Props) {
       >
         <CenteredBox sx={{ flex: { xs: 1, md: 0.5 } }}>
           <PageTitle
-            subheading="Organize yourself and your team by taking advantage of this project management tool!"
-            additionalText="Flow is built with Next.js, TypeScript, Material-UI, and MongoDB. It uses NextAuth for authentication and is deployed on Vercel."
+            subheading="Take your organization and teamwork to the next level with Flow, a powerful project management tool."
+            additionalText="Built with the latest technologies like Next.js, TypeScript, Material-UI, and MongoDB, Flow ensures seamless authentication with NextAuth. And the best part? It's all hosted on Vercel for easy access and use."
             image="/hero/flow.svg"
           />
         </CenteredBox>
@@ -57,7 +57,7 @@ export default function Home({ featuresList }: Props) {
               display: { xs: 'none', md: 'block' },
             }}
           >
-            Click the link below to sign in with Google
+            Sign in using Google by clicking the link below.
           </Typography>
           <ActionButton
             text="Get Started"
@@ -98,22 +98,24 @@ export async function getStaticProps() {
           image: '/features/organized.svg',
           title: 'Organization',
           description:
-            'Create workspaces, boards, and tickets to organize your projects',
+            'Organize your projects with ease by creating workspaces, boards, and tickets',
         },
         {
           image: '/features/collaborate.svg',
           title: 'Collaboration',
-          description: 'Collaborate with your team on projects and tasks',
+          description:
+            'Collaborate with your team seamlessly on projects and tasks',
         },
         {
           image: '/features/productivity.svg',
           title: 'Productivity',
-          description: 'Increase your productivity with Flow',
+          description: 'Boost your productivity with Flow',
         },
         {
           image: '/features/accessible.svg',
           title: 'Accessibility',
-          description: 'Access your projects and tasks from anywhere',
+          description:
+            'Stay on top of your projects and tasks, no matter where you are',
         },
       ],
     },
