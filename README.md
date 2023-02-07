@@ -1,5 +1,5 @@
 <h1 align="center">
-  📑 Flow
+  📑 Project Management App
 </h1>
 
 A web application that helps you manage your software projects by creating workspaces, boards, and tickets!
@@ -43,7 +43,7 @@ A web application that helps you manage your software projects by creating works
 
 _(react, typescript, nextjs, vercel, nextauth, SSR, mongoose, MUI components, cloudinary, axios, useEffect, useState, promise based functions, async/await, custom API, etc...)_
 
-#### How to install and run?
+## How to install and run?
 
 ```bash
 # Clone this repository
@@ -55,6 +55,6 @@ _(react, typescript, nextjs, vercel, nextauth, SSR, mongoose, MUI components, cl
   yarn dev
 ```
 
-Application would need the following environments and variables provided to run successfully:
+Application would need the following environments and variables provided to run successfully on a .env file:
 
 - MONGODB_URI, TOKEN_SECRET, GOOGLE_CLIENT_ID, GOOGLE_CLIENT_ID, NEXTAUTH_SECRET, NEXTAUTH_URL
