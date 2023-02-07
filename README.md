@@ -1,5 +1,6 @@
-# Flow
-
+<h1 align="center">
+  📑 Flow
+</h1>
 A web application that helps you manage your software projects by creating workspaces, boards, and tickets!
 
 <div align="center">
@@ -14,14 +15,14 @@ A web application that helps you manage your software projects by creating works
 
 </div>
 
-## Key Features
+## Key Features ✨
 
 - Enhanced SEO by taking advantage of Next.js' static generation and server-side rendering capabilities
 - Utilized NextAuth to authenticate users and store their data in a MongoDB database
 - Created a fully responsive design that works on all devices and screen sizes
 - Incorporated a atomic design pattern that allows for easy scaling and maintenance
 
-#### Built Using:
+### Technologies Used 💻
 
 <p align="center">
   <img src="https://res.cloudinary.com/de2ymful4/image/upload/v1660605410/main-portfolio/tech-skills/nextjs_mf7wiy.png" width="40" height="40" alt="NextJS" />
@@ -31,7 +32,7 @@ A web application that helps you manage your software projects by creating works
   <img src="https://res.cloudinary.com/de2ymful4/image/upload/v1646101239/main-portfolio/tech-skills/mongodb_r1xhyn.png" width="40" height="40" alt="MongoDB" />
 </p>
 
-react, typescript, nextjs, vercel, nextauth, SSR, mongoose, MUI components, cloudinary, axios, useEffect, useState, promise based functions, async/await, custom API, etc...
+_(react, typescript, nextjs, vercel, nextauth, SSR, mongoose, MUI components, cloudinary, axios, useEffect, useState, promise based functions, async/await, custom API, etc...)_
 
 #### How to install and run?
 
@@ -45,6 +46,6 @@ react, typescript, nextjs, vercel, nextauth, SSR, mongoose, MUI components, clou
   yarn dev
 ```
 
-Server would need the following environments and variables provided to run successfully:
+Application would need the following environments and variables provided to run successfully:
 
 - MONGODB_URI, TOKEN_SECRET, GOOGLE_CLIENT_ID, GOOGLE_CLIENT_ID, NEXTAUTH_SECRET, NEXTAUTH_URL
