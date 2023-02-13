@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import { useState } from 'react';
 import { Feature } from 'models/client';
 import { useRouter } from 'next/router';
 import { signIn } from 'next-auth/react';
@@ -6,6 +7,7 @@ import { useSession } from 'next-auth/react';
 import { Box, Typography, Unstable_Grid2 as Grid } from '@mui/material';
 import { PageTitle, FeatureCard, ActionButton } from '@/components/atoms/index';
 import { CenteredBox } from '@/components/layout/index';
+import { UxFeedback } from '@/components/molecules/index';
 
 interface Props {
   featuresList: Feature[];
@@ -14,8 +16,10 @@ interface Props {
 export default function Home({ featuresList }: Props) {
   const { data: session } = useSession();
   const { push } = useRouter();
+  const [loading, setLoading] = useState(false);
 
   const handleSignIn = () => {
+    setLoading(true);
     if (session) {
       push('/me');
     } else {
@@ -86,6 +90,15 @@ export default function Home({ featuresList }: Props) {
           ))}
         </Grid>
       </Box>
+
+      {loading && (
+        <UxFeedback
+          loading={loading}
+          showBanner={false}
+          bannerMessage={''}
+          bannerType={'success'}
+        />
+      )}
     </>
   );
 }
